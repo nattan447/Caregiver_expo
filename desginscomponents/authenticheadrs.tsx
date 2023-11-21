@@ -17,8 +17,13 @@ interface Propriedades {
   arrowimg: number;
   trocarmodo: React.FC;
 }
-
-const Authenticheadrs: React.FC<Propriedades> = (props) => {
+interface Propriedadesbtn {
+  txtbtn: string;
+  cor: string;
+  txtcor: string;
+  pres: React.FC;
+}
+export const Authenticheadrs: React.FC<Propriedades> = (props) => {
   return (
     <View style={styles.header}>
       <Image source={props.imgheader} style={styles.img}></Image>
@@ -40,7 +45,30 @@ const Authenticheadrs: React.FC<Propriedades> = (props) => {
     </View>
   );
 };
-export default Authenticheadrs;
+
+//componente de btn
+export const Btn: React.FC<Propriedadesbtn> = (props) => {
+  return (
+    <>
+      <TouchableOpacity
+        style={{
+          height: 48,
+          width: 131,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 7,
+          position: "relative",
+          borderColor: "#dddddd",
+          borderWidth: 2,
+          backgroundColor: props.cor,
+        }}
+      >
+        <Text>{props.txtbtn}</Text>
+      </TouchableOpacity>
+    </>
+  );
+};
+
 const styles = StyleSheet.create({
   header: {
     height: "44%",

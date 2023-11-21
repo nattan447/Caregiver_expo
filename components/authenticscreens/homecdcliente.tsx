@@ -6,8 +6,9 @@ import {
   Button,
   SafeAreaView,
   Image,
+  TouchableOpacity,
 } from "react-native";
-import Authenticheadrs from "../../desginscomponents/authenticheadrs";
+import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -42,6 +43,19 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
           Se cadastre ou entre em uma conta e venha entrar nessa jornada conoso
           !
         </Text>
+        <View style={homeloginscss.btndivs}>
+          {/*esse btns seráo componentes separados*/}
+          <TouchableOpacity style={homeloginscss.shadow}>
+            <Text></Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={homeloginscss.btn1}>
+            <Text style={homeloginscss.txtbtn1}>SING IN</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={homeloginscss.btn2}>
+            <Text style={homeloginscss.txtbtn2}>SING UP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
