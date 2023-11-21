@@ -32,5 +32,27 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#F8F8F8",
     borderColor: "lightblue",
+    alignItems: "center",
+    marginTop: "2%",
+  },
+  blocoprincipaltxt: {
+    position: "absolute",
+    color: "#C77B43",
+    fontWeight: "bold",
+    fontSize: 40,
+  },
+  blocoprincipaltxt2: {
+    position: "absolute",
+    color: "#C77B43",
+    fontWeight: "bold",
+    fontSize: 24,
+    top: "20%",
+  },
+  blocoprincipaltxt3: {
+    color: "#C77B43",
+    position: "absolute",
+    fontSize: 15,
+    top: "35%",
+    width: 201,
   },
 });

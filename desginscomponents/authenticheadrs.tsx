@@ -8,32 +8,35 @@ import {
   SafeAreaView,
   Image,
   Systrace,
+  TouchableOpacity,
 } from "react-native";
 
 interface Propriedades {
-  imglink: string;
+  imgheader: number;
   headertxt: string;
+  arrowimg: number;
+  trocarmodo: React.FC;
 }
 
 const Authenticheadrs: React.FC<Propriedades> = (props) => {
   return (
     <View style={styles.header}>
-      <Image
-        source={require("../../assets/img1.png")}
-        style={styles.img}
-      ></Image>
+      <Image source={props.imgheader} style={styles.img}></Image>
+      <TouchableOpacity
+        style={{ alignSelf: "flex-end", top: "60%" }}
+        onPress={props.trocarmodo}
+      >
+        <Image
+          source={props.arrowimg}
+          style={{
+            position: "relative",
+            height: 30,
+            width: 30,
+          }}
+        ></Image>
+      </TouchableOpacity>
 
-      <Image
-        source={require("../../assets/arrowhead.png")}
-        style={{ position: "relative", alignSelf: "flex-end", top: "60%" }}
-      ></Image>
-
-      {/* <Button
-          title="ir para a outra página"
-          onPress={irpaginacuidador}
-        ></Button> */}
-
-      <Text style={styles.headertxt}>SEJA UM CUIDADOR</Text>
+      <Text style={styles.headertxt}>{props.headertxt}</Text>
     </View>
   );
 };
@@ -48,11 +51,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 24,
-    marginTop: 223,
+    marginTop: "60%",
     alignSelf: "center",
   },
   img: {
-    height: "100%",
+    height: "90%",
     width: "150%",
     position: "absolute",
     backgroundColor: "#F8F8F8",
