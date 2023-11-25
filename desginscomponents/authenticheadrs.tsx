@@ -22,6 +22,7 @@ interface Propriedadesbtn {
   cor: string;
   txtcor: string;
   pres: React.FC;
+  fontsize: number;
 }
 export const Authenticheadrs: React.FC<Propriedades> = (props) => {
   return (
@@ -49,7 +50,10 @@ export const Authenticheadrs: React.FC<Propriedades> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <>
+    <View style={{ marginHorizontal: 20 }}>
+      <TouchableOpacity style={styles.shadow}>
+        <Text></Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={{
           height: 48,
@@ -61,11 +65,21 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
           borderColor: "#dddddd",
           borderWidth: 2,
           backgroundColor: props.cor,
+          zIndex: 1,
         }}
+        onPress={props.pres}
       >
-        <Text>{props.txtbtn}</Text>
+        <Text
+          style={{
+            color: props.txtcor,
+            fontWeight: "bold",
+            fontSize: props.fontsize,
+          }}
+        >
+          {props.txtbtn}
+        </Text>
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 
@@ -88,5 +102,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#F8F8F8",
     alignSelf: "center",
+  },
+  shadow: {
+    position: "absolute",
+    height: 48,
+    width: 131,
+    zIndex: 0,
+    backgroundColor: "#dddddd",
+    top: "6%",
+    opacity: 1,
+    borderRadius: 6,
   },
 });

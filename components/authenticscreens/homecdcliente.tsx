@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
+import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
@@ -24,6 +25,9 @@ type Props = {
 const Homecdcliente: React.FC<Props> = ({ navigation }) => {
   const irpaginacuidador = (): undefined => {
     navigation.navigate("Homecuidador", { nome: "nattan" });
+  };
+  const oi = (): undefined => {
+    alert("ola");
   };
 
   return (
@@ -45,16 +49,26 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
         </Text>
         <View style={homeloginscss.btndivs}>
           {/*esse btns seráo componentes separados*/}
-          <TouchableOpacity style={homeloginscss.shadow}>
+          {/* <TouchableOpacity style={homeloginscss.shadow}>
             <Text></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={homeloginscss.btn1}>
-            <Text style={homeloginscss.txtbtn1}>SING IN</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={homeloginscss.btn2}>
+          </TouchableOpacity> */}
+          <Btn
+            cor="#C77B43"
+            txtbtn="SING IN"
+            txtcor="#FFFCFC"
+            pres={oi}
+            fontsize={16}
+          />
+          <Btn
+            cor="#C77B43"
+            txtbtn="SING UP"
+            txtcor="#FFFCFC"
+            pres={oi}
+            fontsize={16}
+          />
+          {/* <TouchableOpacity style={homeloginscss.btn2}>
             <Text style={homeloginscss.txtbtn2}>SING UP</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </SafeAreaView>
