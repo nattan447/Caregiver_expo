@@ -24,6 +24,8 @@ interface Propriedadesbtn {
   txtcor: string;
   pres: React.FC;
   fontsize: number;
+  altura: number;
+  largura: number;
 }
 export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
   return (
@@ -56,14 +58,25 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View style={{ marginHorizontal: 33 }}>
-      <TouchableOpacity style={styles.shadow}>
+    <View style={{ marginHorizontal: 33, marginTop: 20 }}>
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          height: props.altura + 2,
+          width: props.largura,
+          zIndex: 0,
+          backgroundColor: "#dddddd",
+          top: "6%",
+          opacity: 1,
+          borderRadius: 6,
+        }}
+      >
         <Text></Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{
-          height: 48,
-          width: 131,
+          height: props.altura,
+          width: props.largura,
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 7,
@@ -99,7 +112,7 @@ const styles = StyleSheet.create({
     color: "#FFFCFC",
     fontWeight: "bold",
     fontSize: 24,
-    marginTop: "60%",
+    marginTop: "40%",
     alignSelf: "center",
   },
   img: {
@@ -109,15 +122,5 @@ const styles = StyleSheet.create({
     height: "100%",
 
     top: 0,
-  },
-  shadow: {
-    position: "absolute",
-    height: 48,
-    width: 131,
-    zIndex: 0,
-    backgroundColor: "#dddddd",
-    top: "6%",
-    opacity: 1,
-    borderRadius: 6,
   },
 });

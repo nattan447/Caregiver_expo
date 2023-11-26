@@ -14,8 +14,9 @@ import {
 interface inputprops {
   nometxt: string;
   placeholder: string;
-  // onchangevalue: React.FC;
-  // value: React.FC;
+  onchangevalue: (texto: string) => void;
+  value: string;
+  issenha: boolean;
 }
 
 const Inputs: React.FC<inputprops> = (props) => {
@@ -23,8 +24,11 @@ const Inputs: React.FC<inputprops> = (props) => {
     <View style={styles.conponentsyle}>
       <Text style={styles.txt}>{props.nometxt}</Text>
       <TextInput
+        secureTextEntry={props.issenha}
         placeholder={props.placeholder}
         style={styles.input}
+        value={props.value}
+        onChangeText={props.onchangevalue}
       ></TextInput>
       <View style={styles.shadow}>
         <Text></Text>
@@ -35,15 +39,16 @@ const Inputs: React.FC<inputprops> = (props) => {
 export default Inputs;
 const styles = StyleSheet.create({
   conponentsyle: {
-    position: "absolute",
+    position: "relative",
     alignSelf: "center",
     height: 80,
     justifyContent: "center",
     padding: 10,
+    marginTop: "5%",
   },
   input: {
     backgroundColor: "#F1EBEB",
-    borderRadius: 10,
+    borderRadius: 5,
     width: 240,
     height: 30,
     color: "#D8A683",

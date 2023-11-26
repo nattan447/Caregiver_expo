@@ -5,11 +5,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homecdcliente from "./components/authenticscreens/homecdcliente";
 import Homecdcuidador from "./components/authenticscreens/homecdcuidador";
 import Cadastrocuidador from "./components/datascreens/cadastrocuid";
+import Cadastrocuidador2 from "./components/datascreens/cadastrocuid2";
 import { Header } from "react-native/Libraries/NewAppScreen";
 export type RootStackParamList = {
   Homecliente: undefined;
   Homecuidador: undefined;
   Cadastrocuidador: undefined;
+  Cadastrocuidador2: object;
 };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
@@ -30,6 +32,11 @@ export default function App() {
           options={{ headerShown: false }}
           component={Cadastrocuidador}
           name="Cadastrocuidador"
+        ></Stack.Screen>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          component={Cadastrocuidador2}
+          name="Cadastrocuidador2"
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

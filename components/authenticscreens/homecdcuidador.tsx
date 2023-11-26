@@ -60,6 +60,8 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
             txtcor="#FFFCFC"
             pres={ircadastrocuidador}
             fontsize={16}
+            altura={48}
+            largura={131}
           />
           <Btn
             cor="#F1EBEB"
@@ -67,6 +69,8 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
             txtcor="#C77B43"
             pres={ircadastrocuidador}
             fontsize={16}
+            altura={48}
+            largura={131}
           />
         </View>
       </View>
