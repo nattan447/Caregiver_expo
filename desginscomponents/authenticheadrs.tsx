@@ -28,7 +28,12 @@ interface Propriedadesbtn {
 export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
   return (
     <View style={styles.header}>
-      <Image source={props.imgheader} style={styles.img} blurRadius={2}></Image>
+      <Image
+        source={props.imgheader}
+        style={styles.img}
+        blurRadius={2}
+        resizeMode="cover"
+      ></Image>
       <TouchableOpacity
         style={{ alignSelf: props.ladoseta, top: "60%" }}
         onPress={props.trocarmodo}
@@ -86,7 +91,7 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: "42%",
+    height: "40.9%",
     width: "100%",
     backgroundColor: "black",
   },
@@ -102,6 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F8F8F8",
     alignSelf: "center",
     height: "100%",
+
+    top: 0,
   },
   shadow: {
     position: "absolute",
