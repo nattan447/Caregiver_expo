@@ -4,10 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homecdcliente from "./components/authenticscreens/homecdcliente";
 import Homecdcuidador from "./components/authenticscreens/homecdcuidador";
+import Cadastrocuidador from "./components/datascreens/cadastrocuid";
 import { Header } from "react-native/Libraries/NewAppScreen";
 export type RootStackParamList = {
   Homecliente: undefined;
-  Homecuidador: { nome: string };
+  Homecuidador: undefined;
+  Cadastrocuidador: undefined;
 };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
@@ -20,8 +22,14 @@ export default function App() {
           name="Homecliente"
         ></Stack.Screen>
         <Stack.Screen
+          options={{ headerShown: false }}
           component={Homecdcuidador}
           name="Homecuidador"
+        ></Stack.Screen>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          component={Cadastrocuidador}
+          name="Cadastrocuidador"
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

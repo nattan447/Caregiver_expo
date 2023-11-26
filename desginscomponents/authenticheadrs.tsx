@@ -11,11 +11,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-interface Propriedades {
+interface Propriedadesheader {
   imgheader: number;
   headertxt: string;
   arrowimg: number;
   trocarmodo: React.FC;
+  ladoseta: any;
 }
 interface Propriedadesbtn {
   txtbtn: string;
@@ -24,12 +25,12 @@ interface Propriedadesbtn {
   pres: React.FC;
   fontsize: number;
 }
-export const Authenticheadrs: React.FC<Propriedades> = (props) => {
+export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
   return (
     <View style={styles.header}>
-      <Image source={props.imgheader} style={styles.img}></Image>
+      <Image source={props.imgheader} style={styles.img} blurRadius={2}></Image>
       <TouchableOpacity
-        style={{ alignSelf: "flex-end", top: "60%" }}
+        style={{ alignSelf: props.ladoseta, top: "60%" }}
         onPress={props.trocarmodo}
       >
         <Image
@@ -50,7 +51,7 @@ export const Authenticheadrs: React.FC<Propriedades> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View style={{ marginHorizontal: 20 }}>
+    <View style={{ marginHorizontal: 33 }}>
       <TouchableOpacity style={styles.shadow}>
         <Text></Text>
       </TouchableOpacity>
@@ -85,23 +86,22 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: "44%",
+    height: "42%",
     width: "100%",
-    backgroundColor: "F8F8F8",
+    backgroundColor: "black",
   },
   headertxt: {
-    color: "white",
+    color: "#FFFCFC",
     fontWeight: "bold",
     fontSize: 24,
     marginTop: "60%",
     alignSelf: "center",
   },
   img: {
-    height: "90%",
-    width: "150%",
     position: "absolute",
     backgroundColor: "#F8F8F8",
     alignSelf: "center",
+    height: "100%",
   },
   shadow: {
     position: "absolute",

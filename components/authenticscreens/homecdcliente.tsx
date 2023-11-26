@@ -14,6 +14,7 @@ import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
+
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Homecliente"
@@ -24,7 +25,7 @@ type Props = {
 
 const Homecdcliente: React.FC<Props> = ({ navigation }) => {
   const irpaginacuidador = (): undefined => {
-    navigation.navigate("Homecuidador", { nome: "nattan" });
+    navigation.navigate("Homecuidador");
   };
   const oi = (): undefined => {
     alert("ola");
@@ -33,10 +34,11 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={homeloginscss.container}>
       <Authenticheadrs
-        arrowimg={require("../../assets/arrowhead.png")}
-        imgheader={require("../../assets/img1.png")}
+        arrowimg={require("../../assets/arrowteste.png")}
+        imgheader={require("../../assets/teste.png")}
         headertxt="SEJA UM CUIDADOR"
         trocarmodo={irpaginacuidador}
+        ladoseta="flex-end"
       />
 
       {/* essa parte vai ser um componente */}
@@ -48,10 +50,6 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
           !
         </Text>
         <View style={homeloginscss.btndivs}>
-          {/*esse btns seráo componentes separados*/}
-          {/* <TouchableOpacity style={homeloginscss.shadow}>
-            <Text></Text>
-          </TouchableOpacity> */}
           <Btn
             cor="#C77B43"
             txtbtn="SING IN"
@@ -60,15 +58,12 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
             fontsize={16}
           />
           <Btn
-            cor="#C77B43"
+            cor="#F1EBEB"
             txtbtn="SING UP"
-            txtcor="#FFFCFC"
+            txtcor="#C77B43"
             pres={oi}
             fontsize={16}
           />
-          {/* <TouchableOpacity style={homeloginscss.btn2}>
-            <Text style={homeloginscss.txtbtn2}>SING UP</Text>
-          </TouchableOpacity> */}
         </View>
       </View>
     </SafeAreaView>
