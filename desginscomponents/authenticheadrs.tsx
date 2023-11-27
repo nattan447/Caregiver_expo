@@ -58,7 +58,7 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View style={{ marginHorizontal: 33, marginTop: 20 }}>
+    <View style={{ marginHorizontal: 33, marginTop: 20, alignSelf: "center" }}>
       <TouchableOpacity
         style={{
           position: "absolute",

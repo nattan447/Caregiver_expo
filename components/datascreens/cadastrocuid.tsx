@@ -10,7 +10,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
@@ -28,18 +28,21 @@ type Props = {
 };
 
 const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
-  const [txt, settxt] = useState<string>("");
   interface Cuidadordata {
     nome: string;
     sobrenome: string;
     email: string;
     senha: string;
+    profissao: string;
+    descricao: string;
   }
   const [cuidadordata, Setdata] = useState<Cuidadordata>({
     nome: "",
     sobrenome: "",
     email: "",
     senha: "",
+    profissao: "",
+    descricao: "",
   });
 
   const voltarautentic = (): undefined => {
@@ -52,6 +55,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       sobrenome: cuidadordata.sobrenome,
       email: cuidadordata.email,
       senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
     });
   }
   function handlesobrenome(Sobrenome: string): void {
@@ -60,6 +65,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       sobrenome: Sobrenome,
       email: cuidadordata.email,
       senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
     });
   }
   function handleemail(Email: string): void {
@@ -68,6 +75,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       sobrenome: cuidadordata.sobrenome,
       email: Email,
       senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
     });
   }
   function handlesenha(Senha: string): void {
@@ -76,10 +85,51 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       sobrenome: cuidadordata.sobrenome,
       email: cuidadordata.email,
       senha: Senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
     });
   }
-  const a = (): undefined => {
-    alert("ola");
+  function handleprofissao(Profissao: string): void {
+    Setdata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: Profissao,
+      descricao: cuidadordata.descricao,
+    });
+  }
+  function handledescricao(Descricao: string): void {
+    Setdata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: Descricao,
+    });
+  }
+  const [WarnEmail, SetWarnEmail] = useState<string>("");
+  const gosecondstep = (): undefined => {
+    let couterdatas: number = 0;
+
+    const values = Object.values(cuidadordata);
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (regex.test(cuidadordata.email)) {
+      SetWarnEmail("");
+      for (let i = 0; i < values.length; i++) {
+        if (values[i] != "") {
+          couterdatas += 1;
+        }
+      }
+    } else {
+      SetWarnEmail("digite um email válido");
+    }
+    if (couterdatas === values.length) {
+      navigation.navigate("Cadastrocuidador2", cuidadordata);
+    } else {
+      alert("preencha todos os dados");
+    }
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
@@ -92,13 +142,15 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       />
 
       <View style={cadastro.cadastroview}>
-        <ScrollView>
+        <ScrollView style={{ flex: 1, width: "100%" }}>
           <Inputs
             nometxt="nome *"
             placeholder=""
             value={cuidadordata.nome}
             onchangevalue={handlenome}
             issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
           />
           <Inputs
             nometxt="sobrenome *"
@@ -106,13 +158,18 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             value={cuidadordata.sobrenome}
             onchangevalue={handlesobrenome}
             issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
           />
+
           <Inputs
             nometxt="email * "
-            placeholder=""
+            placeholder={WarnEmail}
             value={cuidadordata.email}
             onchangevalue={handleemail}
             issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn={WarnEmail}
           />
           <Inputs
             nometxt="senha *"
@@ -120,26 +177,32 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             value={cuidadordata.senha}
             onchangevalue={handlesenha}
             issenha={true}
+            tamanho={{ height: 30 }}
+            emailwarn=""
           />
           <Inputs
             nometxt="profissão *"
             placeholder=""
-            value={cuidadordata.senha}
-            onchangevalue={handlesenha}
+            value={cuidadordata.profissao}
+            onchangevalue={handleprofissao}
             issenha={true}
+            tamanho={{ height: 30 }}
+            emailwarn=""
           />
           <Inputs
             nometxt="descrição"
             placeholder=""
-            value={cuidadordata.senha}
-            onchangevalue={handlesenha}
+            value={cuidadordata.descricao}
+            onchangevalue={handledescricao}
             issenha={true}
+            tamanho={{ height: 90 }}
+            emailwarn=""
           />
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"
             txtcor="#C77B43"
-            pres={a}
+            pres={gosecondstep}
             fontsize={16}
             altura={32}
             largura={200}

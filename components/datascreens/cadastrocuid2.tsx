@@ -27,7 +27,7 @@ type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
-const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
+const Cadastrocuidador2: React.FC<Props> = ({ navigation }) => {
   const [txt, settxt] = useState<string>("");
   interface Cuidadordata {
     nome: string;
@@ -86,7 +86,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       <Authenticheadrs
         arrowimg={require("../../assets/arrowheadleft.png")}
         imgheader={require("../../assets/dogwoman.png")}
-        headertxt="CRIAR CONTA"
+        headertxt="Cadastro cuidador 2"
         trocarmodo={voltarautentic}
         ladoseta="flex-start"
       />
@@ -100,41 +100,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             onchangevalue={handlenome}
             issenha={false}
           />
-          <Inputs
-            nometxt="sobrenome *"
-            placeholder=""
-            value={cuidadordata.sobrenome}
-            onchangevalue={handlesobrenome}
-            issenha={false}
-          />
-          <Inputs
-            nometxt="email * "
-            placeholder=""
-            value={cuidadordata.email}
-            onchangevalue={handleemail}
-            issenha={false}
-          />
-          <Inputs
-            nometxt="senha *"
-            placeholder=""
-            value={cuidadordata.senha}
-            onchangevalue={handlesenha}
-            issenha={true}
-          />
-          <Inputs
-            nometxt="profissão *"
-            placeholder=""
-            value={cuidadordata.senha}
-            onchangevalue={handlesenha}
-            issenha={true}
-          />
-          <Inputs
-            nometxt="descrição"
-            placeholder=""
-            value={cuidadordata.senha}
-            onchangevalue={handlesenha}
-            issenha={true}
-          />
+
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"
@@ -150,4 +116,4 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   );
 };
 
-export default Cadastrocuidador;
+export default Cadastrocuidador2;
