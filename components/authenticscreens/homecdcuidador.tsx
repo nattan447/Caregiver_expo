@@ -56,7 +56,7 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
           </TouchableOpacity> */}
           <Btn
             cor="#C77B43"
-            txtbtn="SING IN"
+            txtbtn="ENTRAR"
             txtcor="#FFFCFC"
             pres={ircadastrocuidador}
             fontsize={16}
@@ -65,7 +65,7 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
           />
           <Btn
             cor="#F1EBEB"
-            txtbtn="SING UP"
+            txtbtn="CADASTRAR"
             txtcor="#C77B43"
             pres={ircadastrocuidador}
             fontsize={16}

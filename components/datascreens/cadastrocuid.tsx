@@ -185,7 +185,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             placeholder=""
             value={cuidadordata.profissao}
             onchangevalue={handleprofissao}
-            issenha={true}
+            issenha={false}
             tamanho={{ height: 30 }}
             emailwarn=""
           />
@@ -194,7 +194,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             placeholder=""
             value={cuidadordata.descricao}
             onchangevalue={handledescricao}
-            issenha={true}
+            issenha={false}
             tamanho={{ height: 90 }}
             emailwarn=""
           />

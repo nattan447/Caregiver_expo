@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
@@ -21,96 +20,51 @@ import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "Cadastrocuidador"
+  "Cadastrocuidador2"
 >;
 type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
 const Cadastrocuidador2: React.FC<Props> = ({ navigation }) => {
-  const [txt, settxt] = useState<string>("");
-  interface Cuidadordata {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-  }
-  const [cuidadordata, Setdata] = useState<Cuidadordata>({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    senha: "",
-  });
-
-  const voltarautentic = (): undefined => {
-    navigation.navigate("Homecuidador");
-  };
-
-  function handlenome(texto: string): void {
-    Setdata({
-      nome: texto,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-    });
-  }
-  function handlesobrenome(Sobrenome: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: Sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-    });
-  }
-  function handleemail(Email: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: Email,
-      senha: cuidadordata.senha,
-    });
-  }
-  function handlesenha(Senha: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: Senha,
-    });
-  }
-  const a = (): undefined => {
-    alert("ola");
-  };
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <Authenticheadrs
-        arrowimg={require("../../assets/arrowheadleft.png")}
-        imgheader={require("../../assets/dogwoman.png")}
-        headertxt="Cadastro cuidador 2"
-        trocarmodo={voltarautentic}
-        ladoseta="flex-start"
-      />
-
-      <View style={cadastro.cadastroview}>
-        <ScrollView>
-          <Inputs
-            nometxt="nome *"
-            placeholder=""
-            value={cuidadordata.nome}
-            onchangevalue={handlenome}
-            issenha={false}
-          />
-
-          <Btn
-            cor="#F1EBEB"
-            txtbtn="próximo"
-            txtcor="#C77B43"
-            pres={a}
-            fontsize={16}
-            altura={32}
-            largura={200}
-          />
-        </ScrollView>
+      <View style={cadastro.cadastroview2}>
+        <Inputs
+          nometxt="cpf *"
+          placeholder=""
+          value={1}
+          onchangevalue={function () {
+            alert("oi");
+          }}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+        />
+        <TouchableOpacity>
+          <Text>Foto de perfil</Text>
+          <View style={cadastro.inputimg}></View>
+        </TouchableOpacity>
+        <Inputs
+          nometxt="data de nascimento *"
+          placeholder="Ex: dd/mm/yy"
+          value={1}
+          onchangevalue={function () {
+            alert("oi");
+          }}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+        />
+        <Btn
+          cor="#F1EBEB"
+          txtbtn="próximo"
+          txtcor="#C77B43"
+          pres={() => {}}
+          fontsize={16}
+          altura={32}
+          largura={100}
+        />
       </View>
     </SafeAreaView>
   );

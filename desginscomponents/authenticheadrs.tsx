@@ -27,6 +27,8 @@ interface Propriedadesbtn {
   altura: number;
   largura: number;
 }
+
+//componente do cabeçario das paginas
 export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
   return (
     <View style={styles.header}>
@@ -37,7 +39,7 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
         resizeMode="cover"
       ></Image>
       <TouchableOpacity
-        style={{ alignSelf: props.ladoseta, top: "60%" }}
+        style={{ alignSelf: props.ladoseta, position: "absolute", top: "40%" }}
         onPress={props.trocarmodo}
       >
         <Image
@@ -58,7 +60,7 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View style={{ marginHorizontal: 33, marginTop: 20, alignSelf: "center" }}>
+    <View style={{ marginHorizontal: 33, marginTop: 80, alignSelf: "center" }}>
       <TouchableOpacity
         style={{
           position: "absolute",
@@ -104,23 +106,24 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: "40.9%",
     width: "100%",
-    backgroundColor: "black",
+    height: "50%",
+    position: "absolute",
   },
   headertxt: {
     color: "#FFFCFC",
     fontWeight: "bold",
     fontSize: 24,
-    marginTop: "40%",
+    marginTop: "30%",
     alignSelf: "center",
+    position: "absolute",
   },
   img: {
-    position: "absolute",
+    position: "relative",
     backgroundColor: "#F8F8F8",
     alignSelf: "center",
-    height: "100%",
-
+    height: "57%",
+    width: "120%",
     top: 0,
   },
 });

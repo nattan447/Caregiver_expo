@@ -21,7 +21,7 @@ interface inputprops {
   tamanho: TextStyle;
   emailwarn: string;
 }
-
+//componente dos inputs
 const Inputs: React.FC<inputprops> = (props) => {
   return (
     <View style={styles.conponentsyle}>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     padding: 10,
-    marginTop: "5%",
+    margin: "10%",
   },
   input: {
     backgroundColor: "#F1EBEB",

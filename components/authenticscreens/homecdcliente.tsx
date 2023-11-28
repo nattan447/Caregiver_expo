@@ -34,8 +34,8 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={homeloginscss.container}>
       <Authenticheadrs
-        arrowimg={require("../../assets/arrowteste.png")}
-        imgheader={require("../../assets/teste.png")}
+        arrowimg={require("../../assets/arrowhead.png")}
+        imgheader={require("../../assets/dog.png")}
         headertxt="SEJA UM CUIDADOR"
         trocarmodo={irpaginacuidador}
         ladoseta="flex-end"
@@ -52,7 +52,7 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
         <View style={homeloginscss.btndivs}>
           <Btn
             cor="#C77B43"
-            txtbtn="SING IN"
+            txtbtn="ENTRAR"
             txtcor="#FFFCFC"
             pres={oi}
             fontsize={16}
@@ -61,7 +61,7 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
           />
           <Btn
             cor="#F1EBEB"
-            txtbtn="SING UP"
+            txtbtn="CADASTRAR"
             txtcor="#C77B43"
             pres={oi}
             fontsize={16}

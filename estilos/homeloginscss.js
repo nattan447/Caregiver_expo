@@ -19,13 +19,12 @@ export default StyleSheet.create({
   },
 
   blocoprincipal: {
-    position: "relative",
+    marginTop: "80%",
     width: "100%",
     flex: 1,
     backgroundColor: "#F8F8F8",
     borderColor: "lightblue",
     alignItems: "center",
-    marginTop: "2%",
   },
   blocoprincipaltxt: {
     position: "absolute",
@@ -51,4 +50,5 @@ export default StyleSheet.create({
     top: "73%",
     flexDirection: "row",
   },
+  blococadastrocuidador: {},
 });
