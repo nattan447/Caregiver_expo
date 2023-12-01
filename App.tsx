@@ -34,7 +34,15 @@ export default function App() {
           name="Cadastrocuidador"
         ></Stack.Screen>
         <Stack.Screen
-          options={{ headerShown: false }}
+          options={{
+            headerShown: true,
+            title: "",
+            headerBackVisible: true,
+            headerTintColor: "#C77B43",
+            headerStyle: {
+              backgroundColor: "#F8F8F8",
+            },
+          }}
           component={Cadastrocuidador2}
           name="Cadastrocuidador2"
         ></Stack.Screen>

@@ -8,7 +8,7 @@ export default StyleSheet.create({
   header: {
     height: "44%",
     width: "100%",
-    backgroundColor: "F8F8F8",
+    backgroundColor: "#F8F8F8",
   },
   headertxt: {
     color: "white",

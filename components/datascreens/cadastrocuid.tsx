@@ -35,6 +35,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     senha: string;
     profissao: string;
     descricao: string;
+    profileimg: string;
+    cpf: string;
+    datanasc: string;
   }
   const [cuidadordata, Setdata] = useState<Cuidadordata>({
     nome: "",
@@ -43,6 +46,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     senha: "",
     profissao: "",
     descricao: "",
+    profileimg: "",
+    cpf: "",
+    datanasc: "",
   });
 
   const voltarautentic = (): undefined => {
@@ -57,6 +63,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: cuidadordata.senha,
       profissao: cuidadordata.profissao,
       descricao: cuidadordata.descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   function handlesobrenome(Sobrenome: string): void {
@@ -67,6 +76,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: cuidadordata.senha,
       profissao: cuidadordata.profissao,
       descricao: cuidadordata.descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   function handleemail(Email: string): void {
@@ -77,6 +89,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: cuidadordata.senha,
       profissao: cuidadordata.profissao,
       descricao: cuidadordata.descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   function handlesenha(Senha: string): void {
@@ -87,6 +102,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: Senha,
       profissao: cuidadordata.profissao,
       descricao: cuidadordata.descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   function handleprofissao(Profissao: string): void {
@@ -97,6 +115,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: cuidadordata.senha,
       profissao: Profissao,
       descricao: cuidadordata.descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   function handledescricao(Descricao: string): void {
@@ -107,6 +128,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       senha: cuidadordata.senha,
       profissao: cuidadordata.profissao,
       descricao: Descricao,
+      profileimg: "",
+      cpf: "",
+      datanasc: "",
     });
   }
   const [WarnEmail, SetWarnEmail] = useState<string>("");
@@ -125,8 +149,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     } else {
       SetWarnEmail("digite um email válido");
     }
-    if (couterdatas === values.length) {
-      navigation.navigate("Cadastrocuidador2", cuidadordata);
+    if (couterdatas === 6) {
+      //nagegação aqui
+      navigation.navigate("Cadastrocuidador2", { cuidadordata });
     } else {
       alert("preencha todos os dados");
     }
