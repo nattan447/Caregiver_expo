@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TextInput,
   TextStyle,
+  KeyboardTypeOptions,
 } from "react-native";
 
 interface inputprops {
@@ -20,6 +21,8 @@ interface inputprops {
   issenha: boolean;
   tamanho: TextStyle;
   emailwarn: string;
+  type: KeyboardTypeOptions;
+  length: number;
 }
 //componente dos inputs
 const Inputs: React.FC<inputprops> = (props) => {
@@ -33,6 +36,8 @@ const Inputs: React.FC<inputprops> = (props) => {
         style={[styles.input, props.tamanho]}
         value={props.value}
         onChangeText={props.onchangevalue}
+        keyboardType={props.type}
+        maxLength={props.length}
       ></TextInput>
       <View style={styles.shadow}>
         <Text></Text>

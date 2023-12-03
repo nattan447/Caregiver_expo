@@ -29,7 +29,6 @@ type Props = {
   navigation: HomeScreenNavigationProp;
   route: RouteProp<RootStackParamList, "Cadastrocuidador2">;
 };
-
 const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
   interface Cuidadordatainterface {
     nome: string;
@@ -51,7 +50,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     descricao: "",
     profileimg: "",
     cpf: "",
-    datanasc: " string",
+    datanasc: "",
   });
   useEffect(() => {
     if (route.params) {
@@ -61,6 +60,17 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
   }, []);
 
   function handlecpf(Cpf: string) {
+    //formato para o cpf aceitar apenas números(strings), apenas
+    let datacpf = Cpf.split("");
+    if (Cpf.includes(".")) {
+      let idx = Cpf.indexOf(".");
+      datacpf.splice(idx, 1, "");
+    }
+    if (Cpf.includes("-")) {
+      let idx = Cpf.indexOf("-");
+      datacpf.splice(idx, 1, "");
+    }
+    console.log(typeof datacpf);
     setDataCuidador({
       nome: DataCuidador.nome,
       sobrenome: DataCuidador.sobrenome,
@@ -69,11 +79,13 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       profissao: DataCuidador.profissao,
       descricao: DataCuidador.descricao,
       profileimg: DataCuidador.profileimg,
-      cpf: Cpf,
+      cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
       datanasc: DataCuidador.datanasc,
     });
   }
+
   function handledatanasc(Data: string) {
+    let datasplit = Data.split("");
     setDataCuidador({
       nome: DataCuidador.nome,
       sobrenome: DataCuidador.sobrenome,
@@ -81,13 +93,15 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       senha: DataCuidador.senha,
       profissao: DataCuidador.profissao,
       descricao: DataCuidador.descricao,
-      profileimg: DataCuidador.profileimg,
+      profileimg: DataCuidador.profileimg, //uri
       cpf: DataCuidador.cpf,
-      datanasc: Data,
+      datanasc:
+        datasplit.length === 5 || datasplit.length === 2 ? Data + "/" : Data,
     });
   }
 
   const [image, setImage] = useState<string>("");
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -117,14 +131,13 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
+          type="numeric"
+          length={11}
         />
         <TouchableOpacity onPress={pickImage}>
           <Text>Foto de perfil</Text>
           <View style={cadastro.inputimg}></View>
         </TouchableOpacity>
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
         <Inputs
           nometxt="data de nascimento *"
           placeholder="Ex: dd/mm/yy"
@@ -133,6 +146,8 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
+          type="numeric"
+          length={10}
         />
         <Btn
           cor="#F1EBEB"

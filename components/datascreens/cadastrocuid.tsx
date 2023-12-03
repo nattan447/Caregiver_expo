@@ -135,8 +135,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   }
   const [WarnEmail, SetWarnEmail] = useState<string>("");
   const gosecondstep = (): undefined => {
+    navigation.navigate("Cadastrocuidador2", { cuidadordata });
     let couterdatas: number = 0;
-
     const values = Object.values(cuidadordata);
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (regex.test(cuidadordata.email)) {
@@ -151,7 +151,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     }
     if (couterdatas === 6) {
       //nagegação aqui
-      navigation.navigate("Cadastrocuidador2", { cuidadordata });
     } else {
       alert("preencha todos os dados");
     }
@@ -176,6 +175,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={false}
             tamanho={{ height: 30 }}
             emailwarn=""
+            type="default"
+            length={40}
           />
           <Inputs
             nometxt="sobrenome *"
@@ -185,6 +186,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={false}
             tamanho={{ height: 30 }}
             emailwarn=""
+            type="default"
+            length={40}
           />
 
           <Inputs
@@ -195,6 +198,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={false}
             tamanho={{ height: 30 }}
             emailwarn={WarnEmail}
+            type="email-address"
+            length={30}
           />
           <Inputs
             nometxt="senha *"
@@ -204,6 +209,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={true}
             tamanho={{ height: 30 }}
             emailwarn=""
+            type="default"
+            length={10}
           />
           <Inputs
             nometxt="profissão *"
@@ -213,6 +220,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={false}
             tamanho={{ height: 30 }}
             emailwarn=""
+            type="default"
+            length={20}
           />
           <Inputs
             nometxt="descrição"
@@ -222,6 +231,8 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             issenha={false}
             tamanho={{ height: 90 }}
             emailwarn=""
+            type="default"
+            length={80}
           />
           <Btn
             cor="#F1EBEB"

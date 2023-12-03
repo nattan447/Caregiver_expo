@@ -32,6 +32,7 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={homeloginscss.container}>
+      <StatusBar hidden={true}></StatusBar>
       <Authenticheadrs
         arrowimg={require("../../assets/arrowheadleft.png")}
         imgheader={require("../../assets/img2head.png")}

@@ -33,6 +33,7 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={homeloginscss.container}>
+      <StatusBar hidden={true}></StatusBar>
       <Authenticheadrs
         arrowimg={require("../../assets/arrowhead.png")}
         imgheader={require("../../assets/dog.png")}
