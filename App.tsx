@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homecdcliente from "./components/authenticscreens/homecdcliente";
 import Homecdcuidador from "./components/authenticscreens/homecdcuidador";
-import Cadastrocuidador from "./components/datascreens/cadastrocuid";
-import Cadastrocuidador2 from "./components/datascreens/cadastrocuid2";
-import Cadastrocuidador3 from "./components/datascreens/cadastrocuid3";
+import Cadastrocuidador from "./components/datascreenscuid/cadastrocuid";
+import Cadastrocuidador2 from "./components/datascreenscuid/cadastrocuid2";
+import Cadastrocuidador3 from "./components/datascreenscuid/cadastrocuid3";
 import { Header } from "react-native/Libraries/NewAppScreen";
 export type RootStackParamList = {
   Homecliente: undefined;

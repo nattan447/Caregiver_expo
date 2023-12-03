@@ -40,6 +40,10 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     profileimg: string;
     cpf: string;
     datanasc: string;
+    estado: string;
+    cidade: string;
+    rua: string;
+    cep: string;
   }
   const [cuidadordata, SetCuidadordata] = useState<Cuidadordatainterface>({
     nome: "",
@@ -51,8 +55,13 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     profileimg: "",
     cpf: "",
     datanasc: "",
+    estado: "",
+    cidade: "",
+    rua: "",
+    cep: "",
   });
   useEffect(() => {
+    alert("ola");
     if (route.params) {
       const { DataCuidador }: any = route.params;
       SetCuidadordata(DataCuidador);
@@ -60,46 +69,76 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     }
   }, []);
 
-  function handlecpf(Cpf: string) {
-    //formato para o cpf aceitar apenas números(strings), apenas
-    // let datacpf = Cpf.split("");
-    // if (Cpf.includes(".")) {
-    //   let idx = Cpf.indexOf(".");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // if (Cpf.includes("-")) {
-    //   let idx = Cpf.indexOf("-");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // if (Cpf.includes(",")) {
-    //   let idx = Cpf.indexOf(",");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // setDataCuidador({
-    //   nome: DataCuidador.nome,
-    //   sobrenome: DataCuidador.sobrenome,
-    //   email: DataCuidador.email,
-    //   senha: DataCuidador.senha,
-    //   profissao: DataCuidador.profissao,
-    //   descricao: DataCuidador.descricao,
-    //   profileimg: DataCuidador.profileimg,
-    //   cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
-    //   datanasc: DataCuidador.datanasc,
-    // });
+  function handelEstado(Estado: string) {
+    SetCuidadordata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
+      profileimg: cuidadordata.profileimg,
+      cpf: cuidadordata.cpf,
+      datanasc: cuidadordata.datanasc,
+      estado: Estado,
+      cidade: cuidadordata.cidade,
+      rua: cuidadordata.rua,
+      cep: cuidadordata.cep,
+    });
   }
 
-  function handledatanasc(Data: string) {
-    // setDataCuidador({
-    //   nome: DataCuidador.nome,
-    //   sobrenome: DataCuidador.sobrenome,
-    //   email: DataCuidador.email,
-    //   senha: DataCuidador.senha,
-    //   profissao: DataCuidador.profissao,
-    //   descricao: DataCuidador.descricao,
-    //   profileimg: DataCuidador.profileimg, //uri
-    //   cpf: DataCuidador.cpf,
-    //   datanasc: Data.length === 5 || Data.length === 2 ? Data + "/" : Data,
-    // });
+  function handlecidade(Cidade: string) {
+    SetCuidadordata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
+      profileimg: cuidadordata.profileimg,
+      cpf: cuidadordata.cpf,
+      datanasc: cuidadordata.datanasc,
+      estado: cuidadordata.estado,
+      cidade: Cidade,
+      rua: cuidadordata.rua,
+      cep: cuidadordata.cep,
+    });
+  }
+
+  function handlerua(Rua: string) {
+    SetCuidadordata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
+      profileimg: cuidadordata.profileimg,
+      cpf: cuidadordata.cpf,
+      datanasc: cuidadordata.datanasc,
+      estado: cuidadordata.estado,
+      cidade: cuidadordata.cidade,
+      rua: Rua,
+      cep: cuidadordata.cep,
+    });
+  }
+
+  function handlecep(Cep: string) {
+    SetCuidadordata({
+      nome: cuidadordata.nome,
+      sobrenome: cuidadordata.sobrenome,
+      email: cuidadordata.email,
+      senha: cuidadordata.senha,
+      profissao: cuidadordata.profissao,
+      descricao: cuidadordata.descricao,
+      profileimg: cuidadordata.profileimg,
+      cpf: cuidadordata.cpf,
+      datanasc: cuidadordata.datanasc,
+      estado: cuidadordata.estado,
+      cidade: cuidadordata.cidade,
+      rua: cuidadordata.rua,
+      cep: Cep,
+    });
   }
 
   const gonextpage = (): undefined => {
@@ -117,8 +156,8 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
         <Inputs
           nometxt="Estado *"
           placeholder=""
-          value={cuidadordata.datanasc}
-          onchangevalue={() => {}}
+          value={cuidadordata.estado}
+          onchangevalue={handelEstado}
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
@@ -128,21 +167,21 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
 
         <Inputs
           nometxt="cidade *"
-          placeholder="Ex: dd/mm/yy"
-          value={cuidadordata.datanasc}
-          onchangevalue={() => {}}
+          placeholder=""
+          value={cuidadordata.cidade}
+          onchangevalue={handlecidade}
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
-          type="numeric"
+          type="default"
           length={10}
         />
 
         <Inputs
           nometxt="rua *"
-          placeholder="Ex: dd/mm/yy"
-          value={cuidadordata.datanasc}
-          onchangevalue={() => {}}
+          placeholder=""
+          value={cuidadordata.rua}
+          onchangevalue={handlerua}
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
@@ -151,9 +190,9 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
         />
         <Inputs
           nometxt="cep *"
-          placeholder="Ex: dd/mm/yy"
-          value={cuidadordata.datanasc}
-          onchangevalue={() => {}}
+          placeholder=""
+          value={cuidadordata.cep}
+          onchangevalue={handlecep}
           issenha={false}
           tamanho={{ height: 30 }}
           emailwarn=""
