@@ -40,6 +40,10 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     profileimg: string;
     cpf: string;
     datanasc: string;
+    estado: string;
+    cidade: string;
+    rua: string;
+    cep: string;
   }
   const [DataCuidador, setDataCuidador] = useState<Cuidadordatainterface>({
     nome: "",
@@ -51,6 +55,10 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     profileimg: "",
     cpf: "",
     datanasc: "",
+    estado: "",
+    cidade: "",
+    rua: "",
+    cep: "",
   });
   useEffect(() => {
     if (route.params) {
@@ -70,7 +78,10 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       let idx = Cpf.indexOf("-");
       datacpf.splice(idx, 1, "");
     }
-    console.log(typeof datacpf);
+    if (Cpf.includes(",")) {
+      let idx = Cpf.indexOf(",");
+      datacpf.splice(idx, 1, "");
+    }
     setDataCuidador({
       nome: DataCuidador.nome,
       sobrenome: DataCuidador.sobrenome,
@@ -81,11 +92,14 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       profileimg: DataCuidador.profileimg,
       cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
       datanasc: DataCuidador.datanasc,
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
 
   function handledatanasc(Data: string) {
-    let datasplit = Data.split("");
     setDataCuidador({
       nome: DataCuidador.nome,
       sobrenome: DataCuidador.sobrenome,
@@ -95,12 +109,13 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       descricao: DataCuidador.descricao,
       profileimg: DataCuidador.profileimg, //uri
       cpf: DataCuidador.cpf,
-      datanasc:
-        datasplit.length === 5 || datasplit.length === 2 ? Data + "/" : Data,
+      datanasc: Data.length === 5 || Data.length === 2 ? Data + "/" : Data,
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
-
-  const [image, setImage] = useState<string>("");
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -111,13 +126,33 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     });
     console.log(result);
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setDataCuidador({
+        nome: DataCuidador.nome,
+        sobrenome: DataCuidador.sobrenome,
+        email: DataCuidador.email,
+        senha: DataCuidador.senha,
+        profissao: DataCuidador.profissao,
+        descricao: DataCuidador.descricao,
+        profileimg: result.assets[0].uri,
+        cpf: DataCuidador.cpf,
+        datanasc: DataCuidador.datanasc,
+        estado: "",
+        cidade: "",
+        rua: "",
+        cep: "",
+      });
     }
   };
 
   const gonextpage = (): undefined => {
+    navigation.navigate("Cadastrocuidador3", { DataCuidador });
+
     const values = Object.values(DataCuidador);
-    values.map((elemeto) => console.log(elemeto));
+    // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
+    //   //navegação aqui
+    // } else {
+    //   alert("preenchar os campos orbigatórios");
+    // }
   };
 
   return (

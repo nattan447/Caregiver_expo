@@ -61,7 +61,7 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
     <View style={{ marginHorizontal: 33, marginTop: 80, alignSelf: "center" }}>
-      <TouchableOpacity
+      <View
         style={{
           position: "absolute",
           height: props.altura + 2,
@@ -74,7 +74,7 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
         }}
       >
         <Text></Text>
-      </TouchableOpacity>
+      </View>
       <TouchableOpacity
         style={{
           height: props.altura,

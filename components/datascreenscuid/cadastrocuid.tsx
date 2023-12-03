@@ -38,6 +38,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     profileimg: string;
     cpf: string;
     datanasc: string;
+    estado: string;
+    cidade: string;
+    rua: string;
+    cep: string;
   }
   const [cuidadordata, Setdata] = useState<Cuidadordata>({
     nome: "",
@@ -49,6 +53,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     profileimg: "",
     cpf: "",
     datanasc: "",
+    estado: "",
+    cidade: "",
+    rua: "",
+    cep: "",
   });
 
   const voltarautentic = (): undefined => {
@@ -66,6 +74,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   function handlesobrenome(Sobrenome: string): void {
@@ -79,6 +91,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   function handleemail(Email: string): void {
@@ -92,6 +108,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   function handlesenha(Senha: string): void {
@@ -105,6 +125,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   function handleprofissao(Profissao: string): void {
@@ -118,6 +142,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   function handledescricao(Descricao: string): void {
@@ -131,6 +159,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       profileimg: "",
       cpf: "",
       datanasc: "",
+      estado: "",
+      cidade: "",
+      rua: "",
+      cep: "",
     });
   }
   const [WarnEmail, SetWarnEmail] = useState<string>("");
@@ -166,7 +198,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       />
 
       <View style={cadastro.cadastroview}>
-        <ScrollView style={{ flex: 1, width: "100%" }}>
+        <ScrollView>
           <Inputs
             nometxt="nome *"
             placeholder=""
