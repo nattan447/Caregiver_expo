@@ -8,13 +8,14 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { useState } from "react";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
 
+import React from "react";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Homecliente"
@@ -28,9 +29,8 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
     navigation.navigate("Homecuidador");
   };
   const oi = (): undefined => {
-    alert("ola");
+    alert("ta atuu");
   };
-
   return (
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>
@@ -50,6 +50,7 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
           Se cadastre ou entre em uma conta e venha entrar nessa jornada conoso
           !
         </Text>
+
         <View style={homeloginscss.btndivs}>
           <Btn
             cor="#C77B43"

@@ -12,6 +12,8 @@ import {
   TextStyle,
   KeyboardTypeOptions,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { ItemValue } from "@react-native-picker/picker/typings/Picker";
 
 interface inputprops {
   nometxt: string;
@@ -24,6 +26,7 @@ interface inputprops {
   type: KeyboardTypeOptions;
   length: number;
 }
+
 //componente dos inputs
 const Inputs: React.FC<inputprops> = (props) => {
   return (
@@ -46,6 +49,31 @@ const Inputs: React.FC<inputprops> = (props) => {
   );
 };
 export default Inputs;
+
+interface comboxprops {
+  arrayvalues: string[];
+  initialvalue: string;
+  onchange: (Itemvalue: string, itemIndex: number) => void;
+}
+
+export const Combobox: React.FC<comboxprops> = (props) => {
+  const itemvalues = props.arrayvalues.map((value) => {
+    return <Picker.Item label={value} value={value} />;
+  });
+
+  return (
+    <View>
+      <Picker
+        selectedValue={props.initialvalue}
+        style={{ height: 50, width: 150, backgroundColor: "red" }}
+        onValueChange={props.onchange}
+      >
+        {itemvalues}
+      </Picker>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   conponentsyle: {
     position: "relative",

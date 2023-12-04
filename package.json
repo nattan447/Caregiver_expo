@@ -12,11 +12,14 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": "~49.0.15",
+    "expo-constants": "~14.4.2",
+    "expo-image-picker": "~14.3.2",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
-    "expo-image-picker": "~14.3.2",
-    "expo-constants": "~14.4.2"
+    "react-native-picker-select": "^9.0.0",
+    "react-native-select-dropdown": "^3.4.0",
+    "@react-native-picker/picker": "2.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

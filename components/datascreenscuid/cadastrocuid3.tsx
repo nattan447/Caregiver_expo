@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Easing,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { Picker } from "@react-native-picker/picker";
 
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
@@ -21,6 +23,9 @@ import React from "react";
 import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
 import { RouteProp } from "@react-navigation/native";
+import RNPickerSelect from "react-native-picker-select";
+import { Combobox } from "../../desginscomponents/inputs";
+
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Cadastrocuidador3"
@@ -29,6 +34,7 @@ type Props = {
   navigation: HomeScreenNavigationProp;
   route: RouteProp<RootStackParamList, "Cadastrocuidador3">;
 };
+
 const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   interface Cuidadordatainterface {
     nome: string;
@@ -60,8 +66,18 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     rua: "",
     cep: "",
   });
+
+  const [Estado, SetEstado] = useState<string[]>([]);
   useEffect(() => {
-    alert("ola");
+    fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+      .then((response) => response.json())
+      .then((data) =>
+        data.map((estado: any) => {
+          let accestado: string = estado.nome;
+          SetEstado((current) => [...current, estado.nome]);
+        })
+      )
+      .catch((erro) => console.log(erro + "ocorreu o erro"));
     if (route.params) {
       const { DataCuidador }: any = route.params;
       SetCuidadordata(DataCuidador);
@@ -141,6 +157,8 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     });
   }
 
+  const [selectedValue, setSelectedValue] = useState("");
+
   const gonextpage = (): undefined => {
     // const values = Object.values(DataCuidador);
     // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
@@ -164,7 +182,6 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
           type="default"
           length={11}
         />
-
         <Inputs
           nometxt="cidade *"
           placeholder=""
@@ -176,7 +193,6 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
           type="default"
           length={10}
         />
-
         <Inputs
           nometxt="rua *"
           placeholder=""
@@ -198,6 +214,11 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
           emailwarn=""
           type="numeric"
           length={10}
+        />
+        <Combobox
+          initialvalue={selectedValue}
+          onchange={setSelectedValue}
+          arrayvalues={Estado}
         />
         <Btn
           cor="#F1EBEB"
