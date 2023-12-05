@@ -28,182 +28,134 @@ type Props = {
 };
 
 const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
-  interface Cuidadordata {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-    profissao: string;
-    descricao: string;
-    profileimg: string;
-    cpf: string;
-    datanasc: string;
-    estado: string;
-    cidade: string;
-    rua: string;
-    cep: string;
-  }
-  let datateste = [
-    ["idade", 20],
-    ["nome", "nattan"],
-  ];
-
-  useEffect(() => {
-    const dataOBJ = Object.fromEntries(datateste);
-
-    if (dataOBJ.nome) {
-      const indexatual = datateste.findIndex(
-        (item) => item[0] === "nome" && item[1] === "nattan"
-      );
-      datateste.push(["sexo", "masculino"]);
-      console.log("existe");
-    } else {
-      console.log("não existe");
-    }
-  }, []);
-  const [cuidadordata, Setdata] = useState<Cuidadordata>({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    senha: "",
-    profissao: "",
-    descricao: "",
-    profileimg: "",
-    cpf: "",
-    datanasc: "",
-    estado: "",
-    cidade: "",
-    rua: "",
-    cep: "",
-  });
-
+  let Datacuidador: (string | number)[][] = [];
   const Voltar = (): undefined => {
     navigation.navigate("Homecuidador");
   };
-
   function handlenome(texto: string): void {
-    Setdata({
-      nome: texto,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-      profissao: cuidadordata.profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "nome");
+    if (texto != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.nome) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando o cheio");
+        Datacuidador[indexatual] = ["nome", texto];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["nome", texto]);
+      }
+    }
   }
   function handlesobrenome(Sobrenome: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: Sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-      profissao: cuidadordata.profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex(
+      (item) => item[0] === "sobrenome"
+    );
+    if (Sobrenome != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.sobrenome) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando o cheio");
+        Datacuidador[indexatual] = ["sobrenome", Sobrenome];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["sobrenome", Sobrenome]);
+      }
+    }
   }
   function handleemail(Email: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: Email,
-      senha: cuidadordata.senha,
-      profissao: cuidadordata.profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "email");
+    if (Email != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.email) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando o cheio");
+        Datacuidador[indexatual] = ["email", Email];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["email", Email]);
+      }
+    }
   }
   function handlesenha(Senha: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: Senha,
-      profissao: cuidadordata.profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "senha");
+    if (Senha != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.senha) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando o cheio");
+        Datacuidador[indexatual] = ["senha", Senha];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["senha", Senha]);
+      }
+    }
   }
   function handleprofissao(Profissao: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-      profissao: Profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex(
+      (item) => item[0] === "profissao"
+    );
+    if (Profissao != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.profissao) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando o cheio");
+        Datacuidador[indexatual] = ["profissao", Profissao];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["profissao", Profissao]);
+      }
+    }
   }
   function handledescricao(Descricao: string): void {
-    Setdata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-      profissao: cuidadordata.profissao,
-      descricao: Descricao,
-      profileimg: "",
-      cpf: "",
-      datanasc: "",
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex(
+      (item) => item[0] === "descricao"
+    );
+    if (Descricao != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.descricao) {
+        //tem dados
+        console.log(indexatual);
+        console.log("ta puxando existente");
+        Datacuidador[indexatual] = ["descricao", Descricao];
+      } else {
+        // não tem dados
+        console.log("to púxando o vazio");
+        Datacuidador.push(["descricao", Descricao]);
+      }
+    }
   }
   const [WarnEmail, SetWarnEmail] = useState<string>("");
   const gosecondstep = (): undefined => {
-    navigation.navigate("Cadastrocuidador2", { cuidadordata });
-    let couterdatas: number = 0;
-    const values = Object.values(cuidadordata);
-    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (regex.test(cuidadordata.email)) {
-      SetWarnEmail("");
-      for (let i = 0; i < values.length; i++) {
-        if (values[i] != "") {
-          couterdatas += 1;
-        }
-      }
-    } else {
-      SetWarnEmail("digite um email válido");
-    }
-    if (couterdatas === 6) {
-      //nagegação aqui
-    } else {
-      alert("preencha todos os dados");
-    }
+    console.log(Datacuidador);
+    navigation.navigate("Cadastrocuidador2", { Datacuidador });
+    // let couterdatas: number = 0;
+    // const values = Object.values(cuidadordata);
+    // const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // if (regex.test(cuidadordata.email)) {
+    //   SetWarnEmail("");
+    //   for (let i = 0; i < values.length; i++) {
+    //     if (values[i] != "") {
+    //       couterdatas += 1;
+    //     }
+    //   }
+    // } else {
+    //   SetWarnEmail("digite um email válido");
+    // }
+    // if (couterdatas === 6) {
+    //   //nagegação aqui
+    // } else {
+    //   alert("preencha todos os dados");
+    // }
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
@@ -218,9 +170,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       <View style={cadastro.cadastroview}>
         <ScrollView>
           <Inputs
+            value=""
             nometxt="nome *"
             placeholder=""
-            value={cuidadordata.nome}
             onchangevalue={handlenome}
             issenha={false}
             tamanho={{ height: 30 }}
@@ -231,7 +183,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           <Inputs
             nometxt="sobrenome *"
             placeholder=""
-            value={cuidadordata.sobrenome}
             onchangevalue={handlesobrenome}
             issenha={false}
             tamanho={{ height: 30 }}
@@ -243,7 +194,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           <Inputs
             nometxt="email * "
             placeholder={WarnEmail}
-            value={cuidadordata.email}
             onchangevalue={handleemail}
             issenha={false}
             tamanho={{ height: 30 }}
@@ -254,7 +204,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           <Inputs
             nometxt="senha *"
             placeholder=""
-            value={cuidadordata.senha}
             onchangevalue={handlesenha}
             issenha={true}
             tamanho={{ height: 30 }}
@@ -265,7 +214,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           <Inputs
             nometxt="profissão *"
             placeholder=""
-            value={cuidadordata.profissao}
             onchangevalue={handleprofissao}
             issenha={false}
             tamanho={{ height: 30 }}
@@ -276,7 +224,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           <Inputs
             nometxt="descrição"
             placeholder=""
-            value={cuidadordata.descricao}
             onchangevalue={handledescricao}
             issenha={false}
             tamanho={{ height: 90 }}

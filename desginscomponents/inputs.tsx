@@ -37,7 +37,6 @@ const Inputs: React.FC<inputpropsInterface> = (props) => {
         secureTextEntry={props.issenha}
         placeholder={props.placeholder}
         style={[styles.input, props.tamanho]}
-        value={props.value}
         onChangeText={props.onchangevalue}
         keyboardType={props.type}
         maxLength={props.length}
