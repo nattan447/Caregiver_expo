@@ -15,7 +15,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { ItemValue } from "@react-native-picker/picker/typings/Picker";
 
-interface inputprops {
+interface inputpropsInterface {
   nometxt: string;
   placeholder: string;
   onchangevalue: (texto: string) => void;
@@ -28,7 +28,7 @@ interface inputprops {
 }
 
 //componente dos inputs
-const Inputs: React.FC<inputprops> = (props) => {
+const Inputs: React.FC<inputpropsInterface> = (props) => {
   return (
     <View style={styles.conponentsyle}>
       <Text style={styles.txt}>{props.nometxt}</Text>
@@ -50,14 +50,16 @@ const Inputs: React.FC<inputprops> = (props) => {
 };
 export default Inputs;
 
-interface comboxprops {
+interface comboxpropsInterface {
   arrayvalues: string[];
   initialvalue: string;
   onchange: (Itemvalue: string, itemIndex: number) => void;
 }
 
-export const Combobox: React.FC<comboxprops> = (props) => {
-  const itemvalues = props.arrayvalues.map((value) => {
+//componente da Combobox
+
+export const Combobox: React.FC<comboxpropsInterface> = (props) => {
+  const Pickeritem = props.arrayvalues.map((value) => {
     return <Picker.Item label={value} value={value} />;
   });
 
@@ -68,7 +70,7 @@ export const Combobox: React.FC<comboxprops> = (props) => {
         style={{ height: 50, width: 150, backgroundColor: "red" }}
         onValueChange={props.onchange}
       >
-        {itemvalues}
+        {Pickeritem}
       </Picker>
     </View>
   );

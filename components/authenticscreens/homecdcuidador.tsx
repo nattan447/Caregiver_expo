@@ -7,13 +7,14 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useEffect } from "react";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Homecuidador"
@@ -26,7 +27,7 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
   const irpaginacliente = (): undefined => {
     navigation.navigate("Homecliente");
   };
-  const ircadastrocuidador = (): undefined => {
+  const irCadastrocuidador = (): undefined => {
     navigation.navigate("Cadastrocuidador");
   };
 
@@ -59,16 +60,17 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
             cor="#C77B43"
             txtbtn="ENTRAR"
             txtcor="#FFFCFC"
-            pres={ircadastrocuidador}
+            pres={irCadastrocuidador}
             fontsize={16}
             altura={48}
             largura={131}
           />
+
           <Btn
             cor="#F1EBEB"
             txtbtn="CADASTRAR"
             txtcor="#C77B43"
-            pres={ircadastrocuidador}
+            pres={irCadastrocuidador}
             fontsize={16}
             altura={48}
             largura={131}

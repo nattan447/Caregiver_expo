@@ -43,6 +43,24 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     rua: string;
     cep: string;
   }
+  let datateste = [
+    ["idade", 20],
+    ["nome", "nattan"],
+  ];
+
+  useEffect(() => {
+    const dataOBJ = Object.fromEntries(datateste);
+
+    if (dataOBJ.nome) {
+      const indexatual = datateste.findIndex(
+        (item) => item[0] === "nome" && item[1] === "nattan"
+      );
+      datateste.push(["sexo", "masculino"]);
+      console.log("existe");
+    } else {
+      console.log("não existe");
+    }
+  }, []);
   const [cuidadordata, Setdata] = useState<Cuidadordata>({
     nome: "",
     sobrenome: "",
@@ -59,7 +77,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     cep: "",
   });
 
-  const voltarautentic = (): undefined => {
+  const Voltar = (): undefined => {
     navigation.navigate("Homecuidador");
   };
 
@@ -193,7 +211,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         arrowimg={require("../../assets/arrowheadleft.png")}
         imgheader={require("../../assets/dogwoman.png")}
         headertxt="CRIAR CONTA"
-        trocarmodo={voltarautentic}
+        trocarmodo={Voltar}
         ladoseta="flex-start"
       />
 
