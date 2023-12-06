@@ -29,7 +29,7 @@ type Props = {
 
 const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   let Datacuidador: (string | number)[][] = [];
-  const Voltar = (): undefined => {
+  const Voltar = (): void => {
     navigation.navigate("Homecuidador");
   };
   function handlenome(texto: string): void {
@@ -38,12 +38,11 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.nome) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando o cheio");
+
         Datacuidador[indexatual] = ["nome", texto];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
+
         Datacuidador.push(["nome", texto]);
       }
     }
@@ -56,12 +55,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.sobrenome) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando o cheio");
+
         Datacuidador[indexatual] = ["sobrenome", Sobrenome];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
         Datacuidador.push(["sobrenome", Sobrenome]);
       }
     }
@@ -72,12 +69,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.email) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando o cheio");
+
         Datacuidador[indexatual] = ["email", Email];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
         Datacuidador.push(["email", Email]);
       }
     }
@@ -88,12 +83,11 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.senha) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando o cheio");
+
         Datacuidador[indexatual] = ["senha", Senha];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
+
         Datacuidador.push(["senha", Senha]);
       }
     }
@@ -106,12 +100,11 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.profissao) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando o cheio");
+
         Datacuidador[indexatual] = ["profissao", Profissao];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
+
         Datacuidador.push(["profissao", Profissao]);
       }
     }
@@ -124,38 +117,31 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.descricao) {
         //tem dados
-        console.log(indexatual);
-        console.log("ta puxando existente");
+
         Datacuidador[indexatual] = ["descricao", Descricao];
       } else {
         // não tem dados
-        console.log("to púxando o vazio");
+
         Datacuidador.push(["descricao", Descricao]);
       }
     }
   }
-  const [WarnEmail, SetWarnEmail] = useState<string>("");
-  const gosecondstep = (): undefined => {
-    console.log(Datacuidador);
-    navigation.navigate("Cadastrocuidador2", { Datacuidador });
-    // let couterdatas: number = 0;
-    // const values = Object.values(cuidadordata);
-    // const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    // if (regex.test(cuidadordata.email)) {
-    //   SetWarnEmail("");
-    //   for (let i = 0; i < values.length; i++) {
-    //     if (values[i] != "") {
-    //       couterdatas += 1;
-    //     }
-    //   }
-    // } else {
-    //   SetWarnEmail("digite um email válido");
-    // }
-    // if (couterdatas === 6) {
-    //   //nagegação aqui
-    // } else {
-    //   alert("preencha todos os dados");
-    // }
+
+  // const Warnemail = useRef<string>("");
+  const gosecondstep = (): void => {
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const DatacuidadorObj = Object.fromEntries(Datacuidador);
+    const values = Object.values(DatacuidadorObj);
+
+    if (Datacuidador.length === 6) {
+      if (regex.test(DatacuidadorObj.email)) {
+        navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
+      } else {
+        alert("digite o modelo de email certo");
+      }
+    } else {
+      alert("preencha todos os dados");
+    }
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
@@ -182,6 +168,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           />
           <Inputs
             nometxt="sobrenome *"
+            value={"nada"}
             placeholder=""
             onchangevalue={handlesobrenome}
             issenha={false}
@@ -192,16 +179,18 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           />
 
           <Inputs
+            value={"nada"}
             nometxt="email * "
-            placeholder={WarnEmail}
+            placeholder={"digite seu email"}
             onchangevalue={handleemail}
             issenha={false}
             tamanho={{ height: 30 }}
-            emailwarn={WarnEmail}
+            emailwarn={"nada"}
             type="email-address"
             length={30}
           />
           <Inputs
+            value={"nada"}
             nometxt="senha *"
             placeholder=""
             onchangevalue={handlesenha}
@@ -212,6 +201,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             length={10}
           />
           <Inputs
+            value={"nada"}
             nometxt="profissão *"
             placeholder=""
             onchangevalue={handleprofissao}
@@ -222,6 +212,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             length={20}
           />
           <Inputs
+            value={"nada"}
             nometxt="descrição"
             placeholder=""
             onchangevalue={handledescricao}

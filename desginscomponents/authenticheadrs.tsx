@@ -15,14 +15,14 @@ interface Propriedadesheader {
   imgheader: number;
   headertxt: string;
   arrowimg: number;
-  trocarmodo: React.FC;
+  trocarmodo: () => void;
   ladoseta: any;
 }
 interface Propriedadesbtn {
   txtbtn: string;
   cor: string;
   txtcor: string;
-  pres: React.FC;
+  pres: () => void;
   fontsize: number;
   altura: number;
   largura: number;

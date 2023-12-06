@@ -30,124 +30,152 @@ type Props = {
   route: RouteProp<RootStackParamList, "Cadastrocuidador2">;
 };
 const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
-  interface Cuidadordatainterface {
+  interface CuidadorDatainterface {
     nome: string;
     sobrenome: string;
     email: string;
     senha: string;
     profissao: string;
     descricao: string;
-    profileimg: string;
-    cpf: string;
-    datanasc: string;
-    estado: string;
-    cidade: string;
-    rua: string;
-    cep: string;
   }
-  const [DataCuidador, setDataCuidador] = useState<Cuidadordatainterface>({
+  const [DataCuidador, setDataCuidador] = useState<CuidadorDatainterface>({
     nome: "",
     sobrenome: "",
     email: "",
     senha: "",
     profissao: "",
     descricao: "",
-    profileimg: "",
-    cpf: "",
-    datanasc: "",
-    estado: "",
-    cidade: "",
-    rua: "",
-    cep: "",
   });
+
   useEffect(() => {
     if (route.params) {
-      const { cuidadordata }: any = route.params;
-      setDataCuidador(cuidadordata);
+      const { DatacuidadorObj }: { DatacuidadorObj?: CuidadorDatainterface } =
+        route.params;
+      if (DatacuidadorObj != undefined) {
+        setDataCuidador(DatacuidadorObj);
+      }
     }
   }, []);
+  if (DataCuidador) {
+    var Datacuidador: (string | number)[][] = Object.entries(DataCuidador);
+  }
 
   function handlecpf(Cpf: string) {
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "cpf");
+    if (Cpf != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.cpf) {
+        //tem dados
+        Datacuidador[indexatual] = ["cpf", Cpf];
+      } else {
+        // não tem dados
+        Datacuidador.push(["cpf", Cpf]);
+      }
+    }
+
     //formato para o cpf aceitar apenas números(strings), apenas
-    let datacpf = Cpf.split("");
-    if (Cpf.includes(".")) {
-      let idx = Cpf.indexOf(".");
-      datacpf.splice(idx, 1, "");
-    }
-    if (Cpf.includes("-")) {
-      let idx = Cpf.indexOf("-");
-      datacpf.splice(idx, 1, "");
-    }
-    if (Cpf.includes(",")) {
-      let idx = Cpf.indexOf(",");
-      datacpf.splice(idx, 1, "");
-    }
-    setDataCuidador({
-      nome: DataCuidador.nome,
-      sobrenome: DataCuidador.sobrenome,
-      email: DataCuidador.email,
-      senha: DataCuidador.senha,
-      profissao: DataCuidador.profissao,
-      descricao: DataCuidador.descricao,
-      profileimg: DataCuidador.profileimg,
-      cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
-      datanasc: DataCuidador.datanasc,
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    // let datacpf = Cpf.split("");
+    // if (Cpf.includes(".")) {
+    //   let idx = Cpf.indexOf(".");
+    //   datacpf.splice(idx, 1, "");
+    // }
+    // if (Cpf.includes("-")) {
+    //   let idx = Cpf.indexOf("-");
+    //   datacpf.splice(idx, 1, "");
+    // }
+    // if (Cpf.includes(",")) {
+    //   let idx = Cpf.indexOf(",");
+    //   datacpf.splice(idx, 1, "");
+    // }
+    // setDataCuidador({
+    //   nome: DataCuidador.nome,
+    //   sobrenome: DataCuidador.sobrenome,
+    //   email: DataCuidador.email,
+    //   senha: DataCuidador.senha,
+    //   profissao: DataCuidador.profissao,
+    //   descricao: DataCuidador.descricao,
+    //   profileimg: DataCuidador.profileimg,
+    //   cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
+    //   datanasc: DataCuidador.datanasc,
+    //   estado: "",
+    //   cidade: "",
+    //   rua: "",
+    //   cep: "",
+    // });
   }
 
   function handledatanasc(Data: string) {
-    setDataCuidador({
-      nome: DataCuidador.nome,
-      sobrenome: DataCuidador.sobrenome,
-      email: DataCuidador.email,
-      senha: DataCuidador.senha,
-      profissao: DataCuidador.profissao,
-      descricao: DataCuidador.descricao,
-      profileimg: DataCuidador.profileimg, //uri
-      cpf: DataCuidador.cpf,
-      datanasc: Data.length === 5 || Data.length === 2 ? Data + "/" : Data,
-      estado: "",
-      cidade: "",
-      rua: "",
-      cep: "",
-    });
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "data");
+    if (Data != "") {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.data) {
+        //tem dados
+        Datacuidador[indexatual] = ["data", Data];
+      } else {
+        // não tem dados
+        Datacuidador.push(["data", Data]);
+      }
+    }
+
+    // setDataCuidador({
+    //   nome: DataCuidador.nome,
+    //   sobrenome: DataCuidador.sobrenome,
+    //   email: DataCuidador.email,
+    //   senha: DataCuidador.senha,
+    //   profissao: DataCuidador.profissao,
+    //   descricao: DataCuidador.descricao,
+    //   profileimg: DataCuidador.profileimg, //uri
+    //   cpf: DataCuidador.cpf,
+    //   datanasc: Data.length === 5 || Data.length === 2 ? Data + "/" : Data,
+    //   estado: "",
+    //   cidade: "",
+    //   rua: "",
+    //   cep: "",
+    // });
   }
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let Image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
-    if (!result.canceled) {
-      setDataCuidador({
-        nome: DataCuidador.nome,
-        sobrenome: DataCuidador.sobrenome,
-        email: DataCuidador.email,
-        senha: DataCuidador.senha,
-        profissao: DataCuidador.profissao,
-        descricao: DataCuidador.descricao,
-        profileimg: result.assets[0].uri,
-        cpf: DataCuidador.cpf,
-        datanasc: DataCuidador.datanasc,
-        estado: "",
-        cidade: "",
-        rua: "",
-        cep: "",
-      });
+    console.log(Image);
+    if (!Image.canceled) {
+      const indexatual = Datacuidador.findIndex((item) => item[0] === "image");
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.image) {
+        //tem dados
+        Datacuidador[indexatual] = ["image", Image.assets[0].uri];
+      } else {
+        // não tem dados
+        Datacuidador.push(["image", Image.assets[0].uri]);
+      }
+
+      // setDataCuidador({
+      //   nome: DataCuidador.nome,
+      //   sobrenome: DataCuidador.sobrenome,
+      //   email: DataCuidador.email,
+      //   senha: DataCuidador.senha,
+      //   profissao: DataCuidador.profissao,
+      //   descricao: DataCuidador.descricao,
+      //   profileimg: result.assets[0].uri,
+      //   cpf: DataCuidador.cpf,
+      //   datanasc: DataCuidador.datanasc,
+      //   estado: "",
+      //   cidade: "",
+      //   rua: "",
+      //   cep: "",
+      // });
     }
   };
 
   const gonextpage = (): undefined => {
-    navigation.navigate("Cadastrocuidador3", { DataCuidador });
+    console.log(Datacuidador);
+    // navigation.navigate("Cadastrocuidador3", { DataCuidador });
 
-    const values = Object.values(DataCuidador);
+    // const values = Object.values(DataCuidador);
     // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
     //   //navegação aqui
     // } else {
@@ -161,7 +189,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
         <Inputs
           nometxt="cpf *"
           placeholder=""
-          value={DataCuidador.cpf}
+          value={""}
           onchangevalue={handlecpf}
           issenha={false}
           tamanho={{ height: 30 }}
@@ -176,7 +204,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
         <Inputs
           nometxt="data de nascimento *"
           placeholder="Ex: dd/mm/yy"
-          value={DataCuidador.datanasc}
+          value={""}
           onchangevalue={handledatanasc}
           issenha={false}
           tamanho={{ height: 30 }}

@@ -32,7 +32,7 @@ const Inputs: React.FC<inputpropsInterface> = (props) => {
   return (
     <View style={styles.conponentsyle}>
       <Text style={styles.txt}>{props.nometxt}</Text>
-      <Text style={{ color: "red", fontSize: 10 }}>{props.emailwarn}</Text>
+      {/* <Text style={{ color: "red", fontSize: 10 }}>{props.emailwarn}</Text> */}
       <TextInput
         secureTextEntry={props.issenha}
         placeholder={props.placeholder}
