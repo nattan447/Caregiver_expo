@@ -75,7 +75,7 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   conponentsyle: {
     position: "relative",
     alignSelf: "center",

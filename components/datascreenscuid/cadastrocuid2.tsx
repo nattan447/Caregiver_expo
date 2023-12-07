@@ -10,9 +10,10 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import { styles } from "../../desginscomponents/inputs";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
-
+import { TextInputMask } from "react-native-masked-text";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
@@ -72,66 +73,25 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
         Datacuidador.push(["cpf", Cpf]);
       }
     }
-
-    //formato para o cpf aceitar apenas números(strings), apenas
-    // let datacpf = Cpf.split("");
-    // if (Cpf.includes(".")) {
-    //   let idx = Cpf.indexOf(".");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // if (Cpf.includes("-")) {
-    //   let idx = Cpf.indexOf("-");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // if (Cpf.includes(",")) {
-    //   let idx = Cpf.indexOf(",");
-    //   datacpf.splice(idx, 1, "");
-    // }
-    // setDataCuidador({
-    //   nome: DataCuidador.nome,
-    //   sobrenome: DataCuidador.sobrenome,
-    //   email: DataCuidador.email,
-    //   senha: DataCuidador.senha,
-    //   profissao: DataCuidador.profissao,
-    //   descricao: DataCuidador.descricao,
-    //   profileimg: DataCuidador.profileimg,
-    //   cpf: typeof datacpf === "string" ? datacpf : datacpf.join(""),
-    //   datanasc: DataCuidador.datanasc,
-    //   estado: "",
-    //   cidade: "",
-    //   rua: "",
-    //   cep: "",
-    // });
   }
-
-  function handledatanasc(Data: string) {
+  const dateInputRef = useRef(null);
+  function handledatenasc(
+    Date: string,
+    formatted: any,
+    extracted?: string | undefined
+  ) {
+    dateInputRef.current = formatted;
     const indexatual = Datacuidador.findIndex((item) => item[0] === "data");
-    if (Data != "") {
+    if (Date != "") {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.data) {
         //tem dados
-        Datacuidador[indexatual] = ["data", Data];
+        Datacuidador[indexatual] = ["data", Date];
       } else {
         // não tem dados
-        Datacuidador.push(["data", Data]);
+        Datacuidador.push(["data", Date]);
       }
     }
-
-    // setDataCuidador({
-    //   nome: DataCuidador.nome,
-    //   sobrenome: DataCuidador.sobrenome,
-    //   email: DataCuidador.email,
-    //   senha: DataCuidador.senha,
-    //   profissao: DataCuidador.profissao,
-    //   descricao: DataCuidador.descricao,
-    //   profileimg: DataCuidador.profileimg, //uri
-    //   cpf: DataCuidador.cpf,
-    //   datanasc: Data.length === 5 || Data.length === 2 ? Data + "/" : Data,
-    //   estado: "",
-    //   cidade: "",
-    //   rua: "",
-    //   cep: "",
-    // });
   }
 
   const pickImage = async () => {
@@ -152,22 +112,6 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
         // não tem dados
         Datacuidador.push(["image", Image.assets[0].uri]);
       }
-
-      // setDataCuidador({
-      //   nome: DataCuidador.nome,
-      //   sobrenome: DataCuidador.sobrenome,
-      //   email: DataCuidador.email,
-      //   senha: DataCuidador.senha,
-      //   profissao: DataCuidador.profissao,
-      //   descricao: DataCuidador.descricao,
-      //   profileimg: result.assets[0].uri,
-      //   cpf: DataCuidador.cpf,
-      //   datanasc: DataCuidador.datanasc,
-      //   estado: "",
-      //   cidade: "",
-      //   rua: "",
-      //   cep: "",
-      // });
     }
   };
 
@@ -201,16 +145,25 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           <Text>Foto de perfil</Text>
           <View style={cadastro.inputimg}></View>
         </TouchableOpacity>
-        <Inputs
-          nometxt="data de nascimento *"
-          placeholder="Ex: dd/mm/yy"
-          value={""}
-          onchangevalue={handledatanasc}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="numeric"
-          length={10}
+
+        <Text style={[styles.txt, { marginTop: 30 }]}>data de nascimento</Text>
+        <TextInputMask
+          style={[
+            styles.input,
+            {
+              height: 34,
+              borderBottomWidth: 2,
+              borderColor: "#dddddd",
+              marginTop: 10,
+            },
+          ]}
+          maxLength={10}
+          ref={dateInputRef}
+          type={"datetime"}
+          options={{
+            format: "DD/MM/YYYY",
+          }}
+          onChangeText={handledatenasc}
         />
         <Btn
           cor="#F1EBEB"
