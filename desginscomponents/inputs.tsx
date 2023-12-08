@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -53,22 +53,51 @@ interface comboxpropsInterface {
   arrayvalues: string[];
   initialvalue: string;
   onchange: (Itemvalue: string, itemIndex: number) => void;
+  textabove: string;
 }
 
 //componente da Combobox
 
 export const Combobox: React.FC<comboxpropsInterface> = (props) => {
+  const keyCounter = useRef<number>(0);
   const Pickeritem = props.arrayvalues.map((value) => {
-    return <Picker.Item label={value} value={value} />;
+    keyCounter.current++;
+    return <Picker.Item label={value} value={value} key={keyCounter.current} />;
   });
 
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "10%",
+        width: "80%",
+        alignSelf: "center",
+      }}
+    >
+      <Text style={[styles.txt, { alignSelf: "flex-start" }]}>
+        {props.textabove}
+      </Text>
       <Picker
+        placeholder="sexo"
         selectedValue={props.initialvalue}
-        style={{ height: 50, width: 150, backgroundColor: "red" }}
+        style={[
+          styles.input,
+          {
+            borderWidth: 2,
+            borderColor: "#dddddd",
+            alignSelf: "center",
+            width: "100%",
+          },
+        ]}
         onValueChange={props.onchange}
       >
+        <Picker.Item
+          value={null}
+          label="selecione o Estado"
+          key={1999}
+        ></Picker.Item>
         {Pickeritem}
       </Picker>
     </View>

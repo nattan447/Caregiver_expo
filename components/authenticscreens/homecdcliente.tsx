@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
+import { Picker } from "@react-native-picker/picker";
+
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
@@ -43,6 +45,7 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
       />
 
       {/* essa parte vai ser um componente */}
+
       <View style={homeloginscss.blocoprincipal}>
         <Text style={homeloginscss.blocoprincipaltxt}>Caregiver</Text>
         <Text style={homeloginscss.blocoprincipaltxt2}>Bem vindo</Text>

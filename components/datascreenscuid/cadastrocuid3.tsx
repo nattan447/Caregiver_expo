@@ -36,7 +36,7 @@ type Props = {
 };
 
 const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
-  interface Cuidadordatainterface {
+  interface CuidadordataInterface {
     nome: string;
     sobrenome: string;
     email: string;
@@ -51,7 +51,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     rua: string;
     cep: string;
   }
-  const [cuidadordata, SetCuidadordata] = useState<Cuidadordatainterface>({
+  const [cuidadordata, SetCuidadordata] = useState<CuidadordataInterface>({
     nome: "",
     sobrenome: "",
     email: "",
@@ -67,25 +67,34 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     cep: "",
   });
 
-  const [Estado, SetEstado] = useState<string[]>([]);
+  const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
   useEffect(() => {
     fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
       .then((response) => response.json())
       .then((data) =>
         data.map((estado: any) => {
           let accestado: string = estado.nome;
-          SetEstado((current) => [...current, estado.nome]);
+          SetArrayEstado((current) => [...current, estado.nome]);
         })
       )
-      .catch((erro) => console.log(erro + "ocorreu o erro"));
+      .catch((erro) =>
+        console.log(erro + "ocorreu o erro ao carregar os dados da api")
+      );
     if (route.params) {
-      const { DataCuidador }: any = route.params;
-      SetCuidadordata(DataCuidador);
-      console.log(DataCuidador);
+      const { datacuidadorOBJ }: { datacuidadorOBJ?: CuidadordataInterface } =
+        route.params;
+      if (datacuidadorOBJ) {
+        console.log(datacuidadorOBJ);
+        SetCuidadordata(datacuidadorOBJ);
+      }
     }
   }, []);
-
+  const [EstadoValue, SetEstadoValue] = useState<string>("defaltu");
   function handelEstado(Estado: string) {
+    if (Estado != null) {
+      SetEstadoValue(Estado);
+    }
+
     SetCuidadordata({
       nome: cuidadordata.nome,
       sobrenome: cuidadordata.sobrenome,
@@ -157,9 +166,8 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     });
   }
 
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const gonextpage = (): undefined => {
+  const goHomescreen = (): void => {
+    console.log(cuidadordata);
     // const values = Object.values(DataCuidador);
     // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
     //   alert("pode passar");
@@ -171,64 +179,68 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
-        <Inputs
-          nometxt="Estado *"
-          placeholder=""
-          value={cuidadordata.estado}
-          onchangevalue={handelEstado}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="default"
-          length={11}
-        />
-        <Inputs
-          nometxt="cidade *"
-          placeholder=""
-          value={cuidadordata.cidade}
-          onchangevalue={handlecidade}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="default"
-          length={10}
-        />
-        <Inputs
-          nometxt="rua *"
-          placeholder=""
-          value={cuidadordata.rua}
-          onchangevalue={handlerua}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="default"
-          length={10}
-        />
-        <Inputs
-          nometxt="cep *"
-          placeholder=""
-          value={cuidadordata.cep}
-          onchangevalue={handlecep}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="numeric"
-          length={10}
-        />
-        <Combobox
-          initialvalue={selectedValue}
-          onchange={setSelectedValue}
-          arrayvalues={Estado}
-        />
-        <Btn
-          cor="#F1EBEB"
-          txtbtn="cadastrar"
-          txtcor="#C77B43"
-          pres={gonextpage}
-          fontsize={16}
-          altura={32}
-          largura={100}
-        />
+        <ScrollView>
+          {/* <Inputs
+            nometxt="Estado *"
+            placeholder=""
+            value={cuidadordata.estado}
+            onchangevalue={handelEstado}
+            issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
+            type="default"
+            length={11}
+          /> */}
+          <Combobox
+            textabove="Estado"
+            initialvalue={EstadoValue}
+            onchange={handelEstado}
+            arrayvalues={ArrayEstado}
+          />
+          <Inputs
+            nometxt="cidade "
+            placeholder=""
+            value={cuidadordata.cidade}
+            onchangevalue={handlecidade}
+            issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
+            type="default"
+            length={10}
+          />
+          <Inputs
+            nometxt="rua "
+            placeholder=""
+            value={cuidadordata.rua}
+            onchangevalue={handlerua}
+            issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
+            type="default"
+            length={10}
+          />
+          <Inputs
+            nometxt="cep "
+            placeholder=""
+            value={cuidadordata.cep}
+            onchangevalue={handlecep}
+            issenha={false}
+            tamanho={{ height: 30 }}
+            emailwarn=""
+            type="numeric"
+            length={10}
+          />
+
+          <Btn
+            cor="#F1EBEB"
+            txtbtn="cadastrar"
+            txtcor="#C77B43"
+            pres={goHomescreen}
+            fontsize={16}
+            altura={32}
+            largura={100}
+          />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

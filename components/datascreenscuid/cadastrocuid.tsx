@@ -17,6 +17,8 @@ import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
+import { Picker } from "@react-native-picker/picker";
+
 import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
 type HomeScreenNavigationProp = NativeStackNavigationProp<

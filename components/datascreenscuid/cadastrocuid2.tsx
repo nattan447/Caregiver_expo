@@ -86,15 +86,15 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
   ) {
     DateRef.current = Date;
     dateInputRefMask.current = formatted;
-    const indexatual = Datacuidador.findIndex((item) => item[0] === "data");
+    const indexatual = Datacuidador.findIndex((item) => item[0] === "datanasc");
     if (Date != "") {
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.data) {
         //tem dados
-        Datacuidador[indexatual] = ["data", Date];
+        Datacuidador[indexatual] = ["datanasc", Date];
       } else {
         // não tem dados
-        Datacuidador.push(["data", Date]);
+        Datacuidador.push(["datanasc", Date]);
       }
     }
   }
@@ -108,14 +108,16 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     });
     console.log(Image);
     if (!Image.canceled) {
-      const indexatual = Datacuidador.findIndex((item) => item[0] === "image");
+      const indexatual = Datacuidador.findIndex(
+        (item) => item[0] === "profileimg"
+      );
       const dataOBJ = Object.fromEntries(Datacuidador);
       if (dataOBJ.image) {
         //tem dados
-        Datacuidador[indexatual] = ["image", Image.assets[0].uri];
+        Datacuidador[indexatual] = ["profileimg", Image.assets[0].uri];
       } else {
         // não tem dados
-        Datacuidador.push(["image", Image.assets[0].uri]);
+        Datacuidador.push(["profileimg", Image.assets[0].uri]);
       }
     }
   };
