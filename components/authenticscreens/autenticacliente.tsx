@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import { Picker } from "@react-native-picker/picker";
 
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
@@ -20,15 +19,15 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "Homecliente"
+  "Autenticacaocli"
 >;
 type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
-const Homecdcliente: React.FC<Props> = ({ navigation }) => {
+const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
   const irpaginacuidador = (): undefined => {
-    navigation.navigate("Homecuidador");
+    navigation.navigate("Autenticacaocuid");
   };
   const oi = (): undefined => {
     alert("ta atuu");
@@ -78,4 +77,4 @@ const Homecdcliente: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default Homecdcliente;
+export default Autenticacaocli;

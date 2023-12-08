@@ -17,15 +17,15 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect } from "react";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "Homecuidador"
+  "Autenticacaocuid"
 >;
 type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
-const Homecuidador: React.FC<Props> = ({ navigation }) => {
+const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
   const irpaginacliente = (): undefined => {
-    navigation.navigate("Homecliente");
+    navigation.navigate("Autenticacaocli");
   };
   const irCadastrocuidador = (): undefined => {
     navigation.navigate("Cadastrocuidador");
@@ -80,4 +80,4 @@ const Homecuidador: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default Homecuidador;
+export default Autenticacaocuid;

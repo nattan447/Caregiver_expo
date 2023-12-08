@@ -32,7 +32,7 @@ type Props = {
 const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   let Datacuidador: (string | number)[][] = [];
   const Voltar = (): void => {
-    navigation.navigate("Homecuidador");
+    navigation.navigate("Autenticacaocuid");
   };
   function handlenome(texto: string): void {
     const indexatual = Datacuidador.findIndex((item) => item[0] === "nome");

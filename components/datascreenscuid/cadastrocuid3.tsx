@@ -167,30 +167,19 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   }
 
   const goHomescreen = (): void => {
-    console.log(cuidadordata);
-    // const values = Object.values(DataCuidador);
-    // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
-    //   alert("pode passar");
-    // } else {
-    //   alert("preenchar os campos orbigatórios");
-    // }
+    const ArrayCuidadordata: (number | string)[][] =
+      Object.entries(cuidadordata);
+    const values = Object.values(cuidadordata);
+    console.log(values);
+    if (values.length >= 8) {
+      navigation.navigate("Homecuid", { cuidadordata });
+    }
   };
 
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
         <ScrollView>
-          {/* <Inputs
-            nometxt="Estado *"
-            placeholder=""
-            value={cuidadordata.estado}
-            onchangevalue={handelEstado}
-            issenha={false}
-            tamanho={{ height: 30 }}
-            emailwarn=""
-            type="default"
-            length={11}
-          /> */}
           <Combobox
             textabove="Estado"
             initialvalue={EstadoValue}
