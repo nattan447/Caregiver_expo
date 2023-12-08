@@ -39,29 +39,31 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     profissao: string;
     descricao: string;
   }
-  const [DataCuidador, setDataCuidador] = useState<CuidadorDatainterface>({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    senha: "",
-    profissao: "",
-    descricao: "",
-  });
+  const [DataCuidadorState, setDataCuidadorState] =
+    useState<CuidadorDatainterface>({
+      nome: "",
+      sobrenome: "",
+      email: "",
+      senha: "",
+      profissao: "",
+      descricao: "",
+    });
 
   useEffect(() => {
     if (route.params) {
       const { DatacuidadorObj }: { DatacuidadorObj?: CuidadorDatainterface } =
         route.params;
       if (DatacuidadorObj != undefined) {
-        setDataCuidador(DatacuidadorObj);
+        setDataCuidadorState(DatacuidadorObj);
       }
     }
   }, []);
-  if (DataCuidador) {
-    var Datacuidador: (string | number)[][] = Object.entries(DataCuidador);
+  if (DataCuidadorState) {
+    var Datacuidador: (string | number)[][] = Object.entries(DataCuidadorState);
   }
-
+  let cpfRef = useRef<string | undefined>(undefined);
   function handlecpf(Cpf: string) {
+    cpfRef.current = Cpf;
     const indexatual = Datacuidador.findIndex((item) => item[0] === "cpf");
     if (Cpf != "") {
       const dataOBJ = Object.fromEntries(Datacuidador);
@@ -74,13 +76,16 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       }
     }
   }
-  const dateInputRef = useRef(null);
+
+  const DateRef = useRef<string>("");
+  const dateInputRefMask = useRef(null);
   function handledatenasc(
     Date: string,
     formatted: any,
     extracted?: string | undefined
   ) {
-    dateInputRef.current = formatted;
+    DateRef.current = Date;
+    dateInputRefMask.current = formatted;
     const indexatual = Datacuidador.findIndex((item) => item[0] === "data");
     if (Date != "") {
       const dataOBJ = Object.fromEntries(Datacuidador);
@@ -115,16 +120,20 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
     }
   };
 
-  const gonextpage = (): undefined => {
-    console.log(Datacuidador);
-    // navigation.navigate("Cadastrocuidador3", { DataCuidador });
-
-    // const values = Object.values(DataCuidador);
-    // if (DataCuidador.cpf != "" && DataCuidador.datanasc != "") {
-    //   //navegação aqui
-    // } else {
-    //   alert("preenchar os campos orbigatórios");
-    // }
+  const gothrirdstep = (): void => {
+    const datacuidadorOBJ = Object.fromEntries(Datacuidador);
+    const keys = Object.values(datacuidadorOBJ);
+    if (Datacuidador.length >= 8) {
+      console.log(Datacuidador);
+      if (DateRef.current && cpfRef.current) {
+        if (DateRef.current.length === 10 && cpfRef.current.length === 11) {
+          navigation.navigate("Cadastrocuidador3", { datacuidadorOBJ });
+        } else
+          console.log("Erro: campo cpf ou data com caracters insuficientes");
+      } else console.log("Erro :preencha todos os dados obrigatórios");
+    } else {
+      console.log("Erro :preencha todos os dados obrigatórios");
+    }
   };
 
   return (
@@ -158,7 +167,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
             },
           ]}
           maxLength={10}
-          ref={dateInputRef}
+          ref={dateInputRefMask}
           type={"datetime"}
           options={{
             format: "DD/MM/YYYY",
@@ -169,7 +178,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           cor="#F1EBEB"
           txtbtn="próximo"
           txtcor="#C77B43"
-          pres={gonextpage}
+          pres={gothrirdstep}
           fontsize={16}
           altura={32}
           largura={100}
