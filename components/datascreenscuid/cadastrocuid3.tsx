@@ -172,7 +172,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     const values = Object.values(cuidadordata);
     console.log(values);
     if (values.length >= 8) {
-      navigation.navigate("Homecuid", { cuidadordata });
+      navigation.navigate("Homenavigator", { cuidadordata });
     }
   };
 

@@ -11,27 +11,19 @@ import {
 import { useState } from "react";
 
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
-
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import React from "react";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "Homecuid"
->;
-type Props = {
-  navigation: HomeScreenNavigationProp;
-};
 
-const Homecuidador: React.FC<Props> = ({ navigation }) => {
+const Homecuid = () => {
   return (
-    <SafeAreaView style={homeloginscss.container}>
-      <StatusBar hidden={true}></StatusBar>
-      <Text>tala em construção</Text>
-    </SafeAreaView>
+    <View style={homeloginscss.container}>
+      <Text>Home</Text>
+    </View>
   );
 };
-export default Homecuidador;
+export default Homecuid;

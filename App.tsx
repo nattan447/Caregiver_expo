@@ -9,14 +9,14 @@ import Cadastrocuidador from "./components/datascreenscuid/cadastrocuid";
 import Cadastrocuidador2 from "./components/datascreenscuid/cadastrocuid2";
 import Cadastrocuidador3 from "./components/datascreenscuid/cadastrocuid3";
 import { Header } from "react-native/Libraries/NewAppScreen";
-import Homecuidador from "./components/homecuid/homecuidador";
+import Homenavigator from "./components/homecuid/homenavigator";
 export type RootStackParamList = {
   Autenticacaocli: undefined;
   Autenticacaocuid: undefined;
   Cadastrocuidador: undefined;
   Cadastrocuidador2: object;
   Cadastrocuidador3: object;
-  Homecuid: object;
+  Homenavigator: object;
 };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
@@ -75,8 +75,8 @@ export default function App() {
               backgroundColor: "#F8F8F8",
             },
           }}
-          component={Homecuidador}
-          name="Homecuid"
+          component={Homenavigator}
+          name="Homenavigator"
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
