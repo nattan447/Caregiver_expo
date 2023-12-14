@@ -38,7 +38,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
       <Authenticheadrs
         arrowimg={require("../../assets/arrowhead.png")}
         imgheader={require("../../assets/dog.png")}
-        headertxt="SEJA UM CUIDADOR"
+        headertxt="SEJA UM CLIENTE"
         trocarmodo={irpaginacuidador}
         ladoseta="flex-end"
       />

@@ -67,9 +67,9 @@ export default function App() {
         ></Stack.Screen>
         <Stack.Screen
           options={{
-            headerShown: true,
+            headerShown: false,
             title: "",
-            headerBackVisible: true,
+            headerBackVisible: false,
             headerTintColor: "#C77B43",
             headerStyle: {
               backgroundColor: "#F8F8F8",

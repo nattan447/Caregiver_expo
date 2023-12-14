@@ -37,7 +37,7 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
       <Authenticheadrs
         arrowimg={require("../../assets/arrowheadleft.png")}
         imgheader={require("../../assets/img2head.png")}
-        headertxt="SEJA NOSSO CLIENTE"
+        headertxt="SEJA UM CUIDADOR"
         trocarmodo={irpaginacliente}
         ladoseta="flex-start"
       />
