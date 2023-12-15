@@ -1,3 +1,7 @@
 import { createContext } from "react";
-const Caredatacontext = createContext(undefined);
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
+
+const Caredatacontext = createContext<Cuidadadordatainterfc | undefined>(
+  undefined
+);
 export default Caredatacontext;

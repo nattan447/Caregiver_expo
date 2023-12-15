@@ -14,7 +14,7 @@ import {
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Picker } from "@react-native-picker/picker";
-
+import { Cuidadadordatainterfc } from "../interfacests/cuidadordata";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
@@ -36,22 +36,7 @@ type Props = {
 };
 
 const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
-  interface CuidadordataInterface {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-    profissao: string;
-    descricao: string;
-    profileimg: string;
-    cpf: string;
-    datanasc: string;
-    estado: string;
-    cidade: string;
-    rua: string;
-    cep: string;
-  }
-  const [cuidadordata, SetCuidadordata] = useState<CuidadordataInterface>({
+  const [cuidadordata, SetCuidadordata] = useState<Cuidadadordatainterfc>({
     nome: "",
     sobrenome: "",
     email: "",
@@ -81,7 +66,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
         console.log(erro + "ocorreu o erro ao carregar os dados da api")
       );
     if (route.params) {
-      const { datacuidadorOBJ }: { datacuidadorOBJ?: CuidadordataInterface } =
+      const { datacuidadorOBJ }: { datacuidadorOBJ?: Cuidadadordatainterfc } =
         route.params;
       if (datacuidadorOBJ) {
         console.log(datacuidadorOBJ);

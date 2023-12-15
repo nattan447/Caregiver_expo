@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import Contratar from "./contratar";
 import Perfil from "./perfil";
@@ -9,9 +10,9 @@ import Infocontato from "./infocontrato";
 import Pagamentoinfo from "./pagamentoinfo";
 export type RootStackParamListContratar = {
   Contratar: undefined;
-  perfil: any;
-  infocontato: any;
-  pagamentoinfo: any;
+  perfil: Cuidadadordatainterfc | undefined;
+  infocontato: Cuidadadordatainterfc | undefined;
+  pagamentoinfo: Cuidadadordatainterfc | undefined;
 };
 const Stack = createNativeStackNavigator<RootStackParamListContratar>();
 export default function Contratarnavigator() {

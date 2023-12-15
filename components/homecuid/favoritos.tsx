@@ -21,7 +21,7 @@ import Caredatacontext from "./usercontext/caredata";
 import React from "react";
 
 const Favoritos = () => {
-  const { cuidadordataState } = useContext(Caredatacontext);
+  const cuidadordataState = useContext(Caredatacontext);
   useEffect(() => {
     console.log(cuidadordataState);
   }, []);

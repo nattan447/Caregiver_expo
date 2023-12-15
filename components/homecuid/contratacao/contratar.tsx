@@ -12,6 +12,7 @@ import Caredatacontext from "../usercontext/caredata";
 
 import { useState, useEffect, useContext } from "react";
 import homeloginscss from "../../../estilos/homeloginscss";
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type ContratarScreenNavigationProp = NativeStackNavigationProp<
@@ -26,10 +27,12 @@ type Navigationprops = {
 import React from "react";
 
 const Contratar: React.FC<Navigationprops> = ({ navigation }) => {
+  const cuidadordataState: Cuidadadordatainterfc | undefined =
+    useContext(Caredatacontext);
   const Irperfil = (): void => {
-    navigation.navigate("perfil", { cuidadordataState });
+    navigation.navigate("perfil", cuidadordataState);
   };
-  const { cuidadordataState } = useContext(Caredatacontext);
+
   useEffect(() => {
     console.log(cuidadordataState);
   }, []);

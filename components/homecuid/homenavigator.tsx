@@ -45,50 +45,20 @@ export type RootTabParamList = {
 
 const Homenavigator: React.FC<Props> = ({ route }) => {
   const Tab = createBottomTabNavigator<RootTabParamList>();
-  interface CuidadordataInterface {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-    profissao: string;
-    descricao: string;
-    profileimg: string;
-    cpf: string;
-    datanasc: string;
-    estado: string;
-    cidade: string;
-    rua: string;
-    cep: string;
-  }
-
-  const [cuidadordataState, SetCuidadordata] = useState<CuidadordataInterface>({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    senha: "",
-    profissao: "",
-    descricao: "",
-    profileimg: "",
-    cpf: "",
-    datanasc: "",
-    estado: "",
-    cidade: "",
-    rua: "",
-    cep: "",
-  });
+  const [cuidadordataState, SetCuidadordata] =
+    useState<Cuidadadordatainterfc>();
   useEffect(() => {
     if (route.params) {
-      var { cuidadordata }: { cuidadordata?: CuidadordataInterface } =
+      var { cuidadordata }: { cuidadordata?: Cuidadadordatainterfc } =
         route.params;
       if (cuidadordata != undefined) {
         SetCuidadordata(cuidadordata);
-        console.log("aaa" + cuidadordataState);
       }
     }
   }, [route.params]);
   return (
     <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
-      <Caredatacontext.Provider value={{ cuidadordataState }}>
+      <Caredatacontext.Provider value={cuidadordataState}>
         <Tab.Navigator
           initialRouteName="Home"
           screenOptions={{
@@ -103,7 +73,6 @@ const Homenavigator: React.FC<Props> = ({ route }) => {
         >
           <Tab.Screen
             name="Home"
-            initialParams={cuidadordataState}
             component={Homecuid}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (

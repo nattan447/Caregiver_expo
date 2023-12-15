@@ -17,6 +17,7 @@ import React from "react";
 import { RootTabParamList } from "./homenavigator";
 import { RouteProp } from "@react-navigation/native";
 import Caredatacontext from "./usercontext/caredata";
+import { Cuidadadordatainterfc } from "../interfacests/cuidadordata";
 
 type HomeCuidProp = NativeStackNavigationProp<RootTabParamList, "Home">;
 type PropsHome = {
@@ -25,25 +26,9 @@ type PropsHome = {
 };
 
 const Homecuid: React.FC<PropsHome> = ({ route }) => {
-  interface CuidadordataInterface {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-    profissao: string;
-    descricao: string;
-    profileimg: string;
-    cpf: string;
-    datanasc: string;
-    estado: string;
-    cidade: string;
-    rua: string;
-    cep: string;
-  }
-  const { cuidadordataState } = useContext(Caredatacontext);
-  useEffect(() => {
-    console.log(cuidadordataState);
-  }, []);
+  const cuidadordataState: Cuidadadordatainterfc | undefined =
+    useContext(Caredatacontext);
+
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={homesty.header}>
@@ -65,7 +50,7 @@ const Homecuid: React.FC<PropsHome> = ({ route }) => {
           source={require("../../assets/user.png")}
           style={{ height: 90, width: 90 }}
         />
-        <Text style={homesty.mainusername}>Nattan ferreira</Text>
+        <Text style={homesty.mainusername}>{cuidadordataState?.nome}</Text>
 
         <TouchableOpacity style={homesty.btnwicons}>
           <Image
