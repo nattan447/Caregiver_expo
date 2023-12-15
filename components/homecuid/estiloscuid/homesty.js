@@ -32,11 +32,31 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
   btnwconstxt: {
     fontSize: 17,
     fontWeight: "bold",
     color: "#C77B43",
     right: "20%",
+  },
+  avaliacoes: {
+    marginTop: "14%",
+    alignItems: "center",
+
+    width: "100%",
+  },
+  avaliacoestxt: {
+    fontSize: 16,
+    color: "#C77B43",
+  },
+  avaliacao: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F1EBEB",
+    marginTop: "10%",
+    width: "70%",
+    borderRadius: 8,
   },
 });

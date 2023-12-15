@@ -20,15 +20,15 @@ import Caredatacontext from "./usercontext/caredata";
 
 import React from "react";
 
-const Favoritos = () => {
+const Processo = () => {
   const { cuidadordataState } = useContext(Caredatacontext);
   useEffect(() => {
     console.log(cuidadordataState);
   }, []);
   return (
     <View style={homeloginscss.container}>
-      <Text>Favoritos</Text>
+      <Text>serviços em processo</Text>
     </View>
   );
 };
-export default Favoritos;
+export default Processo;

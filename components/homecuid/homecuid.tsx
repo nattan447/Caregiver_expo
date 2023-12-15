@@ -8,27 +8,53 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
-
-import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
+import { useState, useEffect, useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RootStackParamList } from "../../App";
-import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import homesty from "./estiloscuid/homesty";
 import React from "react";
+import { RootTabParamList } from "./homenavigator";
+import { RouteProp } from "@react-navigation/native";
+import Caredatacontext from "./usercontext/caredata";
 
-const Homecuid = () => {
+type HomeCuidProp = NativeStackNavigationProp<RootTabParamList, "Home">;
+type PropsHome = {
+  navigation: HomeCuidProp;
+  route: RouteProp<RootTabParamList, "Home">;
+};
+
+const Homecuid: React.FC<PropsHome> = ({ route }) => {
+  interface CuidadordataInterface {
+    nome: string;
+    sobrenome: string;
+    email: string;
+    senha: string;
+    profissao: string;
+    descricao: string;
+    profileimg: string;
+    cpf: string;
+    datanasc: string;
+    estado: string;
+    cidade: string;
+    rua: string;
+    cep: string;
+  }
+  const { cuidadordataState } = useContext(Caredatacontext);
+  useEffect(() => {
+    console.log(cuidadordataState);
+  }, []);
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={homesty.header}>
         <Text style={homesty.headertxt}>Caregiver</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log(cuidadordataState)}>
           <Image
             source={require("../../assets/gear.png")}
             style={{
-              left: "150%",
+              left: "240%",
+              height: 30,
+              width: 30,
             }}
           />
         </TouchableOpacity>
@@ -55,6 +81,18 @@ const Homecuid = () => {
           />
           <Text style={homesty.btnwconstxt}>Dependente</Text>
         </TouchableOpacity>
+
+        <View style={homesty.avaliacoes}>
+          <Text style={homesty.avaliacoestxt}>Avaliações</Text>
+          <View style={homesty.avaliacao}>
+            <Image
+              source={require("../../assets/user.png")}
+              style={{ height: 60, width: 60 }}
+            />
+
+            <Text style={{ left: 20 }}>gostei do app, nota 10!</Text>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );

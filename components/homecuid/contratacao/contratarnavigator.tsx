@@ -9,9 +9,9 @@ import Infocontato from "./infocontrato";
 import Pagamentoinfo from "./pagamentoinfo";
 export type RootStackParamListContratar = {
   Contratar: undefined;
-  perfil: undefined;
-  infocontato: undefined;
-  pagamentoinfo: undefined;
+  perfil: any;
+  infocontato: any;
+  pagamentoinfo: any;
 };
 const Stack = createNativeStackNavigator<RootStackParamListContratar>();
 export default function Contratarnavigator() {

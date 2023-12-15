@@ -8,7 +8,9 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
+import Caredatacontext from "../usercontext/caredata";
+
+import { useState, useEffect, useContext } from "react";
 import homeloginscss from "../../../estilos/homeloginscss";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -25,9 +27,12 @@ import React from "react";
 
 const Contratar: React.FC<Navigationprops> = ({ navigation }) => {
   const Irperfil = (): void => {
-    navigation.navigate("perfil");
+    navigation.navigate("perfil", { cuidadordataState });
   };
-
+  const { cuidadordataState } = useContext(Caredatacontext);
+  useEffect(() => {
+    console.log(cuidadordataState);
+  }, []);
   return (
     <View style={homeloginscss.container}>
       <Text>Contratar</Text>

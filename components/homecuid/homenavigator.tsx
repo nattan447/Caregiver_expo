@@ -8,11 +8,11 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
+import Caredatacontext from "./usercontext/caredata";
+import { useState, useEffect, useRef } from "react";
 import Homecuid from "./homecuid";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RootStackParamList } from "../../App";
-import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import {
   MaterialCommunityIcons,
@@ -20,11 +20,13 @@ import {
   FontAwesome5,
   Ionicons,
 } from "@expo/vector-icons";
+import { Cuidadadordatainterfc } from "../interfacests/cuidadordata";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Favoritos from "./favoritos";
 import Contratar from "./contratacao/contratar";
 import Contratarnavigator from "./contratacao/contratarnavigator";
-
+import Processo from "./processo";
+import { RouteProp, useFocusEffect } from "@react-navigation/native";
 import React from "react";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -32,87 +34,138 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 type Props = {
   navigation: HomeScreenNavigationProp;
+  route: RouteProp<RootStackParamList, "Homenavigator">;
+};
+export type RootTabParamList = {
+  Home: object;
+  Favoritos: object;
+  Contratar: object;
+  processo: object;
 };
 
-const Homenavigator: React.FC<Props> = ({ navigation }) => {
-  const Tab = createBottomTabNavigator();
+const Homenavigator: React.FC<Props> = ({ route }) => {
+  const Tab = createBottomTabNavigator<RootTabParamList>();
+  interface CuidadordataInterface {
+    nome: string;
+    sobrenome: string;
+    email: string;
+    senha: string;
+    profissao: string;
+    descricao: string;
+    profileimg: string;
+    cpf: string;
+    datanasc: string;
+    estado: string;
+    cidade: string;
+    rua: string;
+    cep: string;
+  }
 
+  const [cuidadordataState, SetCuidadordata] = useState<CuidadordataInterface>({
+    nome: "",
+    sobrenome: "",
+    email: "",
+    senha: "",
+    profissao: "",
+    descricao: "",
+    profileimg: "",
+    cpf: "",
+    datanasc: "",
+    estado: "",
+    cidade: "",
+    rua: "",
+    cep: "",
+  });
+  useEffect(() => {
+    if (route.params) {
+      var { cuidadordata }: { cuidadordata?: CuidadordataInterface } =
+        route.params;
+      if (cuidadordata != undefined) {
+        SetCuidadordata(cuidadordata);
+        console.log("aaa" + cuidadordataState);
+      }
+    }
+  }, [route.params]);
   return (
     <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            height: 90,
-            backgroundColor: "#FFE7E7",
-            margin: "5%",
-            borderRadius: 7,
-          },
-        }}
-      >
-        <Tab.Screen
-          name="Home"
-          component={Homecuid}
-          options={({ route }) => ({
-            tabBarIcon: ({ focused }) => (
-              <MaterialCommunityIcons
-                name="home-variant"
-                size={focused ? 60 : 40}
-                color="black"
-              />
-            ),
-            headerShown: false,
-          })}
-        ></Tab.Screen>
-        <Tab.Screen
-          name="Favoritos"
-          component={Favoritos}
-          options={({ route }) => ({
-            tabBarIcon: ({ focused }) => (
-              <AntDesign name="star" size={focused ? 60 : 40} color="black" />
-            ),
+      <Caredatacontext.Provider value={{ cuidadordataState }}>
+        <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              height: 90,
+              backgroundColor: "#FFE7E7",
+              margin: "5%",
+              borderRadius: 7,
+            },
+          }}
+        >
+          <Tab.Screen
+            name="Home"
+            initialParams={cuidadordataState}
+            component={Homecuid}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused }) => (
+                <MaterialCommunityIcons
+                  name="home-variant"
+                  size={focused ? 60 : 40}
+                  color="black"
+                />
+              ),
+              headerShown: false,
+            })}
+          ></Tab.Screen>
+          <Tab.Screen
+            name="Favoritos"
+            component={Favoritos}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused }) => (
+                <AntDesign name="star" size={focused ? 60 : 40} color="black" />
+              ),
 
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          })}
-        ></Tab.Screen>
-        <Tab.Screen
-          name="Contratar"
-          component={Contratarnavigator}
-          options={({ route }) => ({
-            tabBarIcon: ({ focused }) => (
-              <FontAwesome5
-                name="hand-holding-heart"
-                size={focused ? 60 : 40}
-                color="black"
-              />
-            ),
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          })}
-        ></Tab.Screen>
-        <Tab.Screen
-          name="Histórico"
-          component={Homecuid}
-          options={({ route }) => ({
-            tabBarIcon: ({ focused }) => (
-              <Ionicons
-                name="newspaper"
-                size={focused ? 60 : 40}
-                color="black"
-              />
-            ),
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          })}
-        ></Tab.Screen>
-      </Tab.Navigator>
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            })}
+          ></Tab.Screen>
+          <Tab.Screen
+            name="Contratar"
+            component={Contratarnavigator}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="hand-holding-heart"
+                  size={focused ? 60 : 40}
+                  color="black"
+                />
+              ),
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            })}
+          ></Tab.Screen>
+          <Tab.Screen
+            name="processo"
+            component={Processo}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused }) => (
+                <Ionicons
+                  name="newspaper"
+                  size={focused ? 60 : 40}
+                  color="black"
+                />
+              ),
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            })}
+          ></Tab.Screen>
+        </Tab.Navigator>
+      </Caredatacontext.Provider>
     </View>
   );
 };
