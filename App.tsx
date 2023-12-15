@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import Entrarcuidador from "./components/datascreenscuid/entrada/entrarcuid";
 import Autenticacaocli from "./components/authenticscreens/autenticacliente";
 import Autenticacaocuid from "./components/authenticscreens/autenticacuid";
 import Cadastrocuidador from "./components/datascreenscuid/cadastrocuid";
@@ -13,6 +13,7 @@ import Homenavigator from "./components/homecuid/homenavigator";
 export type RootStackParamList = {
   Autenticacaocli: undefined;
   Autenticacaocuid: undefined;
+  entrarcuidador: undefined;
   Cadastrocuidador: undefined;
   Cadastrocuidador2: object;
   Cadastrocuidador3: object;
@@ -33,8 +34,22 @@ export default function App() {
           component={Autenticacaocuid}
           name="Autenticacaocuid"
         ></Stack.Screen>
+
         <Stack.Screen
           options={{ headerShown: false }}
+          component={Entrarcuidador}
+          name="entrarcuidador"
+        ></Stack.Screen>
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            title: "",
+            headerBackVisible: true,
+            headerTintColor: "#C77B43",
+            headerStyle: {
+              backgroundColor: "#F8F8F8",
+            },
+          }}
           component={Cadastrocuidador}
           name="Cadastrocuidador"
         ></Stack.Screen>

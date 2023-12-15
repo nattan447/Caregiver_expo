@@ -24,11 +24,14 @@ type Props = {
 };
 
 const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
-  const irpaginacliente = (): undefined => {
+  const irpaginacliente = (): void => {
     navigation.navigate("Autenticacaocli");
   };
-  const irCadastrocuidador = (): undefined => {
+  const irCadastrocuidador = (): void => {
     navigation.navigate("Cadastrocuidador");
+  };
+  const irentrarcuidador = (): void => {
+    navigation.navigate("entrarcuidador");
   };
 
   return (
@@ -36,7 +39,7 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
       <StatusBar hidden={true}></StatusBar>
       <Authenticheadrs
         arrowimg={require("../../assets/arrowheadleft.png")}
-        imgheader={require("../../assets/img2head.png")}
+        imgheader={require("../../assets/sejacuidador.png")}
         headertxt="SEJA UM CUIDADOR"
         trocarmodo={irpaginacliente}
         ladoseta="flex-start"
@@ -60,7 +63,7 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
             cor="#C77B43"
             txtbtn="ENTRAR"
             txtcor="#FFFCFC"
-            pres={irCadastrocuidador}
+            pres={irentrarcuidador}
             fontsize={16}
             altura={48}
             largura={131}

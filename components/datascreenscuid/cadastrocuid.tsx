@@ -134,7 +134,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const DatacuidadorObj = Object.fromEntries(Datacuidador);
     const values = Object.values(DatacuidadorObj);
-
     if (Datacuidador.length === 6) {
       if (regex.test(DatacuidadorObj.email)) {
         navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
@@ -147,94 +146,85 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <Authenticheadrs
-        arrowimg={require("../../assets/arrowheadleft.png")}
-        imgheader={require("../../assets/dogwoman.png")}
-        headertxt="CRIAR CONTA"
-        trocarmodo={Voltar}
-        ladoseta="flex-start"
-      />
+      <ScrollView style={{}}>
+        <Text style={cadastro.criarcontatxt}>Criar conta</Text>
+        <Inputs
+          value=""
+          nometxt="nome *"
+          placeholder=""
+          onchangevalue={handlenome}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+          type="default"
+          length={40}
+        />
+        <Inputs
+          nometxt="sobrenome *"
+          value={"nada"}
+          placeholder=""
+          onchangevalue={handlesobrenome}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+          type="default"
+          length={40}
+        />
 
-      <View style={cadastro.cadastroview}>
-        <ScrollView>
-          <Inputs
-            value=""
-            nometxt="nome *"
-            placeholder=""
-            onchangevalue={handlenome}
-            issenha={false}
-            tamanho={{ height: 30 }}
-            emailwarn=""
-            type="default"
-            length={40}
-          />
-          <Inputs
-            nometxt="sobrenome *"
-            value={"nada"}
-            placeholder=""
-            onchangevalue={handlesobrenome}
-            issenha={false}
-            tamanho={{ height: 30 }}
-            emailwarn=""
-            type="default"
-            length={40}
-          />
-
-          <Inputs
-            value={"nada"}
-            nometxt="email * "
-            placeholder={"digite seu email"}
-            onchangevalue={handleemail}
-            issenha={false}
-            tamanho={{ height: 30 }}
-            emailwarn={"nada"}
-            type="email-address"
-            length={30}
-          />
-          <Inputs
-            value={"nada"}
-            nometxt="senha *"
-            placeholder=""
-            onchangevalue={handlesenha}
-            issenha={true}
-            tamanho={{ height: 30 }}
-            emailwarn=""
-            type="default"
-            length={10}
-          />
-          <Inputs
-            value={"nada"}
-            nometxt="profissão *"
-            placeholder=""
-            onchangevalue={handleprofissao}
-            issenha={false}
-            tamanho={{ height: 30 }}
-            emailwarn=""
-            type="default"
-            length={20}
-          />
-          <Inputs
-            value={"nada"}
-            nometxt="descrição"
-            placeholder=""
-            onchangevalue={handledescricao}
-            issenha={false}
-            tamanho={{ height: 90 }}
-            emailwarn=""
-            type="default"
-            length={80}
-          />
-          <Btn
-            cor="#F1EBEB"
-            txtbtn="próximo"
-            txtcor="#C77B43"
-            pres={gosecondstep}
-            fontsize={16}
-            altura={32}
-            largura={200}
-          />
-        </ScrollView>
-      </View>
+        <Inputs
+          value={"nada"}
+          nometxt="email * "
+          placeholder={"digite seu email"}
+          onchangevalue={handleemail}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn={"nada"}
+          type="default"
+          length={30}
+        />
+        <Inputs
+          value={"nada"}
+          nometxt="senha *"
+          placeholder=""
+          onchangevalue={handlesenha}
+          issenha={true}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+          type="default"
+          length={10}
+        />
+        <Inputs
+          value={"nada"}
+          nometxt="profissão *"
+          placeholder=""
+          onchangevalue={handleprofissao}
+          issenha={false}
+          tamanho={{ height: 30 }}
+          emailwarn=""
+          type="default"
+          length={20}
+        />
+        <Inputs
+          value={"nada"}
+          nometxt="descrição"
+          placeholder=""
+          onchangevalue={handledescricao}
+          issenha={false}
+          tamanho={{ height: 90 }}
+          emailwarn=""
+          type="default"
+          length={80}
+        />
+        <Btn
+          cor="#F1EBEB"
+          txtbtn="próximo"
+          txtcor="#C77B43"
+          pres={gosecondstep}
+          fontsize={16}
+          altura={32}
+          largura={200}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };

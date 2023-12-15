@@ -32,14 +32,14 @@ interface Propriedadesbtn {
 export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
   return (
     <View style={styles.header}>
-      <Image
-        source={props.imgheader}
-        style={styles.img}
-        blurRadius={2}
-        resizeMode="cover"
-      ></Image>
+      <Image source={props.imgheader} style={styles.img}></Image>
       <TouchableOpacity
-        style={{ alignSelf: props.ladoseta, position: "absolute", top: "40%" }}
+        style={{
+          alignSelf: props.ladoseta,
+          position: "absolute",
+          top: "146%",
+          marginHorizontal: "6%",
+        }}
         onPress={props.trocarmodo}
       >
         <Image
@@ -107,23 +107,18 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    height: "50%",
+    height: "30%",
     position: "absolute",
+    alignItems: "center",
+    paddingTop: "10%",
   },
   headertxt: {
-    color: "#FFFCFC",
-    fontWeight: "bold",
+    color: "#C77B43",
     fontSize: 24,
-    marginTop: "30%",
-    alignSelf: "center",
-    position: "absolute",
+    top: "10%",
   },
   img: {
-    position: "relative",
-    backgroundColor: "#F8F8F8",
-    alignSelf: "center",
-    height: "57%",
-    width: "120%",
-    top: 0,
+    height: 160,
+    width: 160,
   },
 });

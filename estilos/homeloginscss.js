@@ -3,6 +3,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F8F8F8",
+    paddingTop: "6%",
     alignItems: "center",
   },
   header: {
@@ -19,10 +20,9 @@ export default StyleSheet.create({
   },
 
   blocoprincipal: {
-    marginTop: "80%",
+    marginTop: "74%",
     width: "100%",
     flex: 1,
-    backgroundColor: "#F8F8F8",
     borderColor: "lightblue",
     alignItems: "center",
   },
@@ -37,17 +37,17 @@ export default StyleSheet.create({
     color: "#C77B43",
     fontWeight: "bold",
     fontSize: 24,
-    top: "18%",
+    top: "20%",
   },
   blocoprincipaltxt3: {
     color: "#C77B43",
     position: "absolute",
     fontSize: 15,
-    top: "30%",
-    width: 201,
+    top: "34%",
+    width: "70%",
   },
   btndivs: {
-    top: "73%",
+    top: "60%",
     flexDirection: "row",
   },
   blococadastrocuidador: {},

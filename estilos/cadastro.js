@@ -23,4 +23,10 @@ export default StyleSheet.create({
     position: "relative",
     height: 190,
   },
+
+  criarcontatxt: {
+    color: "#C77B43",
+    fontSize: 30,
+    alignSelf: "center",
+  },
 });
