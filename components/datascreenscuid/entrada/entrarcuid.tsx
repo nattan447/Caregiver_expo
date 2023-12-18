@@ -62,6 +62,7 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
 
       <View style={homeloginscss.blocoprincipal}>
         <Inputs
+          multiline={false}
           value=""
           nometxt="email *"
           placeholder=""
@@ -73,6 +74,7 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
           length={40}
         />
         <Inputs
+          multiline={false}
           value=""
           nometxt="senha *"
           placeholder=""

@@ -186,6 +186,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             emailwarn=""
             type="default"
             length={8}
+            multiline={false}
           />
           <Inputs
             nometxt="rua "
@@ -197,6 +198,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             emailwarn=""
             type="default"
             length={10}
+            multiline={false}
           />
           <Inputs
             nometxt="cep "
@@ -208,6 +210,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             emailwarn=""
             type="numeric"
             length={10}
+            multiline={false}
           />
 
           <Btn

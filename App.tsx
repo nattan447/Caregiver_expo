@@ -19,81 +19,94 @@ export type RootStackParamList = {
   Cadastrocuidador3: object;
   Homenavigator: object;
 };
+import Splashscreen from "./splash/splashscreen";
+import { useEffect, useState } from "react";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
+  const [isvideoOver, setisvideoOver] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setisvideoOver(true);
+    }, 9000);
+  }, []);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Autenticacaocli">
-        <Stack.Screen
-          options={{ headerShown: false }}
-          component={Autenticacaocli}
-          name="Autenticacaocli"
-        ></Stack.Screen>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          component={Autenticacaocuid}
-          name="Autenticacaocuid"
-        ></Stack.Screen>
+      {isvideoOver ? (
+        <Stack.Navigator initialRouteName="Autenticacaocli">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            component={Autenticacaocli}
+            name="Autenticacaocli"
+          ></Stack.Screen>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            component={Autenticacaocuid}
+            name="Autenticacaocuid"
+          ></Stack.Screen>
 
-        <Stack.Screen
-          options={{ headerShown: false }}
-          component={Entrarcuidador}
-          name="entrarcuidador"
-        ></Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "",
-            headerBackVisible: true,
-            headerTintColor: "#C77B43",
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          }}
-          component={Cadastrocuidador}
-          name="Cadastrocuidador"
-        ></Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "",
-            headerBackVisible: true,
-            headerTintColor: "#C77B43",
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          }}
-          component={Cadastrocuidador2}
-          name="Cadastrocuidador2"
-        ></Stack.Screen>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            component={Entrarcuidador}
+            name="entrarcuidador"
+          ></Stack.Screen>
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "",
+              headerBackVisible: true,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={Cadastrocuidador}
+            name="Cadastrocuidador"
+          ></Stack.Screen>
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "",
+              headerBackVisible: true,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={Cadastrocuidador2}
+            name="Cadastrocuidador2"
+          ></Stack.Screen>
 
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "",
-            headerBackVisible: true,
-            headerTintColor: "#C77B43",
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          }}
-          component={Cadastrocuidador3}
-          name="Cadastrocuidador3"
-        ></Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerShown: false,
-            title: "",
-            headerBackVisible: false,
-            headerTintColor: "#C77B43",
-            headerStyle: {
-              backgroundColor: "#F8F8F8",
-            },
-          }}
-          component={Homenavigator}
-          name="Homenavigator"
-        ></Stack.Screen>
-      </Stack.Navigator>
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "",
+              headerBackVisible: true,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={Cadastrocuidador3}
+            name="Cadastrocuidador3"
+          ></Stack.Screen>
+          <Stack.Screen
+            options={{
+              headerShown: false,
+              title: "",
+              headerBackVisible: false,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={Homenavigator}
+            name="Homenavigator"
+          ></Stack.Screen>
+        </Stack.Navigator>
+      ) : (
+        <Splashscreen />
+      )}
     </NavigationContainer>
   );
 }

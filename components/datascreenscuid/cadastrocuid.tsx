@@ -215,6 +215,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           emailwarn=""
           type="default"
           length={40}
+          multiline={false}
         />
         <Inputs
           nometxt="sobrenome *"
@@ -226,6 +227,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           emailwarn=""
           type="default"
           length={40}
+          multiline={false}
         />
 
         <Inputs
@@ -238,6 +240,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           emailwarn={"nada"}
           type="default"
           length={30}
+          multiline={false}
         />
         <Inputs
           value={"nada"}
@@ -249,6 +252,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           emailwarn=""
           type="default"
           length={10}
+          multiline={false}
         />
 
         <Combobox
@@ -272,6 +276,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           emailwarn=""
           type="default"
           length={300}
+          multiline={true}
         />
         <Btn
           cor="#F1EBEB"

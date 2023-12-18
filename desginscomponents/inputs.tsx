@@ -25,6 +25,7 @@ interface inputpropsInterface {
   emailwarn: string;
   type: KeyboardTypeOptions;
   length: number;
+  multiline: boolean;
 }
 
 //componente dos inputs
@@ -34,8 +35,8 @@ const Inputs: React.FC<inputpropsInterface> = (props) => {
       <Text style={styles.txt}>{props.nometxt}</Text>
       {/* <Text style={{ color: "red", fontSize: 10 }}>{props.emailwarn}</Text> */}
       <TextInput
-        multiline={true}
-        numberOfLines={20}
+        multiline={props.multiline}
+        numberOfLines={props.multiline ? 10 : 1}
         secureTextEntry={props.issenha}
         placeholder={props.placeholder}
         style={[styles.input, props.tamanho]}
