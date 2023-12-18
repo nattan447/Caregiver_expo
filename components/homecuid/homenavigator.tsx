@@ -55,7 +55,7 @@ const Homenavigator: React.FC<Props> = ({ route }) => {
         SetCuidadordata(cuidadordata);
       }
     }
-  }, [route.params]);
+  }, []);
   return (
     <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
       <Caredatacontext.Provider value={cuidadordataState}>

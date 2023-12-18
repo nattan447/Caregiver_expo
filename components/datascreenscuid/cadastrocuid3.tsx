@@ -74,7 +74,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
       }
     }
   }, []);
-  const [EstadoValue, SetEstadoValue] = useState<string>("defaltu");
+  const [EstadoValue, SetEstadoValue] = useState<string>("defalt");
   function handelEstado(Estado: string) {
     if (Estado != null) {
       SetEstadoValue(Estado);
@@ -177,7 +177,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             value={cuidadordata.cidade}
             onchangevalue={handlecidade}
             issenha={false}
-            tamanho={{ height: 30 }}
+            tamanho={{ height: 40 }}
             emailwarn=""
             type="default"
             length={10}
@@ -188,7 +188,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             value={cuidadordata.rua}
             onchangevalue={handlerua}
             issenha={false}
-            tamanho={{ height: 30 }}
+            tamanho={{ height: 40 }}
             emailwarn=""
             type="default"
             length={10}
@@ -199,7 +199,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             value={cuidadordata.cep}
             onchangevalue={handlecep}
             issenha={false}
-            tamanho={{ height: 30 }}
+            tamanho={{ height: 40 }}
             emailwarn=""
             type="numeric"
             length={10}
@@ -211,7 +211,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
             txtcor="#C77B43"
             pres={goHomescreen}
             fontsize={16}
-            altura={32}
+            altura={40}
             largura={100}
           />
         </ScrollView>

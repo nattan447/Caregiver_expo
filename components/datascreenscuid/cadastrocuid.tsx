@@ -10,7 +10,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 import { RootStackParamList } from "../../App";
 import { Btn } from "../../desginscomponents/authenticheadrs";
@@ -18,9 +18,10 @@ import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Picker } from "@react-native-picker/picker";
-
+import { Combobox } from "../../desginscomponents/inputs";
 import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
+import { validatePathConfig } from "@react-navigation/native";
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Cadastrocuidador"
@@ -30,7 +31,9 @@ type Props = {
 };
 
 const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
-  let Datacuidador: (string | number)[][] = [];
+  let Datacuidador = useMemo((): (string | number)[][] => {
+    return [];
+  }, []);
   const Voltar = (): void => {
     navigation.navigate("Autenticacaocuid");
   };
@@ -46,6 +49,12 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         // não tem dados
 
         Datacuidador.push(["nome", texto]);
+      }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.nome) {
+        //tem dados
+        Datacuidador[indexatual] = ["nome", "false"];
       }
     }
   }
@@ -94,23 +103,23 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       }
     }
   }
-  function handleprofissao(Profissao: string): void {
-    const indexatual = Datacuidador.findIndex(
-      (item) => item[0] === "profissao"
-    );
-    if (Profissao != "") {
-      const dataOBJ = Object.fromEntries(Datacuidador);
-      if (dataOBJ.profissao) {
-        //tem dados
+  // function handleprofissao(Profissao: string): void {
+  //   const indexatual = Datacuidador.findIndex(
+  //     (item) => item[0] === "profissao"
+  //   );
+  //   if (Profissao != "") {
+  //     const dataOBJ = Object.fromEntries(Datacuidador);
+  //     if (dataOBJ.profissao) {
+  //       //tem dados
 
-        Datacuidador[indexatual] = ["profissao", Profissao];
-      } else {
-        // não tem dados
+  //       Datacuidador[indexatual] = ["profissao", Profissao];
+  //     } else {
+  //       // não tem dados
 
-        Datacuidador.push(["profissao", Profissao]);
-      }
-    }
-  }
+  //       Datacuidador.push(["profissao", Profissao]);
+  //     }
+  //   }
+  // }
   function handledescricao(Descricao: string): void {
     const indexatual = Datacuidador.findIndex(
       (item) => item[0] === "descricao"
@@ -129,19 +138,49 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
     }
   }
 
+  //combobox
+
+  const [profissao, Setprofissao] = useState<string>("");
+  function handleprofissao(Profissao: string) {
+    Setprofissao(Profissao);
+    const indexatual = Datacuidador.findIndex(
+      (item) => item[0] === "profissao"
+    );
+    if (Profissao != null) {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.profissao) {
+        //tem dados
+
+        Datacuidador[indexatual] = ["profissao", Profissao];
+      } else {
+        // não tem dados
+
+        Datacuidador.push(["profissao", Profissao]);
+      }
+    }
+  }
+
   // const Warnemail = useRef<string>("");
   const gosecondstep = (): void => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const DatacuidadorObj = Object.fromEntries(Datacuidador);
-    const values = Object.values(DatacuidadorObj);
+    console.log(Datacuidador);
     if (Datacuidador.length === 6) {
-      if (regex.test(DatacuidadorObj.email)) {
-        navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
-      } else {
-        alert("digite o modelo de email certo");
-      }
+      if (
+        DatacuidadorObj.nome != "false" &&
+        DatacuidadorObj.sobrenome != "false" &&
+        DatacuidadorObj.senha != "false" &&
+        DatacuidadorObj.profissao != "false" &&
+        DatacuidadorObj.descricao != "false"
+      ) {
+        if (regex.test(DatacuidadorObj.email)) {
+          navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
+        } else {
+          alert("digite o modelo de email certo");
+        }
+      } else console.log("preencha todos os dados");
     } else {
-      alert("preencha todos os dados");
+      console.log("preencha todos os dados");
     }
   };
   return (
@@ -154,7 +193,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           onchangevalue={handlenome}
           issenha={false}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="default"
           length={40}
@@ -165,7 +204,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           onchangevalue={handlesobrenome}
           issenha={false}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="default"
           length={40}
@@ -177,7 +216,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           placeholder={"digite seu email"}
           onchangevalue={handleemail}
           issenha={false}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn={"nada"}
           type="default"
           length={30}
@@ -188,21 +227,17 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           onchangevalue={handlesenha}
           issenha={true}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="default"
           length={10}
         />
-        <Inputs
-          value={"nada"}
-          nometxt="profissão *"
-          placeholder=""
-          onchangevalue={handleprofissao}
-          issenha={false}
-          tamanho={{ height: 30 }}
-          emailwarn=""
-          type="default"
-          length={20}
+
+        <Combobox
+          textabove="profissão"
+          initialvalue={profissao}
+          onchange={handleprofissao}
+          arrayvalues={["seguranca", "jogador"]}
         />
         <Inputs
           value={"nada"}
@@ -210,10 +245,10 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           onchangevalue={handledescricao}
           issenha={false}
-          tamanho={{ height: 90 }}
+          tamanho={{ height: 120 }}
           emailwarn=""
           type="default"
-          length={80}
+          length={100}
         />
         <Btn
           cor="#F1EBEB"
@@ -221,7 +256,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           txtcor="#C77B43"
           pres={gosecondstep}
           fontsize={16}
-          altura={32}
+          altura={40}
           largura={200}
         />
       </ScrollView>

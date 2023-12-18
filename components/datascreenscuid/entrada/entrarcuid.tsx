@@ -51,7 +51,7 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>
       <Authenticheadrs
-        arrowimg={require("../../../assets/arrowhead.png")}
+        arrowimg={require("../../../assets/arrowheadleft.png")}
         imgheader={require("../../../assets/loginimage2.png")}
         headertxt="Entrar como cuidador"
         trocarmodo={irpaginacuidador}
@@ -67,7 +67,7 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           issenha={false}
           onchangevalue={handleEmail}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="default"
           length={40}
@@ -78,7 +78,7 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
           placeholder=""
           onchangevalue={handleSenha}
           issenha={true}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="numeric"
           length={40}

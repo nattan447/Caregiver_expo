@@ -147,7 +147,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           value={""}
           onchangevalue={handlecpf}
           issenha={false}
-          tamanho={{ height: 30 }}
+          tamanho={{ height: 40 }}
           emailwarn=""
           type="numeric"
           length={11}
@@ -162,7 +162,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           style={[
             styles.input,
             {
-              height: 34,
+              height: 40,
               borderBottomWidth: 2,
               borderColor: "#dddddd",
               marginTop: 10,
@@ -182,7 +182,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           txtcor="#C77B43"
           pres={gothrirdstep}
           fontsize={16}
-          altura={32}
+          altura={40}
           largura={100}
         />
       </View>

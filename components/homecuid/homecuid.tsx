@@ -47,7 +47,11 @@ const Homecuid: React.FC<PropsHome> = ({ route }) => {
 
       <View style={homesty.main}>
         <Image
-          source={{ uri: cuidadordataState?.profileimg }}
+          source={
+            cuidadordataState?.profileimg
+              ? { uri: cuidadordataState?.profileimg }
+              : require("../../assets/user.png")
+          }
           style={{ height: 90, width: 90, borderRadius: 50 }}
         />
         <Text style={homesty.mainusername}>{cuidadordataState?.nome}</Text>

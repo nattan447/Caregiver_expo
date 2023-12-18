@@ -80,7 +80,7 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
         {props.textabove}
       </Text>
       <Picker
-        placeholder="sexo"
+        placeholder="selecione o Estado"
         selectedValue={props.initialvalue}
         style={[
           styles.input,
@@ -118,12 +118,13 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     width: 240,
     color: "#D8A683",
-    paddingLeft: 8,
+    paddingLeft: 20,
     zIndex: 1,
     position: "relative",
+    minWidth: 6,
   },
   txt: {
-    marginBottom: 10,
+    marginBottom: 8,
     color: "#D8A683",
     fontSize: 16,
     fontWeight: "bold",
