@@ -74,7 +74,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
       }
     }
   }, []);
-  const [EstadoValue, SetEstadoValue] = useState<string>("defalt");
+  const [EstadoValue, SetEstadoValue] = useState<string>("");
   function handelEstado(Estado: string) {
     if (Estado != null) {
       SetEstadoValue(Estado);
@@ -152,12 +152,17 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   }
 
   const goHomescreen = (): void => {
-    const ArrayCuidadordata: (number | string)[][] =
-      Object.entries(cuidadordata);
     const values = Object.values(cuidadordata);
     console.log(values);
-    if (values.length >= 8) {
-      navigation.navigate("Homenavigator", { cuidadordata });
+    if (values.length > 8) {
+      if (cuidadordata.cep) {
+        console.log(cuidadordata.cep.length);
+        if (cuidadordata.cep.length < 8) {
+          alert("caracteres de cep insuficientes");
+        } else {
+          navigation.navigate("Homenavigator", { cuidadordata });
+        }
+      } else navigation.navigate("Homenavigator", { cuidadordata });
     }
   };
 
@@ -173,18 +178,18 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
           />
           <Inputs
             nometxt="cidade "
-            placeholder=""
+            placeholder="digite sua cidade"
             value={cuidadordata.cidade}
             onchangevalue={handlecidade}
             issenha={false}
             tamanho={{ height: 40 }}
             emailwarn=""
             type="default"
-            length={10}
+            length={8}
           />
           <Inputs
             nometxt="rua "
-            placeholder=""
+            placeholder="digite sua rua"
             value={cuidadordata.rua}
             onchangevalue={handlerua}
             issenha={false}
@@ -195,7 +200,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
           />
           <Inputs
             nometxt="cep "
-            placeholder=""
+            placeholder="digite seu cep"
             value={cuidadordata.cep}
             onchangevalue={handlecep}
             issenha={false}

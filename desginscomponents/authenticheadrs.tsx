@@ -60,7 +60,14 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View style={{ marginHorizontal: 33, marginTop: 80, alignSelf: "center" }}>
+    <View
+      style={{
+        marginHorizontal: 33,
+        alignSelf: "center",
+        marginTop: "14%",
+        marginBottom: "10%",
+      }}
+    >
       <View
         style={{
           position: "absolute",
@@ -68,9 +75,10 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
           width: props.largura,
           zIndex: 0,
           backgroundColor: "#dddddd",
-          top: "6%",
+
           opacity: 1,
           borderRadius: 6,
+          borderStartColor: "black",
         }}
       >
         <Text></Text>

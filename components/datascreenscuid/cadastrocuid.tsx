@@ -72,6 +72,12 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         // não tem dados
         Datacuidador.push(["sobrenome", Sobrenome]);
       }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.sobrenome) {
+        //campo vazio
+        Datacuidador[indexatual] = ["sobrenome", "false"];
+      }
     }
   }
   function handleemail(Email: string): void {
@@ -85,6 +91,12 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
       } else {
         // não tem dados
         Datacuidador.push(["email", Email]);
+      }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.email) {
+        //campo vazio
+        Datacuidador[indexatual] = ["email", "false"];
       }
     }
   }
@@ -101,25 +113,15 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
 
         Datacuidador.push(["senha", Senha]);
       }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.senha) {
+        //campo vazio
+        Datacuidador[indexatual] = ["senha", "false"];
+      }
     }
   }
-  // function handleprofissao(Profissao: string): void {
-  //   const indexatual = Datacuidador.findIndex(
-  //     (item) => item[0] === "profissao"
-  //   );
-  //   if (Profissao != "") {
-  //     const dataOBJ = Object.fromEntries(Datacuidador);
-  //     if (dataOBJ.profissao) {
-  //       //tem dados
 
-  //       Datacuidador[indexatual] = ["profissao", Profissao];
-  //     } else {
-  //       // não tem dados
-
-  //       Datacuidador.push(["profissao", Profissao]);
-  //     }
-  //   }
-  // }
   function handledescricao(Descricao: string): void {
     const indexatual = Datacuidador.findIndex(
       (item) => item[0] === "descricao"
@@ -134,6 +136,12 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         // não tem dados
 
         Datacuidador.push(["descricao", Descricao]);
+      }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.descricao) {
+        //campo vazio
+        Datacuidador[indexatual] = ["descricao", "false"];
       }
     }
   }
@@ -157,12 +165,20 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
 
         Datacuidador.push(["profissao", Profissao]);
       }
+    } else {
+      const dataOBJ = Object.fromEntries(Datacuidador);
+      if (dataOBJ.profissao) {
+        //campo vazio
+        Datacuidador[indexatual] = ["profissao", "false"];
+      }
     }
   }
 
-  // const Warnemail = useRef<string>("");
   const gosecondstep = (): void => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const regexeSenha =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+
     const DatacuidadorObj = Object.fromEntries(Datacuidador);
     console.log(Datacuidador);
     if (Datacuidador.length === 6) {
@@ -174,7 +190,9 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         DatacuidadorObj.descricao != "false"
       ) {
         if (regex.test(DatacuidadorObj.email)) {
-          navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
+          if (regexeSenha.test(DatacuidadorObj.senha)) {
+            navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
+          } else console.log("digite uma senha forte");
         } else {
           alert("digite o modelo de email certo");
         }
@@ -224,7 +242,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         <Inputs
           value={"nada"}
           nometxt="senha *"
-          placeholder=""
+          placeholder="digite sua senha"
           onchangevalue={handlesenha}
           issenha={true}
           tamanho={{ height: 40 }}
@@ -237,18 +255,23 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           textabove="profissão"
           initialvalue={profissao}
           onchange={handleprofissao}
-          arrayvalues={["seguranca", "jogador"]}
+          arrayvalues={[
+            "Cuidador Pcd’s",
+            "Cuidador idosos",
+            "Cuidador pets",
+            "Cuidador infantil",
+          ]}
         />
         <Inputs
-          value={"nada"}
+          value={""}
           nometxt="descrição"
-          placeholder=""
+          placeholder="breve descricão"
           onchangevalue={handledescricao}
           issenha={false}
           tamanho={{ height: 120 }}
           emailwarn=""
           type="default"
-          length={100}
+          length={300}
         />
         <Btn
           cor="#F1EBEB"

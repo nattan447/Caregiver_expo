@@ -11,7 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import { styles } from "../../desginscomponents/inputs";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { TextInputMask } from "react-native-masked-text";
 import { RootStackParamList } from "../../App";
@@ -143,7 +143,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
       <View style={cadastro.cadastroview2}>
         <Inputs
           nometxt="cpf *"
-          placeholder=""
+          placeholder="digite seu cpf"
           value={""}
           onchangevalue={handlecpf}
           issenha={false}
@@ -159,6 +159,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
 
         <Text style={[styles.txt, { marginTop: 30 }]}>data de nascimento</Text>
         <TextInputMask
+          placeholder="dia/mês/ano"
           style={[
             styles.input,
             {

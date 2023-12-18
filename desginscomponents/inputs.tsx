@@ -34,6 +34,8 @@ const Inputs: React.FC<inputpropsInterface> = (props) => {
       <Text style={styles.txt}>{props.nometxt}</Text>
       {/* <Text style={{ color: "red", fontSize: 10 }}>{props.emailwarn}</Text> */}
       <TextInput
+        multiline={true}
+        numberOfLines={20}
         secureTextEntry={props.issenha}
         placeholder={props.placeholder}
         style={[styles.input, props.tamanho]}
@@ -71,7 +73,7 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "10%",
+        bottom: "2%",
         width: "80%",
         alignSelf: "center",
       }}
