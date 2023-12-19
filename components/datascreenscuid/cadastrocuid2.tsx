@@ -145,6 +145,7 @@ const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
           nometxt="cpf *"
           placeholder="digite seu cpf"
           value={""}
+          multiline={false}
           onchangevalue={handlecpf}
           issenha={false}
           tamanho={{ height: 40 }}

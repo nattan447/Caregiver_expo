@@ -203,7 +203,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <ScrollView style={{}}>
+      <ScrollView style={{ width: "100%" }}>
         <Text style={cadastro.criarcontatxt}>Criar conta</Text>
         <Inputs
           value=""

@@ -74,6 +74,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
       }
     }
   }, []);
+
   const [EstadoValue, SetEstadoValue] = useState<string>("");
   function handelEstado(Estado: string) {
     if (Estado != null) {
