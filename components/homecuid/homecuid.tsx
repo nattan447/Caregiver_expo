@@ -30,6 +30,7 @@ const Homecuid: React.FC<PropsHome> = ({ route }) => {
     useContext(Caredatacontext);
 
   return (
+    //isso vai ser um componente
     <SafeAreaView style={homeloginscss.container}>
       <View style={homesty.header}>
         <Text style={homesty.headertxt}>Caregiver</Text>

@@ -10,17 +10,17 @@ import {
   ScrollView,
 } from "react-native";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect } from "react";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Autenticacaocuid"
 >;
 type Props = {
-  navigation: HomeScreenNavigationProp;
+  navigation: AuthenticScreenNavigationProp;
 };
 
 const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
@@ -44,8 +44,6 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
         trocarmodo={irpaginacliente}
         ladoseta="flex-start"
       />
-
-      {/* essa parte vai ser um componente */}
       <View style={homeloginscss.blocoprincipal}>
         <Text style={homeloginscss.blocoprincipaltxt}>Caregiver</Text>
         <Text style={homeloginscss.blocoprincipaltxt2}>Bem vindo</Text>
@@ -55,10 +53,6 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
           segurança e fornecer apoio emocional
         </Text>
         <View style={homeloginscss.btndivs}>
-          {/*esse btns seráo componentes separados*/}
-          {/* <TouchableOpacity style={homeloginscss.shadow}>
-            <Text></Text>
-          </TouchableOpacity> */}
           <Btn
             cor="#C77B43"
             txtbtn="ENTRAR"

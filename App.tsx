@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Entrarcuidador from "./components/datascreenscuid/entrada/entrarcuid";
+import Entrarcliente from "./components/datascreenscuid/entrada/entrarclient";
 import Autenticacaocli from "./components/authenticscreens/autenticacliente";
 import Autenticacaocuid from "./components/authenticscreens/autenticacuid";
 import Cadastrocuidador from "./components/datascreenscuid/cadastrocuid";
@@ -10,18 +11,10 @@ import Cadastrocuidador2 from "./components/datascreenscuid/cadastrocuid2";
 import Cadastrocuidador3 from "./components/datascreenscuid/cadastrocuid3";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import Homenavigator from "./components/homecuid/homenavigator";
-export type RootStackParamList = {
-  Autenticacaocli: undefined;
-  Autenticacaocuid: undefined;
-  entrarcuidador: undefined;
-  Cadastrocuidador: undefined;
-  Cadastrocuidador2: object;
-  Cadastrocuidador3: object;
-  Homenavigator: object;
-};
+import { AuthenticRootParamList } from "./types/authenticRoot";
 import Splashscreen from "./splash/splashscreen";
 import { useEffect, useState } from "react";
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<AuthenticRootParamList>();
 export default function App() {
   const [isvideoOver, setisvideoOver] = useState(false);
   useEffect(() => {
@@ -38,6 +31,19 @@ export default function App() {
             options={{ headerShown: false }}
             component={Autenticacaocli}
             name="Autenticacaocli"
+          ></Stack.Screen>
+          <Stack.Screen
+            options={{
+              headerShown: false,
+              title: "",
+              headerBackVisible: false,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={Entrarcliente}
+            name="entrarcliente"
           ></Stack.Screen>
           <Stack.Screen
             options={{ headerShown: false }}

@@ -14,7 +14,7 @@ import { styles } from "../../desginscomponents/inputs";
 import { useState, useEffect, useRef, useMemo } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { TextInputMask } from "react-native-masked-text";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -22,15 +22,18 @@ import React from "react";
 import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
 import { RouteProp } from "@react-navigation/native";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Cadastrocuidador2"
 >;
-type Props = {
-  navigation: HomeScreenNavigationProp;
-  route: RouteProp<RootStackParamList, "Cadastrocuidador2">;
+type PropsNavCuidador2 = {
+  navigation: AuthenticScreenNavigationProp;
+  route: RouteProp<AuthenticRootParamList, "Cadastrocuidador2">;
 };
-const Cadastrocuidador2: React.FC<Props> = ({ navigation, route }: Props) => {
+const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
+  navigation,
+  route,
+}: PropsNavCuidador2) => {
   interface CuidadorDatainterface {
     nome: string;
     sobrenome: string;

@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
-
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { Btn } from "../../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -22,20 +22,22 @@ type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
   "Autenticacaocli"
 >;
-type PropsEntrarCuidador = {
+type PropsEntrarCliente = {
   navigation: AuthenticScreenNavigationProp;
 };
-import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
-const Entrarcuidador: React.FC<PropsEntrarCuidador> = ({ navigation }) => {
-  const irpaginacuidador = (): void => {
-    navigation.navigate("Autenticacaocuid");
+
+const Entrarcliente: React.FC<PropsEntrarCliente> = ({ navigation }) => {
+  const voltarcliente = (): void => {
+    navigation.navigate("Autenticacaocli");
   };
+
   const [email, Setemail] = useState<string>("");
   const [senha, Setsenha] = useState<string>("");
 
   const handleEmail = (Email: string): void => {
     Setemail(Email);
   };
+
   const handleSenha = (Senha: string): void => {
     Setsenha(Senha);
   };
@@ -68,11 +70,14 @@ const Entrarcuidador: React.FC<PropsEntrarCuidador> = ({ navigation }) => {
       >
         <Authenticheadrs
           arrowimg={require("../../../assets/arrowheadleft.png")}
-          imgheader={require("../../../assets/loginimage2.png")}
-          headertxt="Entrar como cuidador"
-          trocarmodo={irpaginacuidador}
+          imgheader={require("../../../assets/loginimage1.png")}
+          headertxt="Entrar como Cliente"
+          trocarmodo={voltarcliente}
           ladoseta="flex-start"
         />
+
+        {/* essa parte vai ser um componente */}
+
         <View style={[homeloginscss.blocoprincipal]}>
           <Inputs
             multiline={false}
@@ -114,4 +119,4 @@ const Entrarcuidador: React.FC<PropsEntrarCuidador> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default Entrarcuidador;
+export default Entrarcliente;

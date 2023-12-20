@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default StyleSheet.create({
   header: {
-    marginTop: "20%",
+    marginTop: "10%",
     flexDirection: "row",
     width: "100%",
     justifyContent: "center",
@@ -28,12 +28,12 @@ export default StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#F1EBEB",
     width: 250,
-    height: 40,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 7,
     borderBottomWidth: 1,
-    borderBottomColor: "black",
+    borderBottomColor: "gray",
   },
   btnwconstxt: {
     fontSize: 17,

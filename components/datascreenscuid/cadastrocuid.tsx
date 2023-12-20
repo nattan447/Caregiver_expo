@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -22,15 +22,15 @@ import { Combobox } from "../../desginscomponents/inputs";
 import cadastro from "../../estilos/cadastro";
 import Inputs from "../../desginscomponents/inputs";
 import { validatePathConfig } from "@react-navigation/native";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Cadastrocuidador"
 >;
-type Props = {
-  navigation: HomeScreenNavigationProp;
+type PropsNavCuidador = {
+  navigation: AuthenticScreenNavigationProp;
 };
 
-const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
+const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
   let Datacuidador = useMemo((): (string | number)[][] => {
     return [];
   }, []);

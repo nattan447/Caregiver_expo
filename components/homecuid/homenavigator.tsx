@@ -12,7 +12,7 @@ import Caredatacontext from "./usercontext/caredata";
 import { useState, useEffect, useRef } from "react";
 import Homecuid from "./homecuid";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
 import homeloginscss from "../../estilos/homeloginscss";
 import {
   MaterialCommunityIcons,
@@ -28,13 +28,13 @@ import Contratarnavigator from "./contratacao/contratarnavigator";
 import Processo from "./processo";
 import { RouteProp, useFocusEffect } from "@react-navigation/native";
 import React from "react";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type HomeScreenNavigationParams = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Homenavigator"
 >;
-type Props = {
-  navigation: HomeScreenNavigationProp;
-  route: RouteProp<RootStackParamList, "Homenavigator">;
+type PropsHome = {
+  navigation: HomeScreenNavigationParams;
+  route: RouteProp<AuthenticRootParamList, "Homenavigator">;
 };
 export type RootTabParamList = {
   Home: object;
@@ -43,14 +43,13 @@ export type RootTabParamList = {
   processo: object;
 };
 
-const Homenavigator: React.FC<Props> = ({ route }) => {
+const Homenavigator: React.FC<PropsHome> = ({ route }) => {
   const Tab = createBottomTabNavigator<RootTabParamList>();
   const [cuidadordataState, SetCuidadordata] =
     useState<Cuidadadordatainterfc>();
   useEffect(() => {
     if (route.params) {
-      var { cuidadordata }: { cuidadordata?: Cuidadadordatainterfc } =
-        route.params;
+      var cuidadordata = route.params;
       if (cuidadordata != undefined) {
         SetCuidadordata(cuidadordata);
       }

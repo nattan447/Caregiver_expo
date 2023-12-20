@@ -11,26 +11,27 @@ import {
 import { useState } from "react";
 
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
+
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import React from "react";
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Autenticacaocli"
 >;
 type Props = {
-  navigation: HomeScreenNavigationProp;
+  navigation: AuthenticScreenNavigationProp;
 };
 
 const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
-  const irpaginacuidador = (): undefined => {
+  const irpaginacuidador = (): void => {
     navigation.navigate("Autenticacaocuid");
   };
-  const oi = (): undefined => {
-    alert("ta atuu");
+  const irentrarcliente = (): void => {
+    navigation.navigate("entrarcliente");
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
@@ -42,8 +43,6 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
         trocarmodo={irpaginacuidador}
         ladoseta="flex-end"
       />
-
-      {/* essa parte vai ser um componente */}
 
       <View style={homeloginscss.blocoprincipal}>
         <Text style={homeloginscss.blocoprincipaltxt}>Caregiver</Text>
@@ -58,7 +57,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
             cor="#C77B43"
             txtbtn="ENTRAR"
             txtcor="#FFFCFC"
-            pres={oi}
+            pres={irentrarcliente}
             fontsize={16}
             altura={48}
             largura={131}
@@ -67,7 +66,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
             cor="#F1EBEB"
             txtbtn="CADASTRAR"
             txtcor="#C77B43"
-            pres={oi}
+            pres={irentrarcliente}
             fontsize={16}
             altura={48}
             largura={131}

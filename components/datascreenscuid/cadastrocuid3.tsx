@@ -15,7 +15,7 @@ import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Picker } from "@react-native-picker/picker";
 import { Cuidadadordatainterfc } from "../interfacests/cuidadordata";
-import { RootStackParamList } from "../../App";
+import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { Btn } from "../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -26,16 +26,19 @@ import { RouteProp } from "@react-navigation/native";
 import RNPickerSelect from "react-native-picker-select";
 import { Combobox } from "../../desginscomponents/inputs";
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+  AuthenticRootParamList,
   "Cadastrocuidador3"
 >;
-type Props = {
-  navigation: HomeScreenNavigationProp;
-  route: RouteProp<RootStackParamList, "Cadastrocuidador3">;
+type PropsNavCuidador2 = {
+  navigation: AuthenticScreenNavigationProp;
+  route: RouteProp<AuthenticRootParamList, "Cadastrocuidador3">;
 };
 
-const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
+const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
+  navigation,
+  route,
+}: PropsNavCuidador2) => {
   const [cuidadordata, SetCuidadordata] = useState<Cuidadadordatainterfc>({
     nome: "",
     sobrenome: "",
@@ -172,9 +175,9 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
         if (cuidadordata.cep.length < 8) {
           alert("caracteres de cep insuficientes");
         } else {
-          navigation.navigate("Homenavigator", { cuidadordata });
+          navigation.navigate("Homenavigator", cuidadordata);
         }
-      } else navigation.navigate("Homenavigator", { cuidadordata });
+      } else navigation.navigate("Homenavigator", cuidadordata);
     }
   };
 
