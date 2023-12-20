@@ -74,9 +74,9 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        bottom: "2%",
-        width: "80%",
+        width: "60%",
         alignSelf: "center",
+        marginTop: "10%",
       }}
     >
       <Text style={[styles.txt, { alignSelf: "flex-start" }]}>

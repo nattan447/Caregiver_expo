@@ -53,18 +53,30 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   });
 
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
+
+  interface ApiIbgeInterface {
+    id: number;
+    nome: string;
+    regiao: {
+      id: number;
+      nome: string;
+      sigla: string;
+    };
+    sigla: string;
+  }
+
   useEffect(() => {
-    fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-      .then((response) => response.json())
-      .then((data) =>
-        data.map((estado: any) => {
-          let accestado: string = estado.nome;
-          SetArrayEstado((current) => [...current, estado.nome]);
-        })
-      )
-      .catch((erro) =>
-        console.log(erro + "ocorreu o erro ao carregar os dados da api")
-      );
+    const fetchdata = async () => {
+      const apiurl =
+        "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+      const response = await fetch(apiurl);
+      const data = await response.json();
+      data.map((estado: ApiIbgeInterface) => {
+        let accestado: string = estado.nome;
+        SetArrayEstado((current) => [...current, estado.nome]);
+      });
+    };
+    fetchdata();
     if (route.params) {
       const { datacuidadorOBJ }: { datacuidadorOBJ?: Cuidadadordatainterfc } =
         route.params;
@@ -80,7 +92,6 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
     if (Estado != null) {
       SetEstadoValue(Estado);
     }
-
     SetCuidadordata({
       nome: cuidadordata.nome,
       sobrenome: cuidadordata.sobrenome,
@@ -170,7 +181,7 @@ const Cadastrocuidador3: React.FC<Props> = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
-        <ScrollView>
+        <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
           <Combobox
             textabove="Estado"
             initialvalue={EstadoValue}

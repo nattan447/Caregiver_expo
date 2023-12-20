@@ -37,8 +37,12 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
         style={{
           alignSelf: props.ladoseta,
           position: "absolute",
-          top: "146%",
+          top: "130%",
           marginHorizontal: "6%",
+          height: "30%",
+
+          alignItems: "center",
+          justifyContent: "center",
         }}
         onPress={props.trocarmodo}
       >
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     height: "30%",
     position: "absolute",
     alignItems: "center",
-    paddingTop: "10%",
+    paddingTop: "5%",
   },
   headertxt: {
     color: "#C77B43",

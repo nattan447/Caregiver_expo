@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { useState } from "react";
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
@@ -50,53 +51,58 @@ const Entrarcuidador: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>
-      <Authenticheadrs
-        arrowimg={require("../../../assets/arrowheadleft.png")}
-        imgheader={require("../../../assets/loginimage2.png")}
-        headertxt="Entrar como cuidador"
-        trocarmodo={irpaginacuidador}
-        ladoseta="flex-start"
-      />
-
-      {/* essa parte vai ser um componente */}
-
-      <View style={homeloginscss.blocoprincipal}>
-        <Inputs
-          multiline={false}
-          value=""
-          nometxt="email *"
-          placeholder=""
-          issenha={false}
-          onchangevalue={handleEmail}
-          tamanho={{ height: 40 }}
-          emailwarn=""
-          type="default"
-          length={40}
+      <ScrollView
+        automaticallyAdjustKeyboardInsets={true}
+        style={{ width: "100%" }}
+      >
+        <Authenticheadrs
+          arrowimg={require("../../../assets/arrowheadleft.png")}
+          imgheader={require("../../../assets/loginimage2.png")}
+          headertxt="Entrar como cuidador"
+          trocarmodo={irpaginacuidador}
+          ladoseta="flex-start"
         />
-        <Inputs
-          multiline={false}
-          value=""
-          nometxt="senha *"
-          placeholder=""
-          onchangevalue={handleSenha}
-          issenha={true}
-          tamanho={{ height: 40 }}
-          emailwarn=""
-          type="numeric"
-          length={40}
-        />
-        <View style={{ bottom: "10%" }}>
-          <Btn
-            cor="#C77B43"
-            txtbtn="ENTRAR"
-            txtcor="#FFFCFC"
-            pres={entrar}
-            fontsize={16}
-            altura={48}
-            largura={131}
+
+        {/* essa parte vai ser um componente */}
+
+        <View style={[homeloginscss.blocoprincipal]}>
+          <Inputs
+            multiline={false}
+            value=""
+            nometxt="email *"
+            placeholder=""
+            issenha={false}
+            onchangevalue={handleEmail}
+            tamanho={{ height: 40 }}
+            emailwarn=""
+            type="default"
+            length={40}
           />
+          <Inputs
+            multiline={false}
+            value=""
+            nometxt="senha *"
+            placeholder=""
+            onchangevalue={handleSenha}
+            issenha={true}
+            tamanho={{ height: 40 }}
+            emailwarn=""
+            type="numeric"
+            length={40}
+          />
+          <View style={{ bottom: "10%" }}>
+            <Btn
+              cor="#C77B43"
+              txtbtn="ENTRAR"
+              txtcor="#FFFCFC"
+              pres={entrar}
+              fontsize={16}
+              altura={48}
+              largura={131}
+            />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -203,12 +203,15 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <ScrollView style={{ width: "100%" }}>
+      <ScrollView
+        style={{ width: "100%" }}
+        automaticallyAdjustKeyboardInsets={true}
+      >
         <Text style={cadastro.criarcontatxt}>Criar conta</Text>
         <Inputs
           value=""
           nometxt="nome *"
-          placeholder=""
+          placeholder="digite seu nome"
           onchangevalue={handlenome}
           issenha={false}
           tamanho={{ height: 40 }}
@@ -220,7 +223,7 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
         <Inputs
           nometxt="sobrenome *"
           value={"nada"}
-          placeholder=""
+          placeholder="digite seu sobrenome"
           onchangevalue={handlesobrenome}
           issenha={false}
           tamanho={{ height: 40 }}
@@ -255,6 +258,18 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
           multiline={false}
         />
 
+        <Inputs
+          value={""}
+          nometxt="descrição"
+          placeholder="breve descricão"
+          onchangevalue={handledescricao}
+          issenha={false}
+          tamanho={{ height: 140 }}
+          emailwarn=""
+          type="default"
+          length={300}
+          multiline={true}
+        />
         <Combobox
           textabove="profissão"
           initialvalue={profissao}
@@ -265,18 +280,6 @@ const Cadastrocuidador: React.FC<Props> = ({ navigation }) => {
             "Cuidador pets",
             "Cuidador infantil",
           ]}
-        />
-        <Inputs
-          value={""}
-          nometxt="descrição"
-          placeholder="breve descricão"
-          onchangevalue={handledescricao}
-          issenha={false}
-          tamanho={{ height: 120 }}
-          emailwarn=""
-          type="default"
-          length={300}
-          multiline={true}
         />
         <Btn
           cor="#F1EBEB"

@@ -44,7 +44,7 @@ export default StyleSheet.create({
     position: "absolute",
     fontSize: 15,
     top: "34%",
-    width: "70%",
+    width: "80%",
   },
   btndivs: {
     top: "60%",
