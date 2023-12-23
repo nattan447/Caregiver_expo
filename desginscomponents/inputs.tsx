@@ -19,7 +19,7 @@ interface inputpropsInterface {
   nometxt: string;
   placeholder: string;
   onchangevalue: (texto: string) => void;
-  value: string;
+  value: string | undefined;
   issenha: boolean;
   tamanho: TextStyle;
   emailwarn: string;

@@ -14,17 +14,17 @@ import {
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Picker } from "@react-native-picker/picker";
-import { Cuidadadordatainterfc } from "../interfacests/cuidadordata";
-import { AuthenticRootParamList } from "../../types/authenticRoot";
-import { Btn } from "../../desginscomponents/authenticheadrs";
-import homeloginscss from "../../estilos/homeloginscss";
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
+import { AuthenticRootParamList } from "../../../types/authenticRoot";
+import { Btn } from "../../../desginscomponents/authenticheadrs";
+import homeloginscss from "../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import cadastro from "../../estilos/cadastro";
-import Inputs from "../../desginscomponents/inputs";
+import cadastro from "../../../estilos/cadastro";
+import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp } from "@react-navigation/native";
 import RNPickerSelect from "react-native-picker-select";
-import { Combobox } from "../../desginscomponents/inputs";
+import { Combobox } from "../../../desginscomponents/inputs";
 
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
@@ -200,7 +200,7 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
             tamanho={{ height: 40 }}
             emailwarn=""
             type="default"
-            length={8}
+            length={40}
             multiline={false}
           />
           <Inputs
@@ -212,7 +212,7 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
             tamanho={{ height: 40 }}
             emailwarn=""
             type="default"
-            length={10}
+            length={40}
             multiline={false}
           />
           <Inputs

@@ -11,16 +11,16 @@ import {
   ScrollView,
 } from "react-native";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
-import { AuthenticRootParamList } from "../../types/authenticRoot";
-import { Btn } from "../../desginscomponents/authenticheadrs";
-import homeloginscss from "../../estilos/homeloginscss";
+import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
+import { AuthenticRootParamList } from "../../../types/authenticRoot";
+import { Btn } from "../../../desginscomponents/authenticheadrs";
+import homeloginscss from "../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Picker } from "@react-native-picker/picker";
-import { Combobox } from "../../desginscomponents/inputs";
-import cadastro from "../../estilos/cadastro";
-import Inputs from "../../desginscomponents/inputs";
+import { Combobox } from "../../../desginscomponents/inputs";
+import cadastro from "../../../estilos/cadastro";
+import Inputs from "../../../desginscomponents/inputs";
 import { validatePathConfig } from "@react-navigation/native";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
@@ -176,9 +176,6 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
 
   const gosecondstep = (): void => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const regexeSenha =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
-
     const DatacuidadorObj = Object.fromEntries(Datacuidador);
     console.log(Datacuidador);
     if (Datacuidador.length === 6) {
@@ -190,9 +187,7 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
         DatacuidadorObj.descricao != "false"
       ) {
         if (regex.test(DatacuidadorObj.email)) {
-          if (regexeSenha.test(DatacuidadorObj.senha)) {
-            navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
-          } else console.log("digite uma senha forte");
+          navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
         } else {
           alert("digite o modelo de email certo");
         }

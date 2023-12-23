@@ -33,6 +33,10 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
   const irentrarcliente = (): void => {
     navigation.navigate("entrarcliente");
   };
+
+  const cadastrarCliente = (): void => {
+    navigation.navigate("cadastrocliente");
+  };
   return (
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>
@@ -66,7 +70,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
             cor="#F1EBEB"
             txtbtn="CADASTRAR"
             txtcor="#C77B43"
-            pres={irentrarcliente}
+            pres={cadastrarCliente}
             fontsize={16}
             altura={48}
             largura={131}

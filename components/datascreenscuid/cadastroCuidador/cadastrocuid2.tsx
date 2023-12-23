@@ -10,17 +10,17 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { styles } from "../../desginscomponents/inputs";
+import { styles } from "../../../desginscomponents/inputs";
 import { useState, useEffect, useRef, useMemo } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { TextInputMask } from "react-native-masked-text";
-import { AuthenticRootParamList } from "../../types/authenticRoot";
-import { Btn } from "../../desginscomponents/authenticheadrs";
-import homeloginscss from "../../estilos/homeloginscss";
+import { AuthenticRootParamList } from "../../../types/authenticRoot";
+import { Btn } from "../../../desginscomponents/authenticheadrs";
+import homeloginscss from "../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import cadastro from "../../estilos/cadastro";
-import Inputs from "../../desginscomponents/inputs";
+import cadastro from "../../../estilos/cadastro";
+import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp } from "@react-navigation/native";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
