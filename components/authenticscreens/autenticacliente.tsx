@@ -48,7 +48,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
         <Text style={homeloginscss.blocoprincipaltxt}>Caregiver</Text>
         <Text style={homeloginscss.blocoprincipaltxt2}>Bem vindo</Text>
         <Text style={homeloginscss.blocoprincipaltxt3}>
-          Se cadastre ou entre em uma conta e venha entrar nessa jornada conoso
+          Se cadastre ou entre em uma conta e venha entrar nessa jornada conosco
           !
         </Text>
 

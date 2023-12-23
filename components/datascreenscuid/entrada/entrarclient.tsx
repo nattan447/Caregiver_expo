@@ -100,7 +100,7 @@ const Entrarcliente: React.FC<PropsEntrarCliente> = ({ navigation }) => {
             issenha={true}
             tamanho={{ height: 40 }}
             emailwarn=""
-            type="numeric"
+            type="default"
             length={40}
           />
           <View style={{ bottom: "10%" }}>

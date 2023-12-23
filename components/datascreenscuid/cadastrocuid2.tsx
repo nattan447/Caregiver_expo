@@ -157,11 +157,18 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
           length={11}
         />
         <TouchableOpacity onPress={pickImage}>
-          <Text>Foto de perfil</Text>
+          <Text style={styles.txt}>Foto de perfil</Text>
           <View style={cadastro.inputimg}></View>
         </TouchableOpacity>
-
-        <Text style={[styles.txt, { marginTop: 30 }]}>data de nascimento</Text>
+        <View
+          style={{
+            width: "70%",
+          }}
+        >
+          <Text style={[styles.txt, { top: 10, marginTop: 40 }]}>
+            data de nascimento
+          </Text>
+        </View>
         <TextInputMask
           placeholder="dia/mês/ano"
           style={[

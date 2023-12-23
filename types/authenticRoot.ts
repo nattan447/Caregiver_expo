@@ -1,5 +1,4 @@
 import { Cuidadadordatainterfc } from "../components/interfacests/cuidadordata";
-
 type AuthenticRootParamList = {
   Autenticacaocli: undefined;
   entrarcliente: undefined;
