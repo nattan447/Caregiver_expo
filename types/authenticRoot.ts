@@ -9,5 +9,7 @@ type AuthenticRootParamList = {
   Cadastrocuidador3: object;
   Homenavigator: Cuidadadordatainterfc;
   cadastrocliente: undefined;
+  cadastrocliente2: object;
+  roothomecliente: Cuidadadordatainterfc;
 };
 export { AuthenticRootParamList };

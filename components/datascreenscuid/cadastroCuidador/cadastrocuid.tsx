@@ -175,7 +175,7 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
   }
 
   const gosecondstep = (): void => {
-    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const DatacuidadorObj = Object.fromEntries(Datacuidador);
     console.log(Datacuidador);
     if (Datacuidador.length === 6) {
@@ -186,7 +186,7 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
         DatacuidadorObj.profissao != "false" &&
         DatacuidadorObj.descricao != "false"
       ) {
-        if (regex.test(DatacuidadorObj.email)) {
+        if (regexEmail.test(DatacuidadorObj.email)) {
           navigation.navigate("Cadastrocuidador2", { DatacuidadorObj });
         } else {
           alert("digite o modelo de email certo");

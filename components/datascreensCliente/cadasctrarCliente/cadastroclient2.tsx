@@ -20,7 +20,7 @@ import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp, StackRouterOptions } from "@react-navigation/native";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
-  "cadastrocliente"
+  "cadastrocliente2"
 >;
 
 interface Clientedatainterfc1 {
@@ -28,16 +28,23 @@ interface Clientedatainterfc1 {
   sobrenome: string | undefined;
   email: string | undefined;
   senha: string | undefined;
-  cpf: string | undefined;
 }
 
-type PropsNavCadastroCliente = {
+type PropsNavCadastroCliente2 = {
   navigation: AuthenticScreenNavigationProp;
-  route: RouteProp<AuthenticRootParamList, "cadastrocliente">;
+  route: RouteProp<AuthenticRootParamList, "cadastrocliente2">;
 };
-const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
+const Cadastrocliente2: React.FC<PropsNavCadastroCliente2> = ({
   navigation,
-}: PropsNavCadastroCliente) => {
+  route,
+}: PropsNavCadastroCliente2) => {
+  useEffect(() => {
+    alert("essa é a segunda parte");
+    if (route.params) {
+      console.log(route.params);
+    }
+  }, []);
+
   const [clienteData, setClienteData] = useState<Clientedatainterfc1>();
 
   const handleName = (Name: string) => {
@@ -46,7 +53,6 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       sobrenome: clienteData?.sobrenome,
       email: clienteData?.email,
       senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
     });
   };
 
@@ -56,7 +62,6 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       sobrenome: Sobrenome,
       email: clienteData?.email,
       senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
     });
   };
 
@@ -66,7 +71,6 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       sobrenome: clienteData?.sobrenome,
       email: Email,
       senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
     });
   };
   const handleSenha = (Senha: string) => {
@@ -75,20 +79,8 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       sobrenome: clienteData?.sobrenome,
       email: clienteData?.email,
       senha: Senha,
-      cpf: clienteData?.cpf,
     });
   };
-
-  const handleCpf = (Cpf: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: clienteData?.sobrenome,
-      email: clienteData?.email,
-      senha: clienteData?.cpf,
-      cpf: Cpf,
-    });
-  };
-
   const gosecondStep = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const regexEmptyInput = /^\S+$/;
@@ -96,33 +88,29 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
     const Filled = valuesCliente?.filter((value) =>
       regexEmptyInput.test(value)
     );
-    if (Filled?.length === 5) {
+    if (Filled?.length === 4) {
       if (regexEmail.test(clienteData?.email as string)) {
-        if (clienteData?.cpf?.length === 11) {
-          console.log("pode passar");
-          navigation.navigate("cadastrocliente2", { clienteData });
-        } else alert("campo de cpf com caracteres insuficientes ");
+        console.log("pode passar");
       } else alert("digite o email de forma correta");
     } else {
       alert("preecha todos dados");
     }
-    console.log(clienteData);
   };
 
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
         <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
-          <Text style={cadastro.criarcontatxt}>Criar conta</Text>
+          <Text style={cadastro.criarcontatxt}>segunda parte</Text>
           <Inputs
             value={clienteData?.nome}
-            nometxt="nome *"
-            placeholder="digite seu nome"
+            nometxt="cpf *"
+            placeholder="digite seu cpf"
             onchangevalue={handleName}
             issenha={false}
             tamanho={{ height: 40 }}
             emailwarn=""
-            type="default"
+            type="numeric"
             length={40}
             multiline={false}
           />
@@ -163,18 +151,6 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
             length={10}
             multiline={false}
           />
-          <Inputs
-            value={clienteData?.cpf}
-            nometxt="cpf *"
-            placeholder="digite seu  cpf"
-            onchangevalue={handleCpf}
-            issenha={true}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="default"
-            length={11}
-            multiline={false}
-          />
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"
@@ -190,4 +166,4 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
   );
 };
 
-export default Cadastrocliente;
+export default Cadastrocliente2;

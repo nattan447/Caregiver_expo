@@ -10,6 +10,7 @@ import {
   TextInput,
   ScrollView,
   Easing,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -56,7 +57,7 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
   });
 
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
-
+  const [isloadingEstados, setIsloadingEstados] = useState(true);
   interface ApiIbgeInterface {
     id: number;
     nome: string;
@@ -70,20 +71,30 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
 
   useEffect(() => {
     const fetchdata = async () => {
-      const apiurl =
-        "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
-      const response = await fetch(apiurl);
-      const data = await response.json();
-      data.map((estado: ApiIbgeInterface) => {
-        let accestado: string = estado.nome;
-        SetArrayEstado((current) => [...current, estado.nome]);
-      });
+      try {
+        const apiurl =
+          "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+        const response = await fetch(apiurl);
+        const data = await response.json();
+        data.map((estado: ApiIbgeInterface) => {
+          let accestado: string = estado.nome;
+          SetArrayEstado((current) => [...current, estado.nome]);
+        });
+        setIsloadingEstados(false);
+        console.log("sucesso ao acessar a api");
+        return true;
+      } catch {
+        console.log("erro ao acessar api");
+        return false;
+      }
     };
     fetchdata();
     if (route.params) {
+      console.log("possui dados nos parametros");
       const { datacuidadorOBJ }: { datacuidadorOBJ?: Cuidadadordatainterfc } =
         route.params;
       if (datacuidadorOBJ) {
+        console.log("dados do cuidador existe");
         console.log(datacuidadorOBJ);
         SetCuidadordata(datacuidadorOBJ);
       }
@@ -92,24 +103,26 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
 
   const [EstadoValue, SetEstadoValue] = useState<string>("");
   function handelEstado(Estado: string) {
-    if (Estado != null) {
-      SetEstadoValue(Estado);
+    if (!isloadingEstados) {
+      if (Estado != null) {
+        SetEstadoValue(Estado);
+      }
+      SetCuidadordata({
+        nome: cuidadordata.nome,
+        sobrenome: cuidadordata.sobrenome,
+        email: cuidadordata.email,
+        senha: cuidadordata.senha,
+        profissao: cuidadordata.profissao,
+        descricao: cuidadordata.descricao,
+        profileimg: cuidadordata.profileimg,
+        cpf: cuidadordata.cpf,
+        datanasc: cuidadordata.datanasc,
+        estado: Estado,
+        cidade: cuidadordata.cidade,
+        rua: cuidadordata.rua,
+        cep: cuidadordata.cep,
+      });
     }
-    SetCuidadordata({
-      nome: cuidadordata.nome,
-      sobrenome: cuidadordata.sobrenome,
-      email: cuidadordata.email,
-      senha: cuidadordata.senha,
-      profissao: cuidadordata.profissao,
-      descricao: cuidadordata.descricao,
-      profileimg: cuidadordata.profileimg,
-      cpf: cuidadordata.cpf,
-      datanasc: cuidadordata.datanasc,
-      estado: Estado,
-      cidade: cuidadordata.cidade,
-      rua: cuidadordata.rua,
-      cep: cuidadordata.cep,
-    });
   }
 
   function handlecidade(Cidade: string) {
@@ -185,12 +198,17 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
         <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
-          <Combobox
-            textabove="Estado"
-            initialvalue={EstadoValue}
-            onchange={handelEstado}
-            arrayvalues={ArrayEstado}
-          />
+          {!isloadingEstados ? (
+            <Combobox
+              textabove="Estado"
+              initialvalue={EstadoValue}
+              onchange={handelEstado}
+              arrayvalues={ArrayEstado}
+            />
+          ) : (
+            <ActivityIndicator size="large" color="orange" />
+          )}
+
           <Inputs
             nometxt="cidade "
             placeholder="digite sua cidade"
