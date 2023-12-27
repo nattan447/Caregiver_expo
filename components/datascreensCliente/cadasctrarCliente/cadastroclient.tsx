@@ -8,8 +8,8 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import { styles } from "../../../desginscomponents/inputs";
 import { useState, useEffect, useRef } from "react";
-import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
 import { Btn } from "../../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../../estilos/homeloginscss";
@@ -18,19 +18,12 @@ import React from "react";
 import cadastro from "../../../estilos/cadastro";
 import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp, StackRouterOptions } from "@react-navigation/native";
+import { Clientedatainterfc } from "../../interfacests/clienteInterface";
+import * as ImagePicker from "expo-image-picker";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
   "cadastrocliente"
 >;
-
-interface Clientedatainterfc1 {
-  nome: string | undefined;
-  sobrenome: string | undefined;
-  email: string | undefined;
-  senha: string | undefined;
-  cpf: string | undefined;
-}
-
 type PropsNavCadastroCliente = {
   navigation: AuthenticScreenNavigationProp;
   route: RouteProp<AuthenticRootParamList, "cadastrocliente">;
@@ -38,7 +31,7 @@ type PropsNavCadastroCliente = {
 const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
   navigation,
 }: PropsNavCadastroCliente) => {
-  const [clienteData, setClienteData] = useState<Clientedatainterfc1>();
+  const [clienteData, setClienteData] = useState<Clientedatainterfc>();
 
   const handleName = (Name: string) => {
     setClienteData({
@@ -47,6 +40,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       email: clienteData?.email,
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
+      profileimg: clienteData?.profileimg,
     });
   };
 
@@ -57,6 +51,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       email: clienteData?.email,
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
+      profileimg: clienteData?.profileimg,
     });
   };
 
@@ -67,6 +62,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       email: Email,
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
+      profileimg: clienteData?.profileimg,
     });
   };
   const handleSenha = (Senha: string) => {
@@ -76,6 +72,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       email: clienteData?.email,
       senha: Senha,
       cpf: clienteData?.cpf,
+      profileimg: clienteData?.profileimg,
     });
   };
 
@@ -84,9 +81,30 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       nome: clienteData?.nome,
       sobrenome: clienteData?.sobrenome,
       email: clienteData?.email,
-      senha: clienteData?.cpf,
+      senha: clienteData?.senha,
       cpf: Cpf,
+      profileimg: clienteData?.profileimg,
     });
+  };
+
+  const pickImage = async () => {
+    let Image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    console.log(Image);
+    if (!Image.canceled) {
+      setClienteData({
+        nome: clienteData?.nome,
+        sobrenome: clienteData?.sobrenome,
+        email: clienteData?.email,
+        senha: clienteData?.senha,
+        cpf: clienteData?.cpf,
+        profileimg: Image.assets[0].uri,
+      });
+    }
   };
 
   const gosecondStep = (): void => {
@@ -96,11 +114,11 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
     const Filled = valuesCliente?.filter((value) =>
       regexEmptyInput.test(value)
     );
-    if (Filled?.length === 5) {
+    if (Filled?.length === 6) {
       if (regexEmail.test(clienteData?.email as string)) {
         if (clienteData?.cpf?.length === 11) {
           console.log("pode passar");
-          navigation.navigate("cadastrocliente2", { clienteData });
+          navigation.navigate("roothomecliente", clienteData);
         } else alert("campo de cpf com caracteres insuficientes ");
       } else alert("digite o email de forma correta");
     } else {
@@ -175,6 +193,11 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
             length={11}
             multiline={false}
           />
+          <TouchableOpacity onPress={pickImage} style={{ alignSelf: "center" }}>
+            <Text style={styles.txt}>Foto de perfil</Text>
+            <View style={cadastro.inputimg}></View>
+          </TouchableOpacity>
+
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"

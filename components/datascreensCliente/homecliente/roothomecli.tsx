@@ -8,12 +8,12 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import Caredatacontext from "./usercontext/caredata";
+import { Clientedatacontext } from "./datacontext/clitentedata";
 import { useState, useEffect, useRef } from "react";
-import Homecuid from "./homecuid";
+import Homecliente from "./homeclie";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AuthenticRootParamList } from "../../types/authenticRoot";
-import homeloginscss from "../../estilos/homeloginscss";
+import { AuthenticRootParamList } from "../../../types/authenticRoot";
+import homeloginscss from "../../../estilos/homeloginscss";
 import {
   MaterialCommunityIcons,
   AntDesign,
@@ -22,10 +22,10 @@ import {
 } from "@expo/vector-icons";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import Favoritos from "./favoritos";
-import Contratar from "./contratacao/contratar";
-import Contratarnavigator from "./contratacao/contratarnavigator";
-import Processo from "./processo";
+// import Favoritos from "./favoritos";
+// import Contratar from "./contratacao/contratar";
+// import Contratarnavigator from "./contratacao/contratarnavigator";
+// import Processo from "./processo";
 import { RouteProp, useFocusEffect } from "@react-navigation/native";
 import React from "react";
 type HomeScreenNavigationParams = NativeStackNavigationProp<
@@ -56,7 +56,7 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
   }, []);
   return (
     <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
-      <Caredatacontext.Provider value={cuidadordataState}>
+      <Clientedatacontext.Provider value={cuidadordataState}>
         <Tab.Navigator
           initialRouteName="Home"
           screenOptions={{
@@ -71,7 +71,7 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
         >
           <Tab.Screen
             name="Home"
-            component={Homecuid}
+            component={Homecliente}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -83,7 +83,7 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
               headerShown: false,
             })}
           ></Tab.Screen>
-          <Tab.Screen
+          {/* <Tab.Screen
             name="Favoritos"
             component={Favoritos}
             options={({ route }) => ({
@@ -96,8 +96,8 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen>
-          <Tab.Screen
+          ></Tab.Screen> */}
+          {/* <Tab.Screen
             name="Contratar"
             component={Contratarnavigator}
             options={({ route }) => ({
@@ -113,8 +113,8 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen>
-          <Tab.Screen
+          ></Tab.Screen> */}
+          {/* <Tab.Screen
             name="processo"
             component={Processo}
             options={({ route }) => ({
@@ -130,9 +130,9 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen>
+          ></Tab.Screen> */}
         </Tab.Navigator>
-      </Caredatacontext.Provider>
+      </Clientedatacontext.Provider>
     </View>
   );
 };

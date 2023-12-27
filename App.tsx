@@ -15,7 +15,6 @@ import Homenavigator from "./components/homecuid/homenavigator";
 import { AuthenticRootParamList } from "./types/authenticRoot";
 import Splashscreen from "./splash/splashscreen";
 import { useEffect, useState } from "react";
-import Cadastrocliente2 from "./components/datascreensCliente/cadasctrarCliente/cadastroclient2";
 import RootHomeCliente from "./components/datascreensCliente/homecliente/roothomecli";
 const Stack = createNativeStackNavigator<AuthenticRootParamList>();
 export default function App() {
@@ -124,19 +123,6 @@ export default function App() {
             }}
             component={Cadastrocliente}
             name="cadastrocliente"
-          ></Stack.Screen>
-
-          <Stack.Screen
-            options={{
-              headerShown: true,
-              title: "",
-              headerTintColor: "#C77B43",
-              headerStyle: {
-                backgroundColor: "#F8F8F8",
-              },
-            }}
-            component={Cadastrocliente2}
-            name="cadastrocliente2"
           ></Stack.Screen>
 
           <Stack.Screen

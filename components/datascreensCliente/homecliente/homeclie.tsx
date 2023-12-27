@@ -16,9 +16,8 @@ import homesty from "../../homecuid/estiloscuid/homesty";
 import React from "react";
 import { RootTabParamList } from "./roothomecli";
 import { RouteProp } from "@react-navigation/native";
-import Caredatacontext from "./usercontext/caredata";
+import { Clientedatacontext } from "./datacontext/clitentedata";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
-
 type HomeCuidProp = NativeStackNavigationProp<RootTabParamList, "Home">;
 type PropsHome = {
   navigation: HomeCuidProp;
@@ -26,17 +25,17 @@ type PropsHome = {
 };
 
 const Homecliente: React.FC<PropsHome> = ({ route }) => {
-  const cuidadordataState: Clientedatainterfc | undefined =
-    useContext(Caredatacontext);
+  const ClientedataState: Clientedatainterfc | undefined =
+    useContext(Clientedatacontext);
 
   return (
     //isso vai ser um componente
     <SafeAreaView style={homeloginscss.container}>
       <View style={homesty.header}>
         <Text style={homesty.headertxt}>Caregiver</Text>
-        <TouchableOpacity onPress={() => console.log(cuidadordataState)}>
+        <TouchableOpacity onPress={() => console.log(ClientedataState)}>
           <Image
-            source={require("../../assets/gear.png")}
+            source={require("../../../assets/gear.png")}
             style={{
               left: "240%",
               height: 30,
@@ -49,24 +48,24 @@ const Homecliente: React.FC<PropsHome> = ({ route }) => {
       <View style={homesty.main}>
         <Image
           source={
-            cuidadordataState?.profileimg
-              ? { uri: cuidadordataState?.profileimg }
-              : require("../../assets/user.png")
+            ClientedataState?.profileimg
+              ? { uri: ClientedataState?.profileimg }
+              : require("../../../assets/user.png")
           }
           style={{ height: 90, width: 90, borderRadius: 50 }}
         />
-        <Text style={homesty.mainusername}>{cuidadordataState?.nome}</Text>
+        <Text style={homesty.mainusername}>{ClientedataState?.nome}</Text>
 
         <TouchableOpacity style={homesty.btnwicons}>
           <Image
-            source={require("../../assets/notifications.png")}
+            source={require("../../../assets/notifications.png")}
             style={{ height: 32, width: 32, right: "100%" }}
           />
           <Text style={homesty.btnwconstxt}>notificações</Text>
         </TouchableOpacity>
         <TouchableOpacity style={homesty.btnwicons}>
           <Image
-            source={require("../../assets/add.png")}
+            source={require("../../../assets/add.png")}
             style={{ height: 27, width: 27, right: "100%" }}
           />
           <Text style={homesty.btnwconstxt}>Dependente</Text>
@@ -76,7 +75,7 @@ const Homecliente: React.FC<PropsHome> = ({ route }) => {
           <Text style={homesty.avaliacoestxt}>Avaliações</Text>
           <View style={homesty.avaliacao}>
             <Image
-              source={require("../../assets/user.png")}
+              source={require("../../../assets/user.png")}
               style={{ height: 60, width: 60 }}
             />
 

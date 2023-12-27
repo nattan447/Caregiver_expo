@@ -1,4 +1,5 @@
 import { Cuidadadordatainterfc } from "../components/interfacests/cuidadordata";
+import { Clientedatainterfc } from "../components/interfacests/clienteInterface";
 type AuthenticRootParamList = {
   Autenticacaocli: undefined;
   entrarcliente: undefined;
@@ -9,7 +10,6 @@ type AuthenticRootParamList = {
   Cadastrocuidador3: object;
   Homenavigator: Cuidadadordatainterfc;
   cadastrocliente: undefined;
-  cadastrocliente2: object;
-  roothomecliente: Cuidadadordatainterfc;
+  roothomecliente: Clientedatainterfc;
 };
 export { AuthenticRootParamList };
