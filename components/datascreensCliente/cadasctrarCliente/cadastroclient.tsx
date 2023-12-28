@@ -109,8 +109,9 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
 
   const gosecondStep = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const regexEmptyInput = /^\S+$/;
+
     const valuesCliente = clienteData ? Object.values(clienteData) : undefined;
+    const regexEmptyInput = /^\S+$/;
     const Filled = valuesCliente?.filter((value) =>
       regexEmptyInput.test(value)
     );

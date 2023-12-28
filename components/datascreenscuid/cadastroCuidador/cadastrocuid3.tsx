@@ -91,12 +91,12 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
     fetchdata();
     if (route.params) {
       console.log("possui dados nos parametros");
-      const { datacuidadorOBJ }: { datacuidadorOBJ?: Cuidadadordatainterfc } =
+      const { datacuidador }: { datacuidador?: Cuidadadordatainterfc } =
         route.params;
-      if (datacuidadorOBJ) {
+      if (datacuidador) {
         console.log("dados do cuidador existe");
-        console.log(datacuidadorOBJ);
-        SetCuidadordata(datacuidadorOBJ);
+        console.log(datacuidador);
+        SetCuidadordata(datacuidador);
       }
     }
   }, []);
@@ -200,6 +200,7 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
         <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
           {!isloadingEstados ? (
             <Combobox
+              placeholder="selecione o Estado"
               textabove="Estado"
               initialvalue={EstadoValue}
               onchange={handelEstado}

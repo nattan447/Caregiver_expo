@@ -9,9 +9,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-
 import { useState } from "react";
-import homeloginscss from "../../../estilos/homeloginscss";
+import homeloginscss from "../../../../estilos/homeloginscss";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type InfocontatoScreenNavigationProp = NativeStackNavigationProp<
@@ -21,7 +20,7 @@ type InfocontatoScreenNavigationProp = NativeStackNavigationProp<
 type Navigationprops = {
   navigation: InfocontatoScreenNavigationProp;
 };
-const Infocontrato: React.FC<Navigationprops> = ({ navigation }) => {
+const InfocontratoCli: React.FC<Navigationprops> = ({ navigation }) => {
   const gopagamento = (): void => {
     navigation.navigate("pagamentoinfo");
   };
@@ -33,4 +32,4 @@ const Infocontrato: React.FC<Navigationprops> = ({ navigation }) => {
     </View>
   );
 };
-export { Infocontrato };
+export { InfocontratoCli };

@@ -34,50 +34,49 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
   navigation,
   route,
 }: PropsNavCuidador2) => {
-  interface CuidadorDatainterface {
-    nome: string;
-    sobrenome: string;
-    email: string;
-    senha: string;
-    profissao: string;
-    descricao: string;
+  interface CadastrocuidadorInter2 {
+    nome: string | undefined;
+    sobrenome: string | undefined;
+    email: string | undefined;
+    senha: string | undefined;
+    profissao: string | undefined;
+    descricao: string | undefined;
+    cpf: string | undefined;
+    profileimg: string | undefined;
+    datanasc: string | undefined;
   }
-  const [DataCuidadorState, setDataCuidadorState] =
-    useState<CuidadorDatainterface>({
-      nome: "",
-      sobrenome: "",
-      email: "",
-      senha: "",
-      profissao: "",
-      descricao: "",
-    });
+  const [datacuidador, setDatacuidador] = useState<CadastrocuidadorInter2>();
 
   useEffect(() => {
-    if (route.params) {
-      const { DatacuidadorObj }: { DatacuidadorObj?: CuidadorDatainterface } =
-        route.params;
-      if (DatacuidadorObj != undefined) {
-        setDataCuidadorState(DatacuidadorObj);
+    const fetchParams = async () => {
+      try {
+        if (route.params) {
+          const DatacuidadorObj = route.params;
+          if (DatacuidadorObj != undefined) {
+            setDatacuidador(DatacuidadorObj as CadastrocuidadorInter2);
+          }
+        }
+      } catch (error) {
+        console.log("deu erro", error);
       }
-    }
+    };
+    fetchParams();
   }, []);
-  if (DataCuidadorState) {
-    var Datacuidador: (string | number)[][] = Object.entries(DataCuidadorState);
-  }
+
   let cpfRef = useRef<string | undefined>(undefined);
   function handlecpf(Cpf: string) {
     cpfRef.current = Cpf;
-    const indexatual = Datacuidador.findIndex((item) => item[0] === "cpf");
-    if (Cpf != "") {
-      const dataOBJ = Object.fromEntries(Datacuidador);
-      if (dataOBJ.cpf) {
-        //tem dados
-        Datacuidador[indexatual] = ["cpf", Cpf];
-      } else {
-        // não tem dados
-        Datacuidador.push(["cpf", Cpf]);
-      }
-    }
+    setDatacuidador({
+      nome: datacuidador?.nome,
+      sobrenome: datacuidador?.sobrenome,
+      email: datacuidador?.email,
+      senha: datacuidador?.senha,
+      descricao: datacuidador?.descricao,
+      profissao: datacuidador?.profissao,
+      cpf: Cpf,
+      profileimg: datacuidador?.profileimg,
+      datanasc: datacuidador?.datanasc,
+    });
   }
 
   const DateRef = useRef<string>("");
@@ -89,17 +88,17 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
   ) {
     DateRef.current = Date;
     dateInputRefMask.current = formatted;
-    const indexatual = Datacuidador.findIndex((item) => item[0] === "datanasc");
-    if (Date != "") {
-      const dataOBJ = Object.fromEntries(Datacuidador);
-      if (dataOBJ.data) {
-        //tem dados
-        Datacuidador[indexatual] = ["datanasc", Date];
-      } else {
-        // não tem dados
-        Datacuidador.push(["datanasc", Date]);
-      }
-    }
+    setDatacuidador({
+      nome: datacuidador?.nome,
+      sobrenome: datacuidador?.sobrenome,
+      email: datacuidador?.email,
+      senha: datacuidador?.senha,
+      descricao: datacuidador?.descricao,
+      profissao: datacuidador?.profissao,
+      cpf: datacuidador?.cpf,
+      profileimg: datacuidador?.profileimg,
+      datanasc: Date,
+    });
   }
 
   const pickImage = async () => {
@@ -111,33 +110,38 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
     });
     console.log(Image);
     if (!Image.canceled) {
-      const indexatual = Datacuidador.findIndex(
-        (item) => item[0] === "profileimg"
-      );
-      const dataOBJ = Object.fromEntries(Datacuidador);
-      if (dataOBJ.image) {
-        //tem dados
-        Datacuidador[indexatual] = ["profileimg", Image.assets[0].uri];
-      } else {
-        // não tem dados
-        Datacuidador.push(["profileimg", Image.assets[0].uri]);
-      }
+      setDatacuidador({
+        nome: datacuidador?.nome,
+        sobrenome: datacuidador?.sobrenome,
+        email: datacuidador?.email,
+        senha: datacuidador?.senha,
+        descricao: datacuidador?.descricao,
+        profissao: datacuidador?.profissao,
+        cpf: datacuidador?.cpf,
+        profileimg: Image.assets[0].uri,
+        datanasc: datacuidador?.datanasc,
+      });
     }
   };
 
   const gothrirdstep = (): void => {
-    const datacuidadorOBJ = Object.fromEntries(Datacuidador);
-    const keys = Object.values(datacuidadorOBJ);
-    if (Datacuidador.length >= 8) {
-      console.log(Datacuidador);
+    const regexEmptyInput = /^\S+$/;
+    const arrayData = datacuidador ? Object.values(datacuidador) : "";
+    if (arrayData?.length >= 8) {
+      console.log(datacuidador);
       if (DateRef.current && cpfRef.current) {
-        if (DateRef.current.length === 10 && cpfRef.current.length === 11) {
-          navigation.navigate("Cadastrocuidador3", { datacuidadorOBJ });
-        } else
-          console.log("Erro: campo cpf ou data com caracters insuficientes");
+        if (
+          DateRef.current.length === 10 &&
+          cpfRef.current.length === 11 &&
+          regexEmptyInput.test(cpfRef.current)
+        ) {
+          navigation.navigate("Cadastrocuidador3", { datacuidador });
+          console.log("pode passar");
+          console.log(datacuidador);
+        } else alert("Erro: campo cpf ou data com caracters insuficientes");
       } else console.log("Erro :preencha todos os dados obrigatórios");
     } else {
-      console.log("Erro :preencha todos os dados obrigatórios");
+      alert("Erro :preencha todos os dados obrigatórios");
     }
   };
 
@@ -147,7 +151,7 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
         <Inputs
           nometxt="cpf *"
           placeholder="digite seu cpf"
-          value={""}
+          value={datacuidador?.cpf}
           multiline={false}
           onchangevalue={handlecpf}
           issenha={false}
@@ -181,7 +185,7 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
             },
           ]}
           maxLength={10}
-          ref={dateInputRefMask}
+          value={datacuidador?.datanasc}
           type={"datetime"}
           options={{
             format: "DD/MM/YYYY",

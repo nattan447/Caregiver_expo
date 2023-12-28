@@ -28,6 +28,7 @@ const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
     navigation.navigate("Autenticacaocli");
   };
   const irCadastrocuidador = (): void => {
+    console.log("cadastro cuidador");
     navigation.navigate("Cadastrocuidador");
   };
   const irentrarcuidador = (): void => {

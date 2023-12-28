@@ -2,26 +2,26 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
+import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
+import { PerfilContratado } from "./perfil";
 import { Header } from "react-native/Libraries/NewAppScreen";
-import Contratar from "./contratar";
-import Perfil from "./perfil";
-import { Infocontrato } from "./infocontrato";
-import Pagamentoinfo from "./pagamentoinfo";
+import { ContratarClie } from "./contratar";
+import { InfocontratoCli } from "./infocontrato";
+import { PagamentoinfoCli } from "./pagamentoinfo";
 export type RootStackParamListContratar = {
   Contratar: undefined;
-  perfil: Cuidadadordatainterfc | undefined;
-  infocontato: Cuidadadordatainterfc | undefined;
-  pagamentoinfo: Cuidadadordatainterfc | undefined;
+  perfil: Clientedatainterfc | undefined;
+  infocontato: Clientedatainterfc | undefined;
+  pagamentoinfo: Clientedatainterfc | undefined;
 };
 const Stack = createNativeStackNavigator<RootStackParamListContratar>();
-export default function Contratarnavigator() {
+function ContratarnavigatorCli() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Contratar">
         <Stack.Screen
           options={{ headerShown: false }}
-          component={Contratar}
+          component={ContratarClie}
           name="Contratar"
         ></Stack.Screen>
         <Stack.Screen
@@ -32,7 +32,7 @@ export default function Contratarnavigator() {
             },
             headerTitle: "",
           }}
-          component={Perfil}
+          component={PerfilContratado}
           name="perfil"
         ></Stack.Screen>
 
@@ -44,7 +44,7 @@ export default function Contratarnavigator() {
             },
             headerTitle: "",
           }}
-          component={Infocontrato}
+          component={InfocontratoCli}
           name="infocontato"
         ></Stack.Screen>
 
@@ -56,10 +56,11 @@ export default function Contratarnavigator() {
             },
             headerTitle: "",
           }}
-          component={Pagamentoinfo}
+          component={PagamentoinfoCli}
           name="pagamentoinfo"
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+export { ContratarnavigatorCli };

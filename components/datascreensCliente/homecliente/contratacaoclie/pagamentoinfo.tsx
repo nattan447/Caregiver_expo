@@ -9,28 +9,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-
 import { useState } from "react";
-import homeloginscss from "../../../estilos/homeloginscss";
+import homeloginscss from "../../../../estilos/homeloginscss";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-type InfocontatoScreenNavigationProp = NativeStackNavigationProp<
+type PagamentoinfoScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamListContratar,
-  "infocontato"
+  "pagamentoinfo"
 >;
 type Navigationprops = {
-  navigation: InfocontatoScreenNavigationProp;
+  navigation: PagamentoinfoScreenNavigationProp;
 };
-const Infocontrato: React.FC<Navigationprops> = ({ navigation }) => {
-  const gopagamento = (): void => {
-    navigation.navigate("pagamentoinfo");
-  };
-
+const PagamentoinfoCli: React.FC<Navigationprops> = ({ navigation }) => {
   return (
     <View style={homeloginscss.container}>
-      <Text>inforcontrato</Text>
-      <Button onPress={gopagamento} title="proximo"></Button>
+      <Text>pagamento</Text>
     </View>
   );
 };
-export { Infocontrato };
+export { PagamentoinfoCli };

@@ -57,6 +57,7 @@ interface comboxpropsInterface {
   initialvalue: string;
   onchange: (Itemvalue: string, itemIndex: number) => void;
   textabove: string;
+  placeholder: string;
 }
 
 //componente da Combobox
@@ -98,7 +99,7 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
       >
         <Picker.Item
           value={null}
-          label="selecione o Estado"
+          label={props.placeholder}
           key={1999}
         ></Picker.Item>
         {Pickeritem}

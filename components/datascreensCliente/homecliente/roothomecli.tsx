@@ -22,10 +22,9 @@ import {
 } from "@expo/vector-icons";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-// import Favoritos from "./favoritos";
-// import Contratar from "./contratacao/contratar";
-// import Contratarnavigator from "./contratacao/contratarnavigator";
-// import Processo from "./processo";
+import { FavoritosCli } from "./favoritos";
+import Processo from "./processocli";
+import { ContratarnavigatorCli } from "./contratacaoclie/contratarnavigator";
 import { RouteProp, useFocusEffect } from "@react-navigation/native";
 import React from "react";
 type HomeScreenNavigationParams = NativeStackNavigationProp<
@@ -83,9 +82,9 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
               headerShown: false,
             })}
           ></Tab.Screen>
-          {/* <Tab.Screen
+          <Tab.Screen
             name="Favoritos"
-            component={Favoritos}
+            component={FavoritosCli}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <AntDesign name="star" size={focused ? 60 : 40} color="black" />
@@ -96,10 +95,10 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen> */}
-          {/* <Tab.Screen
+          ></Tab.Screen>
+          <Tab.Screen
             name="Contratar"
-            component={Contratarnavigator}
+            component={ContratarnavigatorCli}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <FontAwesome5
@@ -113,8 +112,8 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen> */}
-          {/* <Tab.Screen
+          ></Tab.Screen>
+          <Tab.Screen
             name="processo"
             component={Processo}
             options={({ route }) => ({
@@ -130,7 +129,7 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
                 backgroundColor: "#F8F8F8",
               },
             })}
-          ></Tab.Screen> */}
+          ></Tab.Screen>
         </Tab.Navigator>
       </Clientedatacontext.Provider>
     </View>
