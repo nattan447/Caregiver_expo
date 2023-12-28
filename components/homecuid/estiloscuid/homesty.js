@@ -44,7 +44,6 @@ export default StyleSheet.create({
   avaliacoes: {
     marginTop: "14%",
     alignItems: "center",
-
     width: "100%",
   },
   avaliacoestxt: {
@@ -57,6 +56,7 @@ export default StyleSheet.create({
     backgroundColor: "#F1EBEB",
     marginTop: "10%",
     width: "70%",
-    borderRadius: 8,
+    borderRadius: 10,
+    height: "32%",
   },
 });

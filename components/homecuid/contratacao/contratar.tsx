@@ -15,6 +15,7 @@ import homeloginscss from "../../../estilos/homeloginscss";
 import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { SearchbarHome } from "../../homecomponents/searchbar";
 type ContratarScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamListContratar,
   "Contratar"
@@ -38,7 +39,8 @@ const Contratar: React.FC<Navigationprops> = ({ navigation }) => {
   }, []);
   return (
     <View style={homeloginscss.container}>
-      <Text>Contratar</Text>
+      <Text>a</Text>
+      <SearchbarHome />
       <Button onPress={Irperfil} title="contrate"></Button>
     </View>
   );

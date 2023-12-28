@@ -18,7 +18,7 @@ import homeloginscss from "../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Clientedatacontext } from "./datacontext/clitentedata";
 import React from "react";
-const Favoritos = () => {
+const FavoritosCli = () => {
   const cuidadordataState = useContext(Clientedatacontext);
   useEffect(() => {
     console.log(cuidadordataState);
@@ -29,4 +29,4 @@ const Favoritos = () => {
     </View>
   );
 };
-export default Favoritos;
+export { FavoritosCli };
