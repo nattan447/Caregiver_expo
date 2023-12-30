@@ -15,7 +15,7 @@ import homeloginscss from "../../../estilos/homeloginscss";
 import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { SearchbarHome } from "../../homecomponents/searchbar";
+import { SearchbarHome } from "../../homecomponents/contratarComponents/searchbar";
 type ContratarScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamListContratar,
   "Contratar"

@@ -10,10 +10,11 @@ import {
 } from "react-native";
 import { Clientedatacontext } from "./datacontext/clitentedata";
 import { useState, useEffect, useRef } from "react";
-import Homecliente from "./homeclie";
+import Homecliente from "./initialscreen/homeclie";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
 import homeloginscss from "../../../estilos/homeloginscss";
+import { RootInitialScreen } from "./initialscreen/rootInitial";
 import {
   MaterialCommunityIcons,
   AntDesign,
@@ -26,6 +27,7 @@ import { FavoritosCli } from "./favoritos";
 import Processo from "./processocli";
 import { ContratarnavigatorCli } from "./contratacaoclie/contratarnavigator";
 import { RouteProp, useFocusEffect } from "@react-navigation/native";
+
 import React from "react";
 type HomeScreenNavigationParams = NativeStackNavigationProp<
   AuthenticRootParamList,
@@ -42,7 +44,7 @@ export type RootTabParamList = {
   processo: object;
 };
 
-const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
+const TabhomeCli: React.FC<PropsHome> = ({ route }) => {
   const Tab = createBottomTabNavigator<RootTabParamList>();
   const [cuidadordataState, SetCuidadordata] = useState<Clientedatainterfc>();
   useEffect(() => {
@@ -70,7 +72,7 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
         >
           <Tab.Screen
             name="Home"
-            component={Homecliente}
+            component={RootInitialScreen}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -89,7 +91,6 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
               tabBarIcon: ({ focused }) => (
                 <AntDesign name="star" size={focused ? 60 : 40} color="black" />
               ),
-
               headerShown: false,
               headerStyle: {
                 backgroundColor: "#F8F8F8",
@@ -135,4 +136,4 @@ const RootHomeCliente: React.FC<PropsHome> = ({ route }) => {
     </View>
   );
 };
-export default RootHomeCliente;
+export { TabhomeCli };

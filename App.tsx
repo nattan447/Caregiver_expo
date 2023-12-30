@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { ConfiguracaoCli } from "./components/datascreensCliente/homecliente/initialscreen/configuracao1";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Entrarcuidador from "./components/datascreenscuid/entrada/entrarcuid";
@@ -12,10 +12,11 @@ import Cadastrocuidador3 from "./components/datascreenscuid/cadastroCuidador/cad
 import Cadastrocliente from "./components/datascreensCliente/cadasctrarCliente/cadastroclient";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import Homenavigator from "./components/homecuid/homenavigator";
+import Homecliente from "./components/datascreensCliente/homecliente/initialscreen/homeclie";
 import { AuthenticRootParamList } from "./types/authenticRoot";
 import Splashscreen from "./splash/splashscreen";
 import { useEffect, useState } from "react";
-import RootHomeCliente from "./components/datascreensCliente/homecliente/roothomecli";
+import { TabhomeCli } from "./components/datascreensCliente/homecliente/tabhomecli";
 const Stack = createNativeStackNavigator<AuthenticRootParamList>();
 export default function App() {
   const [isvideoOver, setisvideoOver] = useState(false);
@@ -135,8 +136,22 @@ export default function App() {
                 backgroundColor: "#F8F8F8",
               },
             }}
-            component={RootHomeCliente}
+            component={TabhomeCli}
             name="roothomecliente"
+          ></Stack.Screen>
+
+          <Stack.Screen
+            options={{
+              headerShown: false,
+              title: "",
+              headerBackVisible: false,
+              headerTintColor: "#C77B43",
+              headerStyle: {
+                backgroundColor: "#F8F8F8",
+              },
+            }}
+            component={ConfiguracaoCli}
+            name="configuracao"
           ></Stack.Screen>
         </Stack.Navigator>
       ) : (

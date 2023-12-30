@@ -11,5 +11,7 @@ type AuthenticRootParamList = {
   Homenavigator: Cuidadadordatainterfc;
   cadastrocliente: undefined;
   roothomecliente: Clientedatainterfc;
+  homecliente: undefined;
+  configuracao: undefined;
 };
 export { AuthenticRootParamList };

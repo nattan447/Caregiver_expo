@@ -17,7 +17,7 @@ import homeloginscss from "../../../../estilos/homeloginscss";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { RootStackParamListContratar } from "./contratarnavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { SearchbarHome } from "../../../homecomponents/searchbar";
+import { SearchbarHome } from "../../../homecomponents/contratarComponents/searchbar";
 
 type ContratarScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamListContratar,
