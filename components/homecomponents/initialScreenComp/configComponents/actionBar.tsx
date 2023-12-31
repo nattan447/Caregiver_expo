@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { ConfiguracaoStyle } from "../styles/configuracaostyle";
+import { ConfiguracaoStyle } from "../../../datascreensCliente/homecliente/initialscreen/styles/configuracaostyle";
 
 type propsActionBar = {
   iconUrl: number;

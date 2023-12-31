@@ -190,7 +190,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
             issenha={true}
             tamanho={{ height: 40 }}
             emailwarn=""
-            type="default"
+            type="numeric"
             length={11}
             multiline={false}
           />

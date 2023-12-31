@@ -1,32 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { useEffect, useState, useContext } from "react";
 import React from "react";
 import { ConfiguracaoStyle } from "./styles/configuracaostyle";
-import { HeaderConfig } from "./configComponents/header";
-import { ActionBarConfig } from "./configComponents/actionBar";
+import { HeaderConfig } from "../../../homecomponents/initialScreenComp/configComponents/header";
+import { ActionBarConfig } from "../../../homecomponents/initialScreenComp/configComponents/actionBar";
 import { Clientedatacontext } from "../datacontext/clitentedata";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { AuthenticRootParamList } from "../../../../types/authenticRoot";
+import { InitialScreenParamList } from "../../../../types/initialScreenType";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
   "configuracao"
 >;
+type InitialScreenNavigationProp = NativeStackNavigationProp<
+  InitialScreenParamList,
+  "configPerfil"
+>;
+
+type propsFromInitialScreen = {
+  navigation: InitialScreenNavigationProp;
+};
 type propsFromAuthenticScreen = {
   navigation: AuthenticScreenNavigationProp;
 };
-const ConfiguracaoCli = ({ navigation }: propsFromAuthenticScreen) => {
+
+const ConfiguracaoCli = ({
+  navigation,
+}: propsFromAuthenticScreen | propsFromInitialScreen) => {
   const ClientedataState: Clientedatainterfc | undefined =
     useContext(Clientedatacontext);
+
   const ImageUri = ClientedataState?.profileimg;
+
   return (
     <View style={ConfiguracaoStyle.container}>
       <HeaderConfig
@@ -40,7 +46,9 @@ const ConfiguracaoCli = ({ navigation }: propsFromAuthenticScreen) => {
       />
       <View style={ConfiguracaoStyle.main}>
         <ActionBarConfig
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("configPerfil"); //tenho union types no navigation, então o ts não consegue identificar qual rota eu quero especificar
+          }}
           iconUrl={require("../../../../assets/pinkuser.png")}
           arrowUrl={require("../../../../assets/arrowgray.png")}
           txt="Editar Perfil"

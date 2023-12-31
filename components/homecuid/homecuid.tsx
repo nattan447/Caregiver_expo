@@ -25,7 +25,6 @@ type PropsHome = {
   navigation: HomeCuidProp;
   route: RouteProp<RootTabParamList, "Home">;
 };
-
 const Homecuid: React.FC<PropsHome> = ({ route }) => {
   const cuidadordataState: Cuidadadordatainterfc | undefined =
     useContext(Caredatacontext);
