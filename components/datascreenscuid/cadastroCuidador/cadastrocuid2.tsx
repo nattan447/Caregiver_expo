@@ -139,7 +139,7 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
           console.log("pode passar");
           console.log(datacuidador);
         } else alert("Erro: campo cpf ou data com caracters insuficientes");
-      } else console.log("Erro :preencha todos os dados obrigatórios");
+      } else alert("Erro :preencha todos os dados obrigatórios");
     } else {
       alert("Erro :preencha todos os dados obrigatórios");
     }

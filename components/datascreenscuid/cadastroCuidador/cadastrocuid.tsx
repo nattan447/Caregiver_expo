@@ -1,15 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from "react-native";
+import { Text, View, SafeAreaView, Image, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
@@ -95,12 +84,10 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
       profissao: datacuidador?.profissao,
     });
   }
-
   //combobox
   const [profissao, Setprofissao] = useState<string>("");
   function handleprofissao(Profissao: string) {
     Setprofissao(Profissao);
-
     setDataCuidador({
       nome: datacuidador?.nome,
       sobrenome: datacuidador?.sobrenome,
@@ -111,29 +98,39 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
     });
   }
 
-  const gosecondstep = (): void => {
-    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const arrayData = datacuidador ? Object.values(datacuidador) : undefined;
+  //é a mesma função para todas telas de cadastro
+  function inputLength(input: string | undefined): number {
     const regexEmptyInput = /^\S+$/;
-    const Filled = arrayData?.filter(
-      (value) => regexEmptyInput.test(value) && value != undefined
-    );
-    if (
-      Filled?.length === 4 &&
-      datacuidador?.profissao &&
-      datacuidador?.senha
-    ) {
-      if (regexEmptyInput.test(datacuidador.senha as string)) {
-        if (regexEmail.test(datacuidador?.email as string)) {
-          alert("tudo conforme os planejamentos");
-          navigation.navigate("Cadastrocuidador2", datacuidador);
-        } else {
-          alert("digite o modelo de email certo");
-        }
-      } else alert("preencha todos os dados obrigatórios");
-    } else alert("preencha todos os dados obrigatórios");
+    if (input != undefined) {
+      const nameNoSpaces = input
+        .split("")
+        .filter((char) => regexEmptyInput.test(char));
+      return nameNoSpaces.length;
+    } else {
+      return 0;
+    }
+  }
 
-    console.log(datacuidador?.senha);
+  const goSecondstep = (): void => {
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (
+      inputLength(datacuidador?.nome) >= 1 &&
+      inputLength(datacuidador?.sobrenome) >= 1 &&
+      inputLength(datacuidador?.email) >= 1 &&
+      inputLength(datacuidador?.senha) >= 1 &&
+      datacuidador?.profissao
+    ) {
+      if (regexEmail.test(datacuidador?.email as string)) {
+        if (inputLength(datacuidador?.senha as string) < 5) {
+          alert("digite uma senha com mais de 4 carácteres");
+        } else {
+          navigation.navigate("Cadastrocuidador2", datacuidador);
+          console.log("a senha tem mais de 4 carácteres ");
+        }
+      } else alert("digite o email de forma correta");
+    } else {
+      alert("preecha todos dados obrigatórios");
+    }
   };
   return (
     <SafeAreaView style={homeloginscss.container}>
@@ -220,7 +217,7 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
           cor="#F1EBEB"
           txtbtn="próximo"
           txtcor="#C77B43"
-          pres={gosecondstep}
+          pres={goSecondstep}
           fontsize={16}
           altura={40}
           largura={200}
