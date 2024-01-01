@@ -107,20 +107,36 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
     }
   };
 
-  const gosecondStep = (): void => {
-    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    const valuesCliente = clienteData ? Object.values(clienteData) : undefined;
+  function inputLength(input: string | undefined): number {
     const regexEmptyInput = /^\S+$/;
-    const Filled = valuesCliente?.filter((value) =>
-      regexEmptyInput.test(value)
-    );
-    if (Filled?.length === 6) {
+    if (input != undefined) {
+      const nameNoSpaces = input
+        .split("")
+        .filter((char) => regexEmptyInput.test(char));
+      return nameNoSpaces.length;
+    } else {
+      return 0;
+    }
+  }
+
+  const goHome = (): void => {
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (
+      inputLength(clienteData?.nome) >= 1 &&
+      inputLength(clienteData?.email) >= 1 &&
+      inputLength(clienteData?.senha) >= 1 &&
+      inputLength(clienteData?.cpf) >= 1
+    ) {
       if (regexEmail.test(clienteData?.email as string)) {
-        if (clienteData?.cpf?.length === 11) {
-          console.log("pode passar");
-          navigation.navigate("roothomecliente", clienteData);
-        } else alert("campo de cpf com caracteres insuficientes ");
+        if (inputLength(clienteData?.senha as string) < 5) {
+          alert("digite uma senha com mais de 4 carácteres");
+        } else {
+          console.log("a senh tem mais de 4 carácteres ");
+          if (clienteData?.cpf?.length === 11) {
+            console.log("pode passar");
+            navigation.navigate("roothomecliente", clienteData);
+          } else alert("campo de cpf com caracteres insuficientes ");
+        }
       } else alert("digite o email de forma correta");
     } else {
       alert("preecha todos dados");
@@ -203,7 +219,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
             cor="#F1EBEB"
             txtbtn="próximo"
             txtcor="#C77B43"
-            pres={gosecondStep}
+            pres={goHome}
             fontsize={16}
             altura={40}
             largura={200}

@@ -37,7 +37,6 @@ const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
       <HeaderInitial
         configBtnAct={() => navigation.navigate("configuracaoCli")}
       />
-
       <MainInitialScreen
         profileImgId={
           ClientedataState?.profileimg

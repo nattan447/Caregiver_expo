@@ -23,6 +23,7 @@ const HeaderInitial = (props: propsHeader) => {
             left: "240%",
             height: 30,
             width: 30,
+            borderRadius: 30,
           }}
         />
       </TouchableOpacity>
