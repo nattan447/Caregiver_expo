@@ -7,45 +7,65 @@ import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { InputConfig } from "../../../homecomponents/initialScreenComp/configComponents/inputConfig";
 import { Btn } from "../../../../desginscomponents/authenticheadrs";
 const ConfigPerfilCli = () => {
-  const clienteData: Clientedatainterfc | undefined = Clientedatacontext
+  const dataFromContextCli: Clientedatainterfc | undefined = Clientedatacontext
     ? useContext(Clientedatacontext)
     : undefined;
+
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <InputConfig
-        txt="nome"
-        placeholder="digite seu nome"
-        value={clienteData?.nome}
-      />
-      <InputConfig
-        txt="sobrenome"
-        placeholder="digite seu sobrenome"
-        value={clienteData?.sobrenome}
-      />
-      <InputConfig
-        txt="email"
-        placeholder="digite seu email"
-        value={clienteData?.email}
-      />
-      <InputConfig
-        txt="senha"
-        placeholder="digite sua senha"
-        value={clienteData?.senha}
-      />
-      <InputConfig
-        txt="cpf"
-        placeholder="digite sua cpf"
-        value={clienteData?.cpf}
-      />
-      <Btn
-        cor="#F1EBEB"
-        txtbtn="salvar"
-        txtcor="#C77B43"
-        fontsize={16}
-        altura={40}
-        largura={200}
-        pres={() => alert("salvo na padaria")}
-      />
+      <ScrollView style={{ width: "100%" }}>
+        <InputConfig
+          isPassWord={false}
+          txt="nome"
+          placeholder="digite seu nome"
+          value={dataFromContextCli?.nome}
+        />
+        <InputConfig
+          isPassWord={false}
+          txt="sobrenome"
+          placeholder="digite seu sobrenome"
+          value={dataFromContextCli?.sobrenome}
+        />
+        <InputConfig
+          isPassWord={false}
+          txt="email"
+          placeholder="digite seu email"
+          value={dataFromContextCli?.email}
+        />
+        <InputConfig
+          isPassWord={true}
+          txt="senha"
+          placeholder="digite sua senha"
+          value={dataFromContextCli?.senha}
+        />
+        <InputConfig
+          isPassWord={false}
+          txt="cpf"
+          placeholder="digite sua cpf"
+          value={dataFromContextCli?.cpf}
+        />
+        <InputConfig
+          isPassWord={false}
+          txt="Estado"
+          placeholder=" digite seu Estado"
+          value={dataFromContextCli?.cpf}
+        />
+        <InputConfig
+          isPassWord={false}
+          txt="Cidade"
+          placeholder="digite sua cidade"
+          value={dataFromContextCli?.cpf}
+        />
+        <Btn
+          cor="#F1EBEB"
+          txtbtn="salvar"
+          txtcor="#C77B43"
+          fontsize={16}
+          altura={40}
+          largura={200}
+          pres={() => alert("salvo na padaria")}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };

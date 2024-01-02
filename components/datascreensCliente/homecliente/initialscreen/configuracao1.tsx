@@ -11,28 +11,35 @@ import { InitialScreenParamList } from "../../../../types/initialScreenType";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
-  "configuracao"
+  "Autenticacaocli"
 >;
 type InitialScreenNavigationProp = NativeStackNavigationProp<
   InitialScreenParamList,
   "configPerfil"
 >;
-
 type propsFromInitialScreen = {
   navigation: InitialScreenNavigationProp;
 };
 type propsFromAuthenticScreen = {
   navigation: AuthenticScreenNavigationProp;
 };
-
 const ConfiguracaoCli = ({
   navigation,
-}: propsFromAuthenticScreen | propsFromInitialScreen) => {
+}: propsFromInitialScreen | propsFromAuthenticScreen) => {
   const ClientedataState: Clientedatainterfc | undefined =
     useContext(Clientedatacontext);
-
   const ImageUri = ClientedataState?.profileimg;
-
+  //especificação das rotas de navegação
+  const isAuthenticScreenNavigation = (
+    navigation: AuthenticScreenNavigationProp | InitialScreenNavigationProp
+  ): navigation is AuthenticScreenNavigationProp => {
+    return "Autenticacaocli" in navigation;
+  };
+  const isInitalScreenNavigation = (
+    navigation: AuthenticScreenNavigationProp | InitialScreenNavigationProp
+  ): navigation is InitialScreenNavigationProp => {
+    return "configPerfil" in navigation;
+  };
   return (
     <View style={ConfiguracaoStyle.container}>
       <HeaderConfig
@@ -47,7 +54,10 @@ const ConfiguracaoCli = ({
       <View style={ConfiguracaoStyle.main}>
         <ActionBarConfig
           onPress={() => {
-            navigation.navigate("configPerfil"); //tenho union types no navigation, então o ts não consegue identificar qual rota eu quero especificar
+            //tenho union types no navigation, então o ts não consegue identificar qual rota eu quero especificar
+            if (!isAuthenticScreenNavigation(navigation)) {
+              navigation.navigate("configPerfil");
+            }
           }}
           iconUrl={require("../../../../assets/pinkuser.png")}
           arrowUrl={require("../../../../assets/arrowgray.png")}
@@ -61,7 +71,9 @@ const ConfiguracaoCli = ({
         />
         <ActionBarConfig
           onPress={() => {
-            navigation.navigate("Autenticacaocli");
+            if (!isInitalScreenNavigation(navigation)) {
+              navigation.navigate("Autenticacaocli");
+            }
           }}
           iconUrl={require("../../../../assets/singOut.png")}
           arrowUrl={require("../../../../assets/arrowgray.png")}
