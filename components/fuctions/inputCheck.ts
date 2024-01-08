@@ -1,4 +1,4 @@
-function inputLengthCheck(input: string): number {
+function inputLengthCheck(input: string | undefined): number {
   const regexEmptyInput = /^\S+$/;
   if (input != undefined) {
     const nameNoSpaces = input

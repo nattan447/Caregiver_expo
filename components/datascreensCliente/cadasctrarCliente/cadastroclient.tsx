@@ -178,17 +178,17 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
   const goHome = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
-      inputLengthCheck(clienteData?.nome as string) >= 1 &&
-      inputLengthCheck(clienteData?.email as string) >= 1 &&
-      inputLengthCheck(clienteData?.senha as string) >= 1 &&
-      inputLengthCheck(clienteData?.cpf as string) >= 1
+      inputLengthCheck(clienteData?.nome) >= 1 &&
+      inputLengthCheck(clienteData?.email) >= 1 &&
+      inputLengthCheck(clienteData?.senha) >= 1 &&
+      inputLengthCheck(clienteData?.cpf) >= 1
     ) {
       if (regexEmail.test(clienteData?.email as string)) {
-        if (inputLengthCheck(clienteData?.senha as string) < 5) {
+        if (inputLengthCheck(clienteData?.senha) < 5) {
           alert("digite uma senha com mais de 4 carácteres");
         } else {
           console.log("a senh tem mais de 4 carácteres ");
-          if (inputLengthCheck(clienteData?.cpf as string) == 11) {
+          if (inputLengthCheck(clienteData?.cpf) == 11) {
             if (clienteData) {
               navigation.navigate("roothomecliente", clienteData);
               console.log("dados conforme os padrões, cadastro acessivel");

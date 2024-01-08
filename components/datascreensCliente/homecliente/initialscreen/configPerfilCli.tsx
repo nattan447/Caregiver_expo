@@ -108,19 +108,18 @@ const ConfigPerfilCli = () => {
 
   function saveChangesDatas() {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const datasChanged = newData ? Object.keys(newData) : undefined;
     if (
-      inputLengthCheck(newData?.nome as string) >= 1 &&
-      inputLengthCheck(newData?.email as string) >= 1 &&
-      inputLengthCheck(newData?.senha as string) >= 1 &&
-      inputLengthCheck(newData?.cpf as string) >= 1
+      inputLengthCheck(newData?.nome) >= 1 &&
+      inputLengthCheck(newData?.email) >= 1 &&
+      inputLengthCheck(newData?.senha) >= 1 &&
+      inputLengthCheck(newData?.cpf) >= 1
     ) {
       switch (regexEmail.test(newData?.email as string)) {
         case true:
           console.log("email passou no teste");
-          if (inputLengthCheck(newData?.senha as string) > 4) {
+          if (inputLengthCheck(newData?.senha) > 4) {
             console.log("passou no teste da senha");
-            switch (inputLengthCheck(newData?.cpf as string)) {
+            switch (inputLengthCheck(newData?.cpf)) {
               case 11:
                 console.log("passou na fase do cpf");
                 console.log("usuario pode salvar os dados sem problemas");

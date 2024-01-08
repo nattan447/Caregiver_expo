@@ -11,6 +11,7 @@ import { Combobox } from "../../../desginscomponents/inputs";
 import cadastro from "../../../estilos/cadastro";
 import Inputs from "../../../desginscomponents/inputs";
 import { validatePathConfig } from "@react-navigation/native";
+import { inputLengthCheck } from "../../fuctions/inputCheck";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
   "Cadastrocuidador"
@@ -98,30 +99,17 @@ const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
     });
   }
 
-  //é a mesma função para todas telas de cadastro
-  function inputLength(input: string | undefined): number {
-    const regexEmptyInput = /^\S+$/;
-    if (input != undefined) {
-      const nameNoSpaces = input
-        .split("")
-        .filter((char) => regexEmptyInput.test(char));
-      return nameNoSpaces.length;
-    } else {
-      return 0;
-    }
-  }
-
   const goSecondstep = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
-      inputLength(datacuidador?.nome) >= 1 &&
-      inputLength(datacuidador?.sobrenome) >= 1 &&
-      inputLength(datacuidador?.email) >= 1 &&
-      inputLength(datacuidador?.senha) >= 1 &&
+      inputLengthCheck(datacuidador?.nome) >= 1 &&
+      inputLengthCheck(datacuidador?.sobrenome) >= 1 &&
+      inputLengthCheck(datacuidador?.email) >= 1 &&
+      inputLengthCheck(datacuidador?.senha) >= 1 &&
       datacuidador?.profissao
     ) {
       if (regexEmail.test(datacuidador?.email as string)) {
-        if (inputLength(datacuidador?.senha as string) < 5) {
+        if (inputLengthCheck(datacuidador?.senha as string) < 5) {
           alert("digite uma senha com mais de 4 carácteres");
         } else {
           navigation.navigate("Cadastrocuidador2", datacuidador);

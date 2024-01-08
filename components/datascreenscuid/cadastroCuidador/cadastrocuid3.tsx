@@ -167,13 +167,14 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
 
   const goHomescreen = (): void => {
     const values = Object.values(cuidadordata);
-    console.log(values);
+    console.log("numeros de dados no obj: " + values);
     if (values.length > 8) {
       if (cuidadordata.cep) {
-        console.log(cuidadordata.cep.length);
-        if (cuidadordata.cep.length < 8) {
+        if (inputLengthCheck(cuidadordata.cep) < 8) {
           alert("caracteres de cep insuficientes");
+          console.log("não caracter suficientes no cep");
         } else {
+          console.log("cadastro completo");
           navigation.navigate("Homenavigator", cuidadordata);
         }
       } else navigation.navigate("Homenavigator", cuidadordata);
