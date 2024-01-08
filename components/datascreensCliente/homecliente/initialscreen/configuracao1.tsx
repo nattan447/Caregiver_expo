@@ -23,12 +23,16 @@ type propsFromInitialScreen = {
 type propsFromAuthenticScreen = {
   navigation: AuthenticScreenNavigationProp;
 };
+
 const ConfiguracaoCli = ({
   navigation,
 }: propsFromInitialScreen | propsFromAuthenticScreen) => {
-  const ClientedataState: Clientedatainterfc | undefined =
-    useContext(Clientedatacontext);
-  const ImageUri = ClientedataState?.profileimg;
+  //não consigo resolver o problema de tipagem dessa variável
+  const dataFromContextCli = useContext(Clientedatacontext);
+  const { clienteData }: any = dataFromContextCli;
+  const clienteDataTyped: Clientedatainterfc = clienteData;
+
+  const ImageUri = clienteData?.profileimg;
   //especificação das rotas de navegação
   const isAuthenticScreenNavigation = (
     navigation: AuthenticScreenNavigationProp | InitialScreenNavigationProp
@@ -45,10 +49,10 @@ const ConfiguracaoCli = ({
       <HeaderConfig
         profileImageUrl={
           ImageUri
-            ? { uri: ClientedataState?.profileimg }
+            ? { uri: clienteDataTyped?.profileimg }
             : require("../../../../assets/user.png")
         }
-        userName={ClientedataState?.nome as string}
+        userName={clienteDataTyped?.nome as string}
         profession="Cliente"
       />
       <View style={ConfiguracaoStyle.main}>

@@ -1,13 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import {
-  StyleSheet,
   Text,
   View,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
+import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
 import { styles } from "../../../desginscomponents/inputs";
 import { useState, useEffect, useRef } from "react";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
@@ -19,7 +18,9 @@ import cadastro from "../../../estilos/cadastro";
 import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp, StackRouterOptions } from "@react-navigation/native";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
+import { Combobox } from "../../../desginscomponents/inputs";
 import * as ImagePicker from "expo-image-picker";
+import { inputLengthCheck } from "../../fuctions/inputCheck";
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
   "cadastrocliente"
@@ -32,6 +33,31 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
   navigation,
 }: PropsNavCadastroCliente) => {
   const [clienteData, setClienteData] = useState<Clientedatainterfc>();
+  const [isloadingEstados, setIsloadingEstados] = useState(true);
+  const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
+  const [EstadoValue, SetEstadoValue] = useState<string>("");
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const apiurl =
+          "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+        const response = await fetch(apiurl);
+        const data = await response.json();
+        data.map((estado: ApiIbgeInterface) => {
+          let accestado: string = estado.nome;
+          SetArrayEstado((current) => [...current, estado.nome]);
+        });
+        setIsloadingEstados(false);
+        console.log("sucesso ao acessar a api da Ibge");
+        return true;
+      } catch {
+        console.log("erro ao acessar api Ibge");
+        return false;
+      }
+    };
+    fetchdata();
+  }, []);
 
   const handleName = (Name: string) => {
     setClienteData({
@@ -41,6 +67,8 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
       profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: clienteData?.cidade,
     });
   };
 
@@ -52,6 +80,8 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
       profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: clienteData?.cidade,
     });
   };
 
@@ -63,6 +93,8 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       senha: clienteData?.senha,
       cpf: clienteData?.cpf,
       profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: clienteData?.cidade,
     });
   };
   const handleSenha = (Senha: string) => {
@@ -73,6 +105,8 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       senha: Senha,
       cpf: clienteData?.cpf,
       profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: clienteData?.cidade,
     });
   };
 
@@ -84,6 +118,20 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
       senha: clienteData?.senha,
       cpf: Cpf,
       profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: clienteData?.cidade,
+    });
+  };
+  const handleCidade = (Cidade: string) => {
+    setClienteData({
+      nome: clienteData?.nome,
+      sobrenome: clienteData?.sobrenome,
+      email: clienteData?.email,
+      senha: clienteData?.senha,
+      cpf: clienteData?.cpf,
+      profileimg: clienteData?.profileimg,
+      Estado: clienteData?.Estado,
+      cidade: Cidade,
     });
   };
 
@@ -103,38 +151,48 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
         senha: clienteData?.senha,
         cpf: clienteData?.cpf,
         profileimg: Image.assets[0].uri,
+        Estado: clienteData?.Estado,
+        cidade: clienteData?.cidade,
       });
     }
   };
 
-  function inputLength(input: string | undefined): number {
-    const regexEmptyInput = /^\S+$/;
-    if (input != undefined) {
-      const nameNoSpaces = input
-        .split("")
-        .filter((char) => regexEmptyInput.test(char));
-      return nameNoSpaces.length;
-    } else {
-      return 0;
+  function handelEstado(Estado: string) {
+    if (!isloadingEstados) {
+      if (Estado != null) {
+        SetEstadoValue(Estado);
+      }
+      setClienteData({
+        nome: clienteData?.nome,
+        sobrenome: clienteData?.sobrenome,
+        email: clienteData?.email,
+        senha: clienteData?.senha,
+        cpf: clienteData?.cpf,
+        profileimg: clienteData?.profileimg,
+        Estado: Estado,
+        cidade: clienteData?.cidade,
+      });
     }
   }
 
   const goHome = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
-      inputLength(clienteData?.nome) >= 1 &&
-      inputLength(clienteData?.email) >= 1 &&
-      inputLength(clienteData?.senha) >= 1 &&
-      inputLength(clienteData?.cpf) >= 1
+      inputLengthCheck(clienteData?.nome as string) >= 1 &&
+      inputLengthCheck(clienteData?.email as string) >= 1 &&
+      inputLengthCheck(clienteData?.senha as string) >= 1 &&
+      inputLengthCheck(clienteData?.cpf as string) >= 1
     ) {
       if (regexEmail.test(clienteData?.email as string)) {
-        if (inputLength(clienteData?.senha as string) < 5) {
+        if (inputLengthCheck(clienteData?.senha as string) < 5) {
           alert("digite uma senha com mais de 4 carácteres");
         } else {
           console.log("a senh tem mais de 4 carácteres ");
-          if (clienteData?.cpf?.length === 11) {
-            console.log("pode passar");
-            navigation.navigate("roothomecliente", clienteData);
+          if (inputLengthCheck(clienteData?.cpf as string) == 11) {
+            if (clienteData) {
+              navigation.navigate("roothomecliente", clienteData);
+              console.log("dados conforme os padrões, cadastro acessivel");
+            }
           } else alert("campo de cpf com caracteres insuficientes ");
         }
       } else alert("digite o email de forma correta");
@@ -214,7 +272,29 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
             <Text style={styles.txt}>Foto de perfil</Text>
             <View style={cadastro.inputimg}></View>
           </TouchableOpacity>
-
+          {!isloadingEstados ? (
+            <Combobox
+              placeholder="selecione o Estado"
+              textabove="Estado"
+              initialvalue={EstadoValue}
+              onchange={handelEstado}
+              arrayvalues={ArrayEstado}
+            />
+          ) : (
+            <ActivityIndicator size="large" color="orange" />
+          )}
+          <Inputs
+            value={clienteData?.cidade}
+            nometxt="cidade"
+            placeholder="digite sua cidade"
+            onchangevalue={handleCidade}
+            issenha={false}
+            tamanho={{ height: 40 }}
+            emailwarn=""
+            type="default"
+            length={40}
+            multiline={false}
+          />
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"

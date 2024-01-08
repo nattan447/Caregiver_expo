@@ -1,13 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { Clientedatacontext } from "./datacontext/clitentedata";
 import { useState, useEffect, useRef } from "react";
 import Homecliente from "./initialscreen/homeclie";
@@ -27,7 +19,6 @@ import { FavoritosCli } from "./favoritos";
 import Processo from "./processocli";
 import { ContratarnavigatorCli } from "./contratacaoclie/contratarnavigator";
 import { RouteProp, useFocusEffect } from "@react-navigation/native";
-
 import React from "react";
 type HomeScreenNavigationParams = NativeStackNavigationProp<
   AuthenticRootParamList,
@@ -46,18 +37,29 @@ export type RootTabParamList = {
 
 const TabhomeCli: React.FC<PropsHome> = ({ route }) => {
   const Tab = createBottomTabNavigator<RootTabParamList>();
-  const [cuidadordataState, SetCuidadordata] = useState<Clientedatainterfc>();
+  const [clienteData, setClienteData] = useState<
+    Clientedatainterfc | undefined
+  >();
+
   useEffect(() => {
     if (route.params) {
-      var cuidadordata = route.params;
-      if (cuidadordata != undefined) {
-        SetCuidadordata(cuidadordata);
+      const clienteDataFromNav = route.params as Clientedatainterfc;
+      if (clienteDataFromNav != undefined) {
+        setClienteData(clienteDataFromNav);
       }
     }
-  }, []);
+  }, [route.params]);
+
   return (
     <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
-      <Clientedatacontext.Provider value={cuidadordataState}>
+      <Clientedatacontext.Provider
+        //não consigo resolver o problema de tipagem dessa variável
+        value={
+          { clienteData, setClienteData } as unknown as
+            | Clientedatainterfc
+            | undefined
+        }
+      >
         <Tab.Navigator
           initialRouteName="Home"
           screenOptions={{

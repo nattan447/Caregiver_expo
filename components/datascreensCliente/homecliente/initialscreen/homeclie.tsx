@@ -30,8 +30,11 @@ type PropsHome = {
   route: RouteProp<InitialScreenParamList, "homecliente">;
 };
 const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
-  const ClientedataState: Clientedatainterfc | undefined =
+  const dataFromContextCli: Clientedatainterfc | undefined =
     useContext(Clientedatacontext);
+  //não consigo resolver o problema de tipagem dessa variável
+  const { clienteData, setClienteData }: any = dataFromContextCli;
+  const clienteDataTyped: Clientedatainterfc = clienteData;
   return (
     <SafeAreaView style={homeloginscss.container}>
       <HeaderInitial
@@ -39,11 +42,11 @@ const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
       />
       <MainInitialScreen
         profileImgId={
-          ClientedataState?.profileimg
-            ? { uri: ClientedataState?.profileimg }
+          clienteDataTyped?.profileimg
+            ? { uri: clienteDataTyped?.profileimg }
             : require("../../../../assets/user.png")
         }
-        userName={ClientedataState?.nome as string}
+        userName={clienteDataTyped?.nome as string}
       />
     </SafeAreaView>
   );

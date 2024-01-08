@@ -1,17 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import {
-  StyleSheet,
-  Text,
   View,
-  Button,
   SafeAreaView,
-  Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
   Easing,
   ActivityIndicator,
 } from "react-native";
+import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Picker } from "@react-native-picker/picker";
@@ -26,6 +21,7 @@ import Inputs from "../../../desginscomponents/inputs";
 import { RouteProp } from "@react-navigation/native";
 import RNPickerSelect from "react-native-picker-select";
 import { Combobox } from "../../../desginscomponents/inputs";
+import { inputLengthCheck } from "../../fuctions/inputCheck";
 
 type AuthenticScreenNavigationProp = NativeStackNavigationProp<
   AuthenticRootParamList,
@@ -58,16 +54,6 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
 
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
   const [isloadingEstados, setIsloadingEstados] = useState(true);
-  interface ApiIbgeInterface {
-    id: number;
-    nome: string;
-    regiao: {
-      id: number;
-      nome: string;
-      sigla: string;
-    };
-    sigla: string;
-  }
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -197,7 +183,10 @@ const Cadastrocuidador3: React.FC<PropsNavCuidador2> = ({
   return (
     <SafeAreaView style={homeloginscss.container}>
       <View style={cadastro.cadastroview2}>
-        <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
+        <ScrollView
+          automaticallyAdjustKeyboardInsets={true}
+          style={{ width: "100%" }}
+        >
           {!isloadingEstados ? (
             <Combobox
               placeholder="selecione o Estado"
