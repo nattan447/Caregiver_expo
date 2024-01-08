@@ -6,37 +6,29 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
+import React from "react";
 import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
 import { styles } from "../../../desginscomponents/inputs";
 import { useState, useEffect, useRef } from "react";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
 import { Btn } from "../../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import cadastro from "../../../estilos/cadastro";
 import Inputs from "../../../desginscomponents/inputs";
-import { RouteProp, StackRouterOptions } from "@react-navigation/native";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
 import { Combobox } from "../../../desginscomponents/inputs";
 import * as ImagePicker from "expo-image-picker";
 import { inputLengthCheck } from "../../fuctions/inputCheck";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+type PropsCadastroCliente = NativeStackScreenProps<
   AuthenticRootParamList,
   "cadastrocliente"
 >;
-type PropsNavCadastroCliente = {
-  navigation: AuthenticScreenNavigationProp;
-  route: RouteProp<AuthenticRootParamList, "cadastrocliente">;
-};
-const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
-  navigation,
-}: PropsNavCadastroCliente) => {
+const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
   const [clienteData, setClienteData] = useState<Clientedatainterfc>();
   const [isloadingEstados, setIsloadingEstados] = useState(true);
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
   const [EstadoValue, SetEstadoValue] = useState<string>("");
-
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -58,7 +50,6 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
     };
     fetchdata();
   }, []);
-
   const handleName = (Name: string) => {
     setClienteData({
       nome: Name,
@@ -297,7 +288,7 @@ const Cadastrocliente: React.FC<PropsNavCadastroCliente> = ({
           />
           <Btn
             cor="#F1EBEB"
-            txtbtn="próximo"
+            txtbtn="cadastrar"
             txtcor="#C77B43"
             pres={goHome}
             fontsize={16}

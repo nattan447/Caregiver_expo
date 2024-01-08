@@ -1,33 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 import Caredatacontext from "../usercontext/caredata";
-
 import { useState, useEffect, useContext } from "react";
-import homeloginscss from "../../../estilos/homeloginscss";
 import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { RootStackParamListContratar } from "./contratarnavigator";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SearchbarHome } from "../../homecomponents/contratarComponents/searchbar";
-type ContratarScreenNavigationProp = NativeStackNavigationProp<
+type PropsContratar = NativeStackScreenProps<
   RootStackParamListContratar,
   "Contratar"
 >;
-
-type Navigationprops = {
-  navigation: ContratarScreenNavigationProp;
-};
-
-import React from "react";
-
-const Contratar: React.FC<Navigationprops> = ({ navigation }) => {
+const Contratar = ({ navigation }: PropsContratar) => {
   const cuidadordataState: Cuidadadordatainterfc | undefined =
     useContext(Caredatacontext);
   const Irperfil = (): void => {
@@ -38,7 +21,7 @@ const Contratar: React.FC<Navigationprops> = ({ navigation }) => {
     console.log(cuidadordataState);
   }, []);
   return (
-    <View style={homeloginscss.container}>
+    <View style={{ flex: 1, justifyContent: "center" }}>
       <Text>a</Text>
       <SearchbarHome />
       <Button onPress={Irperfil} title="contrate"></Button>

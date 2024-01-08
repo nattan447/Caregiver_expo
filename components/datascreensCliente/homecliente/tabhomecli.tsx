@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { View } from "react-native";
+import React from "react";
 import { Clientedatacontext } from "./datacontext/clitentedata";
-import { useState, useEffect, useRef } from "react";
-import Homecliente from "./initialscreen/homeclie";
+import { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
-import homeloginscss from "../../../estilos/homeloginscss";
 import { RootInitialScreen } from "./initialscreen/rootInitial";
 import {
   MaterialCommunityIcons,
@@ -13,34 +11,20 @@ import {
   FontAwesome5,
   Ionicons,
 } from "@expo/vector-icons";
+import { RootProcess } from "./processoScrens/rootProcess";
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FavoritosCli } from "./favoritos";
 import Processo from "./processocli";
 import { ContratarnavigatorCli } from "./contratacaoclie/contratarnavigator";
-import { RouteProp, useFocusEffect } from "@react-navigation/native";
-import React from "react";
-type HomeScreenNavigationParams = NativeStackNavigationProp<
+import { HomeTabParms } from "../../../types/homeTabParams";
+type PropsHomeFromAuthenticScreen = NativeStackScreenProps<
   AuthenticRootParamList,
   "roothomecliente"
 >;
-type PropsHome = {
-  navigation: HomeScreenNavigationParams;
-  route: RouteProp<AuthenticRootParamList, "roothomecliente">;
-};
-export type RootTabParamList = {
-  Home: object;
-  Favoritos: object;
-  Contratar: object;
-  processo: object;
-};
-
-const TabhomeCli: React.FC<PropsHome> = ({ route }) => {
-  const Tab = createBottomTabNavigator<RootTabParamList>();
-  const [clienteData, setClienteData] = useState<
-    Clientedatainterfc | undefined
-  >();
-
+const TabhomeCli = ({ route }: PropsHomeFromAuthenticScreen) => {
+  const Tab = createBottomTabNavigator<HomeTabParms>();
+  const [clienteData, setClienteData] = useState<Clientedatainterfc>();
   useEffect(() => {
     if (route.params) {
       const clienteDataFromNav = route.params as Clientedatainterfc;
@@ -117,8 +101,8 @@ const TabhomeCli: React.FC<PropsHome> = ({ route }) => {
             })}
           ></Tab.Screen>
           <Tab.Screen
-            name="processo"
-            component={Processo}
+            name="rootProcess"
+            component={RootProcess}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <Ionicons

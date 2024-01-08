@@ -10,7 +10,6 @@ import Cadastrocuidador from "./components/datascreenscuid/cadastroCuidador/cada
 import Cadastrocuidador2 from "./components/datascreenscuid/cadastroCuidador/cadastrocuid2";
 import Cadastrocuidador3 from "./components/datascreenscuid/cadastroCuidador/cadastrocuid3";
 import Cadastrocliente from "./components/datascreensCliente/cadasctrarCliente/cadastroclient";
-import { Header } from "react-native/Libraries/NewAppScreen";
 import Homenavigator from "./components/homecuid/homenavigator";
 import Homecliente from "./components/datascreensCliente/homecliente/initialscreen/homeclie";
 import { AuthenticRootParamList } from "./types/authenticRoot";
