@@ -37,15 +37,17 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
         const response = await fetch(apiurl);
         const data = await response.json();
         data.map((estado: ApiIbgeInterface) => {
-          let accestado: string = estado.nome;
           SetArrayEstado((current) => [...current, estado.nome]);
         });
-        setIsloadingEstados(false);
+
         console.log("sucesso ao acessar a api da Ibge");
         return true;
       } catch {
         console.log("erro ao acessar api Ibge");
         return false;
+      } finally {
+        console.log("processo assincrono finalidado");
+        setIsloadingEstados(false);
       }
     };
     fetchdata();
@@ -195,75 +197,84 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
 
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <View style={cadastro.cadastroview2}>
-        <ScrollView automaticallyAdjustKeyboardInsets style={{ width: "100%" }}>
-          <Text style={cadastro.criarcontatxt}>Criar conta</Text>
-          <Inputs
-            value={clienteData?.nome}
-            nometxt="nome *"
-            placeholder="digite seu nome"
-            onchangevalue={handleName}
-            issenha={false}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="default"
-            length={40}
-            multiline={false}
-          />
-          <Inputs
-            nometxt="sobrenome *"
-            value={clienteData?.sobrenome}
-            placeholder="digite seu sobrenome"
-            onchangevalue={handleSobrenome}
-            issenha={false}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="default"
-            length={40}
-            multiline={false}
-          />
+      {isloadingEstados ? (
+        <ActivityIndicator size="large" color="orange" />
+      ) : (
+        <View style={cadastro.cadastroview2}>
+          <ScrollView
+            automaticallyAdjustKeyboardInsets
+            style={{ width: "100%" }}
+          >
+            <Text style={cadastro.criarcontatxt}>Criar conta</Text>
+            <Inputs
+              value={clienteData?.nome}
+              nometxt="nome *"
+              placeholder="digite seu nome"
+              onchangevalue={handleName}
+              issenha={false}
+              tamanho={{ height: 40 }}
+              emailwarn=""
+              type="default"
+              length={40}
+              multiline={false}
+            />
+            <Inputs
+              nometxt="sobrenome *"
+              value={clienteData?.sobrenome}
+              placeholder="digite seu sobrenome"
+              onchangevalue={handleSobrenome}
+              issenha={false}
+              tamanho={{ height: 40 }}
+              emailwarn=""
+              type="default"
+              length={40}
+              multiline={false}
+            />
 
-          <Inputs
-            value={clienteData?.email}
-            nometxt="email * "
-            placeholder={"digite seu email"}
-            onchangevalue={handleEmail}
-            issenha={false}
-            tamanho={{ height: 40 }}
-            emailwarn={"nada"}
-            type="email-address"
-            length={30}
-            multiline={false}
-          />
-          <Inputs
-            value={clienteData?.senha}
-            nometxt="senha *"
-            placeholder="digite sua senha"
-            onchangevalue={handleSenha}
-            issenha={true}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="default"
-            length={10}
-            multiline={false}
-          />
-          <Inputs
-            value={clienteData?.cpf}
-            nometxt="cpf *"
-            placeholder="digite seu  cpf"
-            onchangevalue={handleCpf}
-            issenha={true}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="numeric"
-            length={11}
-            multiline={false}
-          />
-          <TouchableOpacity onPress={pickImage} style={{ alignSelf: "center" }}>
-            <Text style={styles.txt}>Foto de perfil</Text>
-            <View style={cadastro.inputimg}></View>
-          </TouchableOpacity>
-          {!isloadingEstados ? (
+            <Inputs
+              value={clienteData?.email}
+              nometxt="email * "
+              placeholder={"digite seu email"}
+              onchangevalue={handleEmail}
+              issenha={false}
+              tamanho={{ height: 40 }}
+              emailwarn={"nada"}
+              type="email-address"
+              length={30}
+              multiline={false}
+            />
+            <Inputs
+              value={clienteData?.senha}
+              nometxt="senha *"
+              placeholder="digite sua senha"
+              onchangevalue={handleSenha}
+              issenha={true}
+              tamanho={{ height: 40 }}
+              emailwarn=""
+              type="default"
+              length={10}
+              multiline={false}
+            />
+            <Inputs
+              value={clienteData?.cpf}
+              nometxt="cpf *"
+              placeholder="digite seu  cpf"
+              onchangevalue={handleCpf}
+              issenha={true}
+              tamanho={{ height: 40 }}
+              emailwarn=""
+              type="numeric"
+              length={11}
+              multiline={false}
+            />
+            <TouchableOpacity
+              onPress={pickImage}
+              style={{ alignSelf: "center" }}
+            >
+              <Text style={styles.txt}>Foto de perfil</Text>
+              <View style={cadastro.inputimg}></View>
+            </TouchableOpacity>
+
             <Combobox
               placeholder="selecione o Estado"
               textabove="Estado"
@@ -271,32 +282,31 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
               onchange={handelEstado}
               arrayvalues={ArrayEstado}
             />
-          ) : (
-            <ActivityIndicator size="large" color="orange" />
-          )}
-          <Inputs
-            value={clienteData?.cidade}
-            nometxt="cidade"
-            placeholder="digite sua cidade"
-            onchangevalue={handleCidade}
-            issenha={false}
-            tamanho={{ height: 40 }}
-            emailwarn=""
-            type="default"
-            length={40}
-            multiline={false}
-          />
-          <Btn
-            cor="#F1EBEB"
-            txtbtn="cadastrar"
-            txtcor="#C77B43"
-            pres={goHome}
-            fontsize={16}
-            altura={40}
-            largura={200}
-          />
-        </ScrollView>
-      </View>
+
+            <Inputs
+              value={clienteData?.cidade}
+              nometxt="cidade"
+              placeholder="digite sua cidade"
+              onchangevalue={handleCidade}
+              issenha={false}
+              tamanho={{ height: 40 }}
+              emailwarn=""
+              type="default"
+              length={40}
+              multiline={false}
+            />
+            <Btn
+              cor="#F1EBEB"
+              txtbtn="cadastrar"
+              txtcor="#C77B43"
+              pres={goHome}
+              fontsize={16}
+              altura={40}
+              largura={200}
+            />
+          </ScrollView>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

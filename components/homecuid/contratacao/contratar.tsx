@@ -21,7 +21,7 @@ const Contratar = ({ navigation }: PropsContratar) => {
     console.log(cuidadordataState);
   }, []);
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>a</Text>
       <SearchbarHome />
       <Button onPress={Irperfil} title="contrate"></Button>
