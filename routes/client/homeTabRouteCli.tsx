@@ -13,9 +13,9 @@ import { Clientedatainterfc } from "../../components/interfacests/clienteInterfa
 import { HomeTabParms } from "../../types/homeTabParams";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Clientedatacontext } from "../../components/datascreensCliente/homecliente/datacontext/clitentedata";
-import { RootInitialScreen } from "../../components/datascreensCliente/homecliente/initialscreen/rootInitial";
 import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { ProcessTopRouteCli } from "./proccessTopRouteCli";
+import { InitialScreenRouteCli } from "./InitialScreenRouteClie";
 type PropsHomeFromAuthenticScreen = NativeStackScreenProps<
   AuthenticRootParamList,
   "roothomecliente"
@@ -35,10 +35,10 @@ const HomeTabRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
         //não consigo resolver o problema de tipagem dessa variável
         value={{ clienteData, setClienteData } as unknown as Clientedatainterfc}
       >
-        <Tab.Navigator initialRouteName="Home" screenOptions={tabStyle as any}>
+        <Tab.Navigator screenOptions={tabStyle as any}>
           <Tab.Screen
             name="Home"
-            component={RootInitialScreen}
+            component={InitialScreenRouteCli}
             options={({ route }) => ({
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -98,9 +98,9 @@ export { HomeTabRouteCli };
 const tabStyle = {
   tabBarShowLabel: false,
   tabBarStyle: {
-    height: 90,
+    height: "10%",
     backgroundColor: "#FFE7E7",
-    margin: "5%",
+    margin: "2%",
     borderRadius: 7,
   },
 };

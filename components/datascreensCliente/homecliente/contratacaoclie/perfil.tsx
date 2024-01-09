@@ -9,30 +9,23 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect } from "react";
-
 import { useState } from "react";
-
 import homeloginscss from "../../../../estilos/homeloginscss";
-import { RouteProp } from "@react-navigation/native";
-import { RootStackParamListContratar } from "./contratarnavigator";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
-type PerfilScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamListContratar,
+import { contratarRootParams } from "../../../../types/contratarRootParams";
+type PropsPerfilContratado = NativeStackScreenProps<
+  contratarRootParams,
   "perfil"
 >;
-type Navigationprops = {
-  navigation: PerfilScreenNavigationProp;
-  route: RouteProp<RootStackParamListContratar, "perfil">;
-};
-const PerfilContratado: React.FC<Navigationprops> = ({ navigation, route }) => {
+const PerfilContratado = ({ navigation, route }: PropsPerfilContratado) => {
   useEffect(() => {
     if (route.params) {
       const cuidadordataState: Clientedatainterfc = route.params;
     }
   }, []);
   const solicitar = (): void => {
-    navigation.navigate("infocontato");
+    navigation.navigate("infocontrato");
   };
   return (
     <View style={homeloginscss.container}>

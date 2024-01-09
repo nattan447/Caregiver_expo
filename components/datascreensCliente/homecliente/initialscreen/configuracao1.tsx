@@ -15,18 +15,18 @@ type AuthenticScreenNavigationProp = NativeStackNavigationProp<
 >;
 type InitialScreenNavigationProp = NativeStackNavigationProp<
   InitialScreenParamList,
-  "configPerfil"
+  "configuracaoCli"
 >;
-type propsFromInitialScreen = {
+type PropsConfigCli = {
   navigation: InitialScreenNavigationProp;
 };
-type propsFromAuthenticScreen = {
+type PropsAuthenticScreen = {
   navigation: AuthenticScreenNavigationProp;
 };
 
 const ConfiguracaoCli = ({
   navigation,
-}: propsFromInitialScreen | propsFromAuthenticScreen) => {
+}: PropsConfigCli | PropsAuthenticScreen) => {
   //não consigo resolver o problema de tipagem dessa variável
   const dataFromContextCli = useContext(Clientedatacontext);
   const { clienteData }: any = dataFromContextCli;

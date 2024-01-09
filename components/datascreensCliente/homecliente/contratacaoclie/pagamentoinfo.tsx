@@ -11,16 +11,14 @@ import {
 import React from "react";
 import { useState } from "react";
 import homeloginscss from "../../../../estilos/homeloginscss";
-import { RootStackParamListContratar } from "./contratarnavigator";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-type PagamentoinfoScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamListContratar,
+import { contratarRootParams } from "../../../../types/contratarRootParams";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+type PropsPagamentoCli = NativeStackScreenProps<
+  contratarRootParams,
   "pagamentoinfo"
 >;
-type Navigationprops = {
-  navigation: PagamentoinfoScreenNavigationProp;
-};
-const PagamentoinfoCli: React.FC<Navigationprops> = ({ navigation }) => {
+
+const PagamentoinfoCli = ({ navigation }: PropsPagamentoCli) => {
   return (
     <View style={homeloginscss.container}>
       <Text>pagamento</Text>

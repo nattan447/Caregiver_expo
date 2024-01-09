@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
   input: {
     backgroundColor: "#F1EBEB",
     borderRadius: 5,
-    width: 240,
+    width: 280,
     color: "#D8A683",
     paddingLeft: 20,
     zIndex: 1,
@@ -136,7 +136,7 @@ export const styles = StyleSheet.create({
   shadow: {
     backgroundColor: "#dddddd",
     position: "relative",
-    width: 240,
+    width: 280,
     borderRadius: 10,
     alignSelf: "center",
     bottom: 15,

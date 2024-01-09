@@ -26,7 +26,7 @@ function ContratarRouteCli() {
         <Stack.Screen
           options={styleHeader}
           component={InfocontratoCli}
-          name="infocontato"
+          name="infocontrato"
         ></Stack.Screen>
 
         <Stack.Screen

@@ -14,7 +14,7 @@ import homeloginscss from "../../../../estilos/homeloginscss";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import homesty from "../../../homecuid/estiloscuid/homesty";
 import React from "react";
-import { RootTabParamList } from "../tabhomecli";
+import { HomeTabParms } from "../../../../types/homeTabParams";
 import { RouteProp } from "@react-navigation/native";
 import { Clientedatacontext } from "../datacontext/clitentedata";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
@@ -47,6 +47,7 @@ const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
             : require("../../../../assets/user.png")
         }
         userName={clienteDataTyped?.nome as string}
+        depPress={() => navigation.navigate("addDepCli")}
       />
     </SafeAreaView>
   );

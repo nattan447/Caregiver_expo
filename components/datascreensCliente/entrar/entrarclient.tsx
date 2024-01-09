@@ -1,32 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, SafeAreaView, ScrollView } from "react-native";
 import { useState } from "react";
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
-import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 import { Btn } from "../../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Inputs from "../../../desginscomponents/inputs";
+import { Clientedatainterfc } from "../../interfacests/clienteInterface";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
-  AuthenticRootParamList,
-  "Autenticacaocli"
->;
-type PropsEntrarCliente = {
-  navigation: AuthenticScreenNavigationProp;
-};
 
-const Entrarcliente: React.FC<PropsEntrarCliente> = ({ navigation }) => {
+type PropsEntrarCliente = NativeStackScreenProps<
+  AuthenticRootParamList,
+  "entrarcliente"
+>;
+const Entrarcliente = ({ navigation }: PropsEntrarCliente) => {
   const voltarcliente = (): void => {
     navigation.navigate("Autenticacaocli");
   };
@@ -42,23 +30,18 @@ const Entrarcliente: React.FC<PropsEntrarCliente> = ({ navigation }) => {
     Setsenha(Senha);
   };
   const entrar = (): void => {
-    const cuidadordata: Cuidadadordatainterfc = {
+    const clienteData: Clientedatainterfc = {
       nome: "Administrador",
       sobrenome: "",
       email: email,
       senha: senha,
-      estado: "",
+      Estado: "",
       cidade: "",
-      cep: "",
-      profissao: "",
       profileimg: "",
       cpf: "",
-      descricao: "",
-      rua: "",
-      datanasc: "",
     };
     if (email === "admin" && senha === "123") {
-      navigation.navigate("Homenavigator", cuidadordata);
+      navigation.navigate("roothomecliente", clienteData);
     } else alert("login ou sennhas incorretos");
   };
   return (

@@ -8,11 +8,12 @@ import {
   Image,
 } from "react-native";
 import homesty from "../../homecuid/estiloscuid/homesty";
-type propsMain = {
+type propsMainInitialScreen = {
   profileImgId: number;
   userName: string;
+  depPress: () => void;
 };
-const MainInitialScreen = (props: propsMain) => {
+const MainInitialScreen = (props: propsMainInitialScreen) => {
   return (
     <View style={homesty.main}>
       <Image
@@ -21,6 +22,7 @@ const MainInitialScreen = (props: propsMain) => {
       />
       <Text style={homesty.mainusername}>{props.userName}</Text>
 
+      {/* esses TouchableOpacity serão componentes seprarados*/}
       <TouchableOpacity style={homesty.btnwicons}>
         <Image
           source={require("../../../assets/notifications.png")}
@@ -28,7 +30,7 @@ const MainInitialScreen = (props: propsMain) => {
         />
         <Text style={homesty.btnwconstxt}>notificações</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={homesty.btnwicons}>
+      <TouchableOpacity style={homesty.btnwicons} onPress={props.depPress}>
         <Image
           source={require("../../../assets/add.png")}
           style={{ height: 27, width: 27, right: "100%" }}

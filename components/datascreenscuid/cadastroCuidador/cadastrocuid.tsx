@@ -4,21 +4,18 @@ import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
 import { Btn } from "../../../desginscomponents/authenticheadrs";
 import homeloginscss from "../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Picker } from "@react-native-picker/picker";
 import { Combobox } from "../../../desginscomponents/inputs";
 import cadastro from "../../../estilos/cadastro";
 import Inputs from "../../../desginscomponents/inputs";
 import { validatePathConfig } from "@react-navigation/native";
 import { inputLengthCheck } from "../../fuctions/inputCheck";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+
+type PropsCadastroCuid1 = NativeStackScreenProps<
   AuthenticRootParamList,
   "Cadastrocuidador"
 >;
-type PropsNavCuidador = {
-  navigation: AuthenticScreenNavigationProp;
-};
 
 interface CadastrocuidadorInter1 {
   nome: string | undefined;
@@ -28,7 +25,7 @@ interface CadastrocuidadorInter1 {
   descricao: string | undefined;
   profissao: string | undefined;
 }
-const Cadastrocuidador: React.FC<PropsNavCuidador> = ({ navigation }) => {
+const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
   const [datacuidador, setDataCuidador] = useState<CadastrocuidadorInter1>();
   const Voltar = (): void => {
     console.log("volto pra tela inicial");

@@ -1,16 +1,17 @@
 interface Cuidadadordatainterfc {
-  nome: string;
-  sobrenome: string;
-  email: string;
-  senha: string;
-  profissao: string;
-  descricao: string;
-  profileimg: string;
-  cpf: string;
-  datanasc: string;
-  estado: string;
-  cidade: string;
-  rua: string;
-  cep: string;
+  nome: string | undefined;
+  sobrenome: string | undefined;
+  email: string | undefined;
+  senha: string | undefined;
+  profissao: string | undefined;
+  descricao: string | undefined;
+  profileimg: string | undefined;
+  cpf: string | undefined;
+  datanasc: string | undefined;
+  estado: string | undefined;
+  cidade: string | undefined;
+  rua: string | undefined;
+  cep: string | undefined;
+  pricePerHour: string | undefined;
 }
 export { Cuidadadordatainterfc };

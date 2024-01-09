@@ -32,7 +32,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 7,
-    borderBottomWidth: 1,
+    borderWidth: 0.3,
     borderBottomColor: "gray",
   },
   btnwconstxt: {
@@ -42,7 +42,7 @@ export default StyleSheet.create({
     right: "20%",
   },
   avaliacoes: {
-    marginTop: "14%",
+    marginTop: "10%",
     alignItems: "center",
     width: "100%",
   },
@@ -54,9 +54,9 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#F1EBEB",
-    marginTop: "10%",
+    marginTop: "4%",
     width: "70%",
     borderRadius: 10,
-    height: "32%",
+    height: "35%",
   },
 });

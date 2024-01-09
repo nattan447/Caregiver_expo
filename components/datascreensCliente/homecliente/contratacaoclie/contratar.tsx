@@ -15,23 +15,18 @@ import { useState, useEffect, useContext } from "react";
 import { Clientedatacontext } from "../datacontext/clitentedata";
 import homeloginscss from "../../../../estilos/homeloginscss";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
-import { RootStackParamListContratar } from "./contratarnavigator";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { contratarRootParams } from "../../../../types/contratarRootParams";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SearchbarHome } from "../../../homecomponents/contratarComponents/searchbar";
-
-type ContratarScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamListContratar,
+type PropsContratarCli = NativeStackScreenProps<
+  contratarRootParams,
   "Contratar"
 >;
-
-type Navigationprops = {
-  navigation: ContratarScreenNavigationProp;
-};
 interface Search {
   nome: string;
   idade: number;
 }
-const ContratarClie: React.FC<Navigationprops> = ({ navigation }) => {
+const ContratarClie = ({ navigation }: PropsContratarCli) => {
   const Irperfil = (): void => {
     navigation.navigate("perfil", cuidadordataState);
   };

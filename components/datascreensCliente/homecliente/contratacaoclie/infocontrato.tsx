@@ -11,16 +11,15 @@ import {
 import React from "react";
 import { useState } from "react";
 import homeloginscss from "../../../../estilos/homeloginscss";
-import { RootStackParamListContratar } from "./contratarnavigator";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-type InfocontatoScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamListContratar,
-  "infocontato"
+import { contratarRootParams } from "../../../../types/contratarRootParams";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+type PropsInfoContrato = NativeStackScreenProps<
+  contratarRootParams,
+  "infocontrato"
 >;
-type Navigationprops = {
-  navigation: InfocontatoScreenNavigationProp;
-};
-const InfocontratoCli: React.FC<Navigationprops> = ({ navigation }) => {
+
+const InfocontratoCli = ({ navigation }: PropsInfoContrato) => {
   const gopagamento = (): void => {
     navigation.navigate("pagamentoinfo");
   };

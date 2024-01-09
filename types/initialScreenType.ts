@@ -4,5 +4,6 @@ type InitialScreenParamList = {
   homecliente: undefined;
   configuracaoCli: undefined;
   configPerfil: undefined;
+  addDepCli: undefined;
 };
 export { InitialScreenParamList };

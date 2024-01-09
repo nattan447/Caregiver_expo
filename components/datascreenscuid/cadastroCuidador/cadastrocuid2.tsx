@@ -147,61 +147,66 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
 
   return (
     <SafeAreaView style={homeloginscss.container}>
-      <View style={cadastro.cadastroview2}>
-        <Inputs
-          nometxt="cpf *"
-          placeholder="digite seu cpf"
-          value={datacuidador?.cpf}
-          multiline={false}
-          onchangevalue={handlecpf}
-          issenha={false}
-          tamanho={{ height: 40 }}
-          emailwarn=""
-          type="numeric"
-          length={11}
-        />
-        <TouchableOpacity onPress={pickImage}>
-          <Text style={styles.txt}>Foto de perfil</Text>
-          <View style={cadastro.inputimg}></View>
-        </TouchableOpacity>
-        <View
-          style={{
-            width: "70%",
-          }}
-        >
-          <Text style={[styles.txt, { top: 10, marginTop: 40 }]}>
-            data de nascimento
-          </Text>
+      <ScrollView
+        style={{ width: "100%" }}
+        automaticallyAdjustKeyboardInsets={true}
+      >
+        <View style={cadastro.cadastroview2}>
+          <Inputs
+            nometxt="cpf *"
+            placeholder="digite seu cpf"
+            value={datacuidador?.cpf}
+            multiline={false}
+            onchangevalue={handlecpf}
+            issenha={false}
+            tamanho={{ height: 40 }}
+            emailwarn=""
+            type="numeric"
+            length={11}
+          />
+          <TouchableOpacity onPress={pickImage}>
+            <Text style={styles.txt}>Foto de perfil</Text>
+            <View style={cadastro.inputimg}></View>
+          </TouchableOpacity>
+          <View
+            style={{
+              width: "70%",
+            }}
+          >
+            <Text style={[styles.txt, { top: 10, marginTop: 40 }]}>
+              data de nascimento
+            </Text>
+          </View>
+          <TextInputMask
+            placeholder="dia/mês/ano"
+            style={[
+              styles.input,
+              {
+                height: 40,
+                borderBottomWidth: 2,
+                borderColor: "#dddddd",
+                marginTop: 10,
+              },
+            ]}
+            maxLength={10}
+            value={datacuidador?.datanasc}
+            type={"datetime"}
+            options={{
+              format: "DD/MM/YYYY",
+            }}
+            onChangeText={handledatenasc}
+          />
+          <Btn
+            cor="#F1EBEB"
+            txtbtn="próximo"
+            txtcor="#C77B43"
+            pres={gothrirdstep}
+            fontsize={16}
+            altura={40}
+            largura={100}
+          />
         </View>
-        <TextInputMask
-          placeholder="dia/mês/ano"
-          style={[
-            styles.input,
-            {
-              height: 40,
-              borderBottomWidth: 2,
-              borderColor: "#dddddd",
-              marginTop: 10,
-            },
-          ]}
-          maxLength={10}
-          value={datacuidador?.datanasc}
-          type={"datetime"}
-          options={{
-            format: "DD/MM/YYYY",
-          }}
-          onChangeText={handledatenasc}
-        />
-        <Btn
-          cor="#F1EBEB"
-          txtbtn="próximo"
-          txtcor="#C77B43"
-          pres={gothrirdstep}
-          fontsize={16}
-          altura={40}
-          largura={100}
-        />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
