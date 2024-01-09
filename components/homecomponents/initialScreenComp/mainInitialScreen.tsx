@@ -12,6 +12,7 @@ type propsMainInitialScreen = {
   profileImgId: number;
   userName: string;
   depPress: () => void;
+  notificationPress: () => void;
 };
 const MainInitialScreen = (props: propsMainInitialScreen) => {
   return (
@@ -23,7 +24,10 @@ const MainInitialScreen = (props: propsMainInitialScreen) => {
       <Text style={homesty.mainusername}>{props.userName}</Text>
 
       {/* esses TouchableOpacity serão componentes seprarados*/}
-      <TouchableOpacity style={homesty.btnwicons}>
+      <TouchableOpacity
+        style={homesty.btnwicons}
+        onPress={props.notificationPress}
+      >
         <Image
           source={require("../../../assets/notifications.png")}
           style={{ height: 32, width: 32, right: "100%" }}

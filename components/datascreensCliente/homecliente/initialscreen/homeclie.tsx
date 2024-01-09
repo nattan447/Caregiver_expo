@@ -1,13 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import homeloginscss from "../../../../estilos/homeloginscss";
@@ -48,6 +40,7 @@ const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
         }
         userName={clienteDataTyped?.nome as string}
         depPress={() => navigation.navigate("addDepCli")}
+        notificationPress={() => navigation.navigate("notificationCli")}
       />
     </SafeAreaView>
   );
