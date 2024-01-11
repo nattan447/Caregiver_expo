@@ -4,10 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
   TextInput,
   TextStyle,
   KeyboardTypeOptions,
@@ -28,30 +24,6 @@ interface inputpropsInterface {
   multiline: boolean;
 }
 
-//componente dos inputs
-const Inputs: React.FC<inputpropsInterface> = (props) => {
-  return (
-    <View style={styles.conponentsyle}>
-      <Text style={styles.txt}>{props.nometxt}</Text>
-      {/* <Text style={{ color: "red", fontSize: 10 }}>{props.emailwarn}</Text> */}
-      <TextInput
-        multiline={props.multiline}
-        numberOfLines={props.multiline ? 10 : 1}
-        secureTextEntry={props.issenha}
-        placeholder={props.placeholder}
-        style={[styles.input, props.tamanho]}
-        onChangeText={props.onchangevalue}
-        keyboardType={props.type}
-        maxLength={props.length}
-      ></TextInput>
-      <View style={styles.shadow}>
-        <Text></Text>
-      </View>
-    </View>
-  );
-};
-export default Inputs;
-
 interface comboxpropsInterface {
   arrayvalues: string[];
   initialvalue: string;
@@ -61,7 +33,6 @@ interface comboxpropsInterface {
 }
 
 //componente da Combobox
-
 export const Combobox: React.FC<comboxpropsInterface> = (props) => {
   const keyCounter = useRef<number>(0);
   const Pickeritem = props.arrayvalues.map((value) => {
@@ -70,31 +41,14 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
   });
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        width: "60%",
-        alignSelf: "center",
-        marginTop: "10%",
-      }}
-    >
+    <View style={comboBoxStyle.container}>
       <Text style={[styles.txt, { alignSelf: "flex-start" }]}>
         {props.textabove}
       </Text>
       <Picker
         placeholder="selecione o Estado"
         selectedValue={props.initialvalue}
-        style={[
-          styles.input,
-          {
-            borderWidth: 2,
-            borderColor: "#dddddd",
-            alignSelf: "center",
-            width: "100%",
-          },
-        ]}
+        style={comboBoxStyle.picker}
         onValueChange={props.onchange}
       >
         <Picker.Item
@@ -108,9 +62,47 @@ export const Combobox: React.FC<comboxpropsInterface> = (props) => {
   );
 };
 
+const comboBoxStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "60%",
+    alignSelf: "center",
+    marginTop: "10%",
+  },
+  picker: {
+    backgroundColor: "#F1EBEB",
+    color: "#D8A683",
+    borderWidth: 2,
+    borderColor: "#dddddd",
+    alignSelf: "center",
+    width: "100%",
+  },
+});
+
+//componente dos inputs
+const Inputs: React.FC<inputpropsInterface> = (props) => {
+  return (
+    <View style={styles.conponentsyle}>
+      <Text style={styles.txt}>{props.nometxt}</Text>
+      <TextInput
+        multiline={props.multiline}
+        numberOfLines={props.multiline ? 10 : 1}
+        secureTextEntry={props.issenha}
+        placeholder={props.placeholder}
+        style={[styles.input, props.tamanho]}
+        onChangeText={props.onchangevalue}
+        keyboardType={props.type}
+        maxLength={props.length}
+      ></TextInput>
+    </View>
+  );
+};
+export default Inputs;
+
 export const styles = StyleSheet.create({
   conponentsyle: {
-    position: "relative",
     alignSelf: "center",
     height: 100,
     justifyContent: "center",
@@ -123,22 +115,14 @@ export const styles = StyleSheet.create({
     width: 280,
     color: "#D8A683",
     paddingLeft: 20,
-    zIndex: 1,
-    position: "relative",
     minWidth: 6,
+    borderWidth: 0.4,
+    borderColor: "black",
   },
   txt: {
     marginBottom: 8,
     color: "#D8A683",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  shadow: {
-    backgroundColor: "#dddddd",
-    position: "relative",
-    width: 280,
-    borderRadius: 10,
-    alignSelf: "center",
-    bottom: 15,
   },
 });

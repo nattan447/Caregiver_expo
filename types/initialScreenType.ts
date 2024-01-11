@@ -6,5 +6,6 @@ type InitialScreenParamList = {
   configPerfil: undefined;
   addDepCli: undefined;
   notificationCli: undefined;
+  configPerfilDep: undefined;
 };
 export { InitialScreenParamList };

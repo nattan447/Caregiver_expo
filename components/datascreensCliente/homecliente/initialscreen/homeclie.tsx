@@ -36,7 +36,7 @@ const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
         profileImgId={
           clienteDataTyped?.profileimg
             ? { uri: clienteDataTyped?.profileimg }
-            : require("../../../../assets/user.png")
+            : require("../../../../assets/modelFace.jpg")
         }
         userName={clienteDataTyped?.nome as string}
         depPress={() => navigation.navigate("addDepCli")}

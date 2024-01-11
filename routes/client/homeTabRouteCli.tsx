@@ -12,17 +12,21 @@ import { FavoritosCli } from "../../components/datascreensCliente/homecliente/fa
 import { Clientedatainterfc } from "../../components/interfacests/clienteInterface";
 import { HomeTabParms } from "../../types/homeTabParams";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Clientedatacontext } from "../../components/datascreensCliente/homecliente/datacontext/clitentedata";
 import { AuthenticRootParamList } from "../../types/authenticRoot";
 import { ProcessTopRouteCli } from "./proccessTopRouteCli";
 import { InitialScreenRouteCli } from "./InitialScreenRouteClie";
+import { Clientedatacontext } from "../../components/datascreensCliente/homecliente/datacontext/clitentedata";
+import { DepDataInterface } from "../../components/interfacests/depDataInterface";
+import { DepDataContextCli } from "../../components/datascreensCliente/homecliente/datacontext/depDataContext";
 type PropsHomeFromAuthenticScreen = NativeStackScreenProps<
   AuthenticRootParamList,
   "roothomecliente"
 >;
+const Tab = createBottomTabNavigator<HomeTabParms>();
 const HomeTabRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
-  const Tab = createBottomTabNavigator<HomeTabParms>();
   const [clienteData, setClienteData] = useState<Clientedatainterfc>();
+  const [depDataContext, setDepDataContext] = useState<DepDataInterface>();
+
   useEffect(() => {
     if (route.params) {
       const clienteDataFromNav = route.params as Clientedatainterfc;
@@ -30,10 +34,13 @@ const HomeTabRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
     }
   }, [route.params]);
   return (
-    <View style={{ backgroundColor: "#F8F8F8", flex: 1 }}>
-      <Clientedatacontext.Provider
-        //não consigo resolver o problema de tipagem dessa variável
-        value={{ clienteData, setClienteData } as unknown as Clientedatainterfc}
+    <Clientedatacontext.Provider
+      value={{ clienteData, setClienteData } as unknown as Clientedatainterfc}
+    >
+      <DepDataContextCli.Provider
+        value={
+          { depDataContext, setDepDataContext } as unknown as DepDataInterface
+        }
       >
         <Tab.Navigator screenOptions={tabStyle as any}>
           <Tab.Screen
@@ -89,8 +96,8 @@ const HomeTabRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
             })}
           ></Tab.Screen>
         </Tab.Navigator>
-      </Clientedatacontext.Provider>
-    </View>
+      </DepDataContextCli.Provider>
+    </Clientedatacontext.Provider>
   );
 };
 export { HomeTabRouteCli };

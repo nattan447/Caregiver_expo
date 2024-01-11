@@ -77,7 +77,7 @@ const notificationStyle = StyleSheet.create({
     height: 120,
     justifyContent: "center",
     marginTop: "10%",
-    borderBottomWidth: 0.2,
+    borderBottomWidth: 0.6,
     borderColor: "black",
   },
   notifiDetails: {
@@ -96,7 +96,7 @@ const notificationStyle = StyleSheet.create({
     color: "gray",
   },
   detailsService: {
-    fontSize: 13,
+    fontSize: 10,
   },
   notifiLeftSide: {
     height: "100%",
@@ -114,7 +114,7 @@ const notificationStyle = StyleSheet.create({
     width: 80,
     borderRadius: 50,
     alignSelf: "center",
-    marginHorizontal: "4%",
+    marginHorizontal: "2%",
   },
   recCircle: {
     height: 20,

@@ -5,7 +5,7 @@ import { NotificationComp } from "../../../../homecomponents/initialScreenComp/n
 const NotificationCli = () => {
   return (
     <SafeAreaView style={notificationsStyle.container}>
-      <Text style={notificationsStyle.headerTxt}>notificações</Text>
+      {/* <Text style={notificationsStyle.headerTxt}>notificações</Text> */}
       <NotificationComp queryData={dataQueryNotification} />
     </SafeAreaView>
   );

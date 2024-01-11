@@ -6,6 +6,8 @@ import { AddDependentCli } from "../../components/datascreensCliente/homecliente
 import Homecliente from "../../components/datascreensCliente/homecliente/initialscreen/homeclie";
 import { InitialScreenParamList } from "../../types/initialScreenType";
 import { NotificationCli } from "../../components/datascreensCliente/homecliente/initialscreen/notifications/notificationCli";
+import { ConfigDepCli } from "../../components/datascreensCliente/homecliente/initialscreen/configDep/configDepCli";
+import { useState } from "react";
 const Stack = createNativeStackNavigator<InitialScreenParamList>();
 const InitialScreenRouteCli = () => {
   return (
@@ -29,6 +31,11 @@ const InitialScreenRouteCli = () => {
         name="addDepCli"
         component={AddDependentCli}
         options={{ ...headerStyle2, headerShown: true }}
+      />
+      <Stack.Screen
+        name="configPerfilDep"
+        component={ConfigDepCli}
+        options={headerStyle1}
       />
 
       <Stack.Screen

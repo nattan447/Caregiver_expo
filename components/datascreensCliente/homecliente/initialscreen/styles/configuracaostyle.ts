@@ -7,18 +7,19 @@ const ConfiguracaoStyle = StyleSheet.create({
   },
   header: {
     width: "100%",
-    height: "55%",
+    height: "45%",
     justifyContent: "center",
     alignItems: "center",
   },
   headertxt1: {
     color: "#C77B43",
     fontSize: 24,
+    margin: 20,
   },
 
-  headerimg: { height: 100, width: 100, marginTop: 15 },
-  headertxt2: { fontSize: 20, marginTop: 10 },
-  headertxt3: { fontSize: 16, marginTop: 10 },
+  headerimg: { height: 100, width: 100, marginTop: 3, borderRadius: 50 },
+  headertxt2: { fontSize: 20, marginTop: 14 },
+  headertxt3: { fontSize: 16, marginTop: 17 },
   main: {
     backgroundColor: "#F8F8F8",
     width: "100%",

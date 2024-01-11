@@ -6,18 +6,18 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Inputs, {
-  Combobox,
-  styles,
-} from "../../../../../desginscomponents/inputs";
+import Inputs, { Combobox } from "../../../../../desginscomponents/inputs";
 import { DepDataInterface } from "../../../../interfacests/depDataInterface";
 import { Btn } from "../../../../../desginscomponents/authenticheadrs";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DepDataContextCli } from "../../datacontext/depDataContext";
 import cadastro from "../../../../../estilos/cadastro";
 import * as ImagePicker from "expo-image-picker";
 import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
 const AddDependentCli = () => {
-  const [depData, setDepData] = useState<DepDataInterface>();
+  const { depDataContext, setDepDataContext }: any =
+    useContext(DepDataContextCli);
+  const [depData, setDepData] = useState<DepDataInterface>(depDataContext);
   const [quadro, setQuadro] = useState<string>("");
   function handleName(Name: string) {
     setDepData({
@@ -76,6 +76,11 @@ const AddDependentCli = () => {
       descricao: Descricao,
     });
   }
+  function adicionar() {
+    setDepDataContext(depData);
+    alert("adicionado com sucesso");
+    console.log(depDataContext);
+  }
 
   return (
     <SafeAreaView style={depStyle.container}>
@@ -102,7 +107,7 @@ const AddDependentCli = () => {
             issenha={false}
             tamanho={{ height: 40 }}
             emailwarn=""
-            type="default"
+            type="numeric"
             length={40}
           />
 
@@ -110,7 +115,7 @@ const AddDependentCli = () => {
             onPress={pickImage}
             style={depStyle.imagePickerStyle}
           >
-            <Text style={styles.txt}>Foto de perfil</Text>
+            <Text style={depStyle.defaultTxt}>Foto de perfil</Text>
             <View style={depStyle.imagePickerView}></View>
           </TouchableOpacity>
           <Inputs
@@ -129,14 +134,14 @@ const AddDependentCli = () => {
             placeholder="selecione o quadro"
             textabove="quadro *"
             initialvalue={quadro}
-            onchange={setQuadro}
+            onchange={handleQuadro}
             arrayvalues={["Pcd", "Idosos", "Pet", "Infantil"]}
           />
           <Btn
-            cor="#C77B43"
-            txtbtn="SALVAR"
-            txtcor="#FFFCFC"
-            pres={() => alert("dados salvos na nuvem")}
+            cor="#F1EBEB"
+            txtcor="#E64A19"
+            txtbtn="adicionar"
+            pres={adicionar}
             fontsize={16}
             altura={48}
             largura={131}
@@ -176,5 +181,11 @@ const depStyle = StyleSheet.create({
     zIndex: 1,
     position: "relative",
     height: 190,
+  },
+  defaultTxt: {
+    marginBottom: 8,
+    color: "#D8A683",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

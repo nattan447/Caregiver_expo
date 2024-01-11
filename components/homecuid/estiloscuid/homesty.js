@@ -31,9 +31,9 @@ export default StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 7,
-    borderWidth: 0.3,
-    borderBottomColor: "gray",
+    borderRadius: 6,
+    borderWidth: 0.4,
+    borderBottomColor: "black",
   },
   btnwconstxt: {
     fontSize: 17,

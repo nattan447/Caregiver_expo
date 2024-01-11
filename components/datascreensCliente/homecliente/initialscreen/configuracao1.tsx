@@ -27,12 +27,10 @@ type PropsAuthenticScreen = {
 const ConfiguracaoCli = ({
   navigation,
 }: PropsConfigCli | PropsAuthenticScreen) => {
-  //não consigo resolver o problema de tipagem dessa variável
-  const dataFromContextCli = useContext(Clientedatacontext);
-  const { clienteData }: any = dataFromContextCli;
+  const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
   const clienteDataTyped: Clientedatainterfc = clienteData;
+  //não consigo resolver o problema de tipagem dessa variável
 
-  const ImageUri = clienteData?.profileimg;
   //especificação das rotas de navegação
   const isAuthenticScreenNavigation = (
     navigation: AuthenticScreenNavigationProp | InitialScreenNavigationProp
@@ -48,9 +46,9 @@ const ConfiguracaoCli = ({
     <View style={ConfiguracaoStyle.container}>
       <HeaderConfig
         profileImageUrl={
-          ImageUri
+          clienteDataTyped?.profileimg
             ? { uri: clienteDataTyped?.profileimg }
-            : require("../../../../assets/user.png")
+            : require("../../../../assets/modelFace.jpg")
         }
         userName={clienteDataTyped?.nome as string}
         profession="Cliente"
@@ -68,7 +66,10 @@ const ConfiguracaoCli = ({
           txt="Editar Perfil"
         />
         <ActionBarConfig
-          onPress={() => {}}
+          onPress={() => {
+            if (!isAuthenticScreenNavigation(navigation))
+              navigation.navigate("configPerfilDep");
+          }}
           iconUrl={require("../../../../assets/depIcon.png")}
           arrowUrl={require("../../../../assets/arrowgray.png")}
           txt="Editar Dep."
