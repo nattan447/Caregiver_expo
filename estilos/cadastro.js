@@ -14,6 +14,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   inputimg: {
+    alignItems: "center",
     backgroundColor: "#F1EBEB",
     borderRadius: 5,
     width: 240,
@@ -22,6 +23,7 @@ export default StyleSheet.create({
     zIndex: 1,
     position: "relative",
     height: 190,
+    justifyContent: "center",
   },
 
   criarcontatxt: {

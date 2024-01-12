@@ -1,31 +1,20 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
-import { useState, useEffect, useContext } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import homeloginscss from "../../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import homesty from "../../../homecuid/estiloscuid/homesty";
 import React from "react";
-import { HomeTabParms } from "../../../../types/homeTabParams";
-import { RouteProp } from "@react-navigation/native";
+import { useState, useEffect, useContext } from "react";
+import homeloginscss from "../../../../estilos/homeloginscss";
+import { NativeStackScreenProps } from "@react-navigation/native-stack/lib/typescript/src/types";
 import { Clientedatacontext } from "../datacontext/clitentedata";
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { InitialScreenParamList } from "../../../../types/initialScreenType";
 import { HeaderInitial } from "../../../homecomponents/initialScreenComp/headerInitial";
 import { MainInitialScreen } from "../../../homecomponents/initialScreenComp/mainInitialScreen";
-type HomeCuidProp = NativeStackNavigationProp<
+
+type HomeCuidInitialProps = NativeStackScreenProps<
   InitialScreenParamList,
-  "homecliente"
+  "homeCliente"
 >;
-type PropsHome = {
-  navigation: HomeCuidProp;
-  route: RouteProp<InitialScreenParamList, "homecliente">;
-};
-const Homecliente: React.FC<PropsHome> = ({ route, navigation }) => {
-  const dataFromContextCli: Clientedatainterfc | undefined =
-    useContext(Clientedatacontext);
-  //não consigo resolver o problema de tipagem dessa variável
-  const { clienteData, setClienteData }: any = dataFromContextCli;
+const Homecliente = ({ route, navigation }: HomeCuidInitialProps) => {
+  const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
   const clienteDataTyped: Clientedatainterfc = clienteData;
   return (
     <SafeAreaView style={homeloginscss.container}>

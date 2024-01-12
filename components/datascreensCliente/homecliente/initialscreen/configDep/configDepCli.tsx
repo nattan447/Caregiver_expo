@@ -1,36 +1,88 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { InputConfig } from "../../../../homecomponents/initialScreenComp/configComponents/inputConfig";
 import Inputs from "../../../../../desginscomponents/inputs";
+import { DepDataContextCli } from "../../datacontext/depDataContext";
 import { Combobox } from "../../../../../desginscomponents/inputs";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { BigInput } from "../../../../../desginscomponents/bigInput";
 import { HeaderConfig } from "../../../../homecomponents/initialScreenComp/configComponents/header";
 import { Btn } from "../../../../../desginscomponents/authenticheadrs";
-const ConfigDepCli = () => {
-  const [quadro, setQuadro] = useState<string>("");
+import { DepDataInterface } from "../../../../interfacests/depDataInterface";
+import { inputLengthCheck } from "../../../../fuctions/inputCheck";
+import * as ImagePicker from "expo-image-picker";
 
-  function handleQuadro(Quadro: string) {
-    setQuadro(Quadro);
+const ConfigDepCli = () => {
+  const { depDataContext, setDepDataContext }: any =
+    useContext(DepDataContextCli);
+  const [newData, setNewData] = useState<DepDataInterface>(depDataContext);
+  const [quadro, setQuadro] = useState<string>("");
+  async function handleImage() {
+    let Image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    console.log(Image);
+    if (!Image.canceled) {
+      setNewData({...newData,profileImg: Image.assets[0].uri,});
+    }
   }
-  function handleName(Name: string) {}
-  function handleIdade(Idade: string) {}
-  function handleDescricao(Descricao: string) {}
+
+  const handleName = (Name: string) => setNewData({ ...newData, nome: Name });
+
+  const handleIdade = (Age: string) => setNewData({ ...newData, idade: Age });
+
+  const handleDescricao = (Des: string) => setNewData({ ...newData, descricao: Des });
+  
+  const handleQuadro =(Quadro: string) =>
+   {
+    setNewData({ ...newData, quadro:  Quadro })
+    setQuadro(Quadro);
+  };
+
+
+  function salvar() {
+    if (
+      inputLengthCheck(newData.nome) > 1 &&
+      inputLengthCheck(newData.idade) > 1 &&
+      inputLengthCheck(newData.descricao) > 1 &&
+      newData.quadro
+    ) {
+      alert("dados salvos");
+      console.log("campos obrigatórios completos");
+      console.log(newData);
+      setDepDataContext(newData);
+    } else {
+      alert("preencha todos campos obrigatórios");
+      console.error("falta preencher campos obrigatórios");
+    }
+  }
 
   //planejo colocar algum algoritimo usando a consulta do banco de dados para que eu possa poder trocar de dependentes no processo
 
   return (
     <View style={configDepStyle.container}>
       <ScrollView style={{ width: "100%" }}>
-        <Image
-          source={require("../../../../../assets/modelFace.jpg")}
-          style={configDepStyle.depImg}
-        ></Image>
+        <TouchableOpacity onPress={handleImage}>
+          <Image
+            source={require("../../../../../assets/modelFace.jpg")}
+            style={configDepStyle.depImg}
+          ></Image>
+        </TouchableOpacity>
         <InputConfig
           txt="nome completo"
           isPassWord={false}
           onchangeValue={handleName}
-          value=""
+          value={newData.nome}
           placeholder="digite  o nome"
           maxLength={40}
           type="default"
@@ -39,13 +91,13 @@ const ConfigDepCli = () => {
           txt="idade"
           isPassWord={false}
           onchangeValue={handleIdade}
-          value=""
+          value={newData.idade}
           placeholder="digite  a idade"
           maxLength={40}
-          type="default"
+          type="numeric"
         />
         <BigInput
-          value={""}
+          value={newData.descricao as string}
           onchangeValue={handleDescricao}
           nometxt="descrição *"
           placeholder=""
@@ -53,7 +105,7 @@ const ConfigDepCli = () => {
         <Combobox
           placeholder="selecione o quadro"
           textabove="Quadro"
-          initialvalue={quadro}
+          initialvalue={newData.quadro as string}
           onchange={handleQuadro}
           arrayvalues={["Pcd", "Idosos", "Pet", "Infantil"]}
         />
@@ -61,7 +113,7 @@ const ConfigDepCli = () => {
           cor="#F1EBEB"
           txtcor="#E64A19"
           txtbtn="SALVAR"
-          pres={() => alert("dados salvos na nuvem")}
+          pres={salvar}
           fontsize={16}
           altura={48}
           largura={131}

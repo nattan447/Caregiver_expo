@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import { ConfiguracaoStyle } from "../../../datascreensCliente/homecliente/initialscreen/styles/configuracaostyle";
 
 type propsActionBar = {
@@ -16,6 +16,7 @@ type propsActionBar = {
   arrowUrl: number;
   onPress: () => void;
 };
+
 const ActionBarConfig = (props: propsActionBar) => {
   return (
     <TouchableOpacity style={ConfiguracaoStyle.options} onPress={props.onPress}>

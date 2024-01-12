@@ -7,104 +7,31 @@ import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { InputConfig } from "../../../homecomponents/initialScreenComp/configComponents/inputConfig";
 import { Btn } from "../../../../desginscomponents/authenticheadrs";
 import { inputLengthCheck } from "../../../fuctions/inputCheck";
+
 const ConfigPerfilCli = () => {
-  const dataFromContextCli = useContext(Clientedatacontext);
-  //não consigo resolver o problema de tipagem dessa variável
-  const { clienteData }: any = dataFromContextCli;
-  const { setClienteData }: any = dataFromContextCli;
-  const [newData, setNewData] = useState<Clientedatainterfc | undefined>(
-    clienteData
-  );
+
+  const { clienteData,setClienteData }: any = useContext(Clientedatacontext);;
+    
+  const [newData, setNewData] = useState<Clientedatainterfc>(clienteData);
 
   useEffect(() => {
     console.log(clienteData);
   }, []);
-  const changeName = (Name: string): void => {
-    setNewData({
-      nome: Name,
-      sobrenome: newData?.sobrenome,
-      email: newData?.email,
-      senha: newData?.senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: newData?.cidade,
-    });
-  };
-  const changeSobrenome = (Sobrenome: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: Sobrenome,
-      email: newData?.email,
-      senha: newData?.senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: newData?.cidade,
-    });
-  };
 
-  const changeEmail = (Email: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: newData?.sobrenome,
-      email: Email,
-      senha: newData?.senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: newData?.cidade,
-    });
-  };
-  const changeSenha = (Senha: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: newData?.sobrenome,
-      email: newData?.email,
-      senha: Senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: newData?.cidade,
-    });
-  };
-  const changeCpf = (Cpf: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: newData?.sobrenome,
-      email: newData?.email,
-      senha: newData?.senha,
-      cpf: Cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: newData?.cidade,
-    });
-  };
-  const changeEstado = (Estado: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: newData?.sobrenome,
-      email: newData?.email,
-      senha: newData?.senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: Estado,
-      cidade: newData?.cidade,
-    });
-  };
+  const changeName = (Name: string) => setNewData({...newData,nome:Name});
 
-  const changeCidade = (Cidade: string) => {
-    setNewData({
-      nome: newData?.nome,
-      sobrenome: newData?.sobrenome,
-      email: newData?.email,
-      senha: newData?.senha,
-      cpf: newData?.cpf,
-      profileimg: dataFromContextCli?.profileimg,
-      Estado: newData?.Estado,
-      cidade: Cidade,
-    });
-  };
+  const changeSobrenome = (Sobrenome: string) => setNewData({...newData,sobrenome: Sobrenome,});
+
+  const changeEmail = (Email: string) => setNewData({ ...newData,email: Email,});
+
+  const changeSenha = (Senha: string) => setNewData({...newData,senha: Senha,});
+  
+  const changeCpf = (Cpf: string) =>  setNewData({...newData,cpf: Cpf,});
+  
+  const changeEstado = (estate: string) => setNewData({...newData,Estado: estate,});
+ 
+  const changeCidade = (Cidade: string) => setNewData({...newData,cidade: Cidade,});
+
 
   function saveChangesDatas() {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

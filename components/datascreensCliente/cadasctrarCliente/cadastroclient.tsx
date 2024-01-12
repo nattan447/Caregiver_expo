@@ -26,9 +26,13 @@ type PropsCadastroCliente = NativeStackScreenProps<
 >;
 const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
   const [clienteData, setClienteData] = useState<Clientedatainterfc>();
+ 
   const [isloadingEstados, setIsloadingEstados] = useState(true);
+ 
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
+ 
   const [EstadoValue, SetEstadoValue] = useState<string>("");
+ 
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -52,81 +56,31 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
     };
     fetchdata();
   }, []);
-  const handleName = (Name: string) => {
-    setClienteData({
-      nome: Name,
-      sobrenome: clienteData?.sobrenome,
-      email: clienteData?.email,
-      senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: clienteData?.cidade,
-    });
-  };
 
-  const handleSobrenome = (Sobrenome: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: Sobrenome,
-      email: clienteData?.email,
-      senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: clienteData?.cidade,
-    });
-  };
+  const handleName=(Name:string)=>setClienteData({...clienteData as Clientedatainterfc,nome:Name})
 
-  const handleEmail = (Email: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: clienteData?.sobrenome,
-      email: Email,
-      senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: clienteData?.cidade,
-    });
-  };
-  const handleSenha = (Senha: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: clienteData?.sobrenome,
-      email: clienteData?.email,
-      senha: Senha,
-      cpf: clienteData?.cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: clienteData?.cidade,
-    });
-  };
+  const handleSobrenome=(sbNome:string)=>setClienteData({...clienteData as Clientedatainterfc,sobrenome:sbNome})
 
-  const handleCpf = (Cpf: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: clienteData?.sobrenome,
-      email: clienteData?.email,
-      senha: clienteData?.senha,
-      cpf: Cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: clienteData?.cidade,
-    });
-  };
-  const handleCidade = (Cidade: string) => {
-    setClienteData({
-      nome: clienteData?.nome,
-      sobrenome: clienteData?.sobrenome,
-      email: clienteData?.email,
-      senha: clienteData?.senha,
-      cpf: clienteData?.cpf,
-      profileimg: clienteData?.profileimg,
-      Estado: clienteData?.Estado,
-      cidade: Cidade,
-    });
-  };
+  const handleEmail=(Email:string)=>setClienteData({...clienteData as Clientedatainterfc,email:Email})
+
+  const handleSenha=(Senha:string)=>setClienteData({...clienteData as Clientedatainterfc,senha:Senha})
+
+  const handleCpf=(Cpf:string)=>setClienteData({...clienteData as Clientedatainterfc,cpf:Cpf})
+
+  const handleCidade=(city:string)=>setClienteData({...clienteData as Clientedatainterfc,cidade:city})
+
+  const handelEstado=(Estado:string)=>
+  {
+    if (!isloadingEstados) 
+        {
+      if (Estado != null) 
+          {
+        SetEstadoValue(Estado);
+          }
+
+setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
+        }
+  }
 
   const pickImage = async () => {
     let Image = await ImagePicker.launchImageLibraryAsync({
@@ -136,37 +90,13 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
       quality: 1,
     });
     console.log(Image);
-    if (!Image.canceled) {
-      setClienteData({
-        nome: clienteData?.nome,
-        sobrenome: clienteData?.sobrenome,
-        email: clienteData?.email,
-        senha: clienteData?.senha,
-        cpf: clienteData?.cpf,
-        profileimg: Image.assets[0].uri,
-        Estado: clienteData?.Estado,
-        cidade: clienteData?.cidade,
-      });
+    if (!Image.canceled) 
+    {
+      setClienteData({...clienteData as Clientedatainterfc,profileimg: Image.assets[0].uri});
     }
   };
 
-  function handelEstado(Estado: string) {
-    if (!isloadingEstados) {
-      if (Estado != null) {
-        SetEstadoValue(Estado);
-      }
-      setClienteData({
-        nome: clienteData?.nome,
-        sobrenome: clienteData?.sobrenome,
-        email: clienteData?.email,
-        senha: clienteData?.senha,
-        cpf: clienteData?.cpf,
-        profileimg: clienteData?.profileimg,
-        Estado: Estado,
-        cidade: clienteData?.cidade,
-      });
-    }
-  }
+
 
   const goHome = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -190,7 +120,7 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
         }
       } else alert("digite o email de forma correta");
     } else {
-      alert("preecha todos dados");
+      alert("preecha todos dados obrigatórios");
     }
     console.log(clienteData);
   };

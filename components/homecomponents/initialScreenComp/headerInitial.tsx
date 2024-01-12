@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+
 import homesty from "../../homecuid/estiloscuid/homesty";
+
 import { styles } from "../../../desginscomponents/inputs";
+
 type propsHeader = {
   configBtnAct: () => void;
 };
+
 const HeaderInitial = (props: propsHeader) => {
   return (
     <View style={homesty.header}>

@@ -1,103 +1,85 @@
 import { Text, View, SafeAreaView, Image, ScrollView } from "react-native";
+
 import { useState, useEffect } from "react";
+
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
+
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+
 import { Btn } from "../../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../../estilos/homeloginscss";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import React from "react";
+
 import { Combobox } from "../../../desginscomponents/inputs";
+
 import cadastro from "../../../estilos/cadastro";
+
 import Inputs from "../../../desginscomponents/inputs";
+
 import { validatePathConfig } from "@react-navigation/native";
+
 import { inputLengthCheck } from "../../fuctions/inputCheck";
+
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
 
 type PropsCadastroCuid1 = NativeStackScreenProps<
   AuthenticRootParamList,
   "Cadastrocuidador"
 >;
-
-interface CadastrocuidadorInter1 {
-  nome: string | undefined;
-  sobrenome: string | undefined;
-  email: string | undefined;
-  senha: string | undefined;
-  descricao: string | undefined;
-  profissao: string | undefined;
-}
+type PickedCuidadadorData = Pick<
+  Cuidadadordatainterfc,
+  "nome" | "sobrenome" | "email" | "senha" | "descricao" | "profissao"
+>;
 const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
-  const [datacuidador, setDataCuidador] = useState<CadastrocuidadorInter1>();
-  const Voltar = (): void => {
-    console.log("volto pra tela inicial");
-    navigation.navigate("Autenticacaocuid");
-  };
-  function handlenome(Nome: string): void {
-    setDataCuidador({
-      nome: Nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
-    });
-  }
-  function handlesobrenome(Sobrenome: string): void {
-    setDataCuidador({
-      nome: datacuidador?.nome,
-      sobrenome: Sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
-    });
-  }
-  function handleemail(Email: string): void {
-    setDataCuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: Email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
-    });
-  }
-  function handlesenha(Senha: string): void {
-    setDataCuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: Senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
-    });
-  }
+  const [profissao, Setprofissao] = useState("");
 
-  function handledescricao(Descricao: string): void {
+  const [datacuidador, setDataCuidador] = useState<PickedCuidadadorData>();
+
+  const Voltar = () => navigation.navigate("Autenticacaocuid");
+
+  const handleNome = (Name: string) =>
+    setDataCuidador({ ...(datacuidador as PickedCuidadadorData), nome: Name });
+
+  const handleSobrenome = (sbrNome: string) =>
     setDataCuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: Descricao,
-      profissao: datacuidador?.profissao,
+      ...(datacuidador as PickedCuidadadorData),
+      sobrenome: sbrNome,
     });
-  }
-  //combobox
-  const [profissao, Setprofissao] = useState<string>("");
-  function handleprofissao(Profissao: string) {
-    Setprofissao(Profissao);
+
+  const handleEmail = (Email: string) =>
     setDataCuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
+      ...(datacuidador as PickedCuidadadorData),
+      email: Email,
+    });
+
+  const handleSenha = (Senha: string) =>
+    setDataCuidador({
+      ...(datacuidador as PickedCuidadadorData),
+      senha: Senha,
+    });
+
+  const handleDescricao = (Desc: string) =>
+    setDataCuidador({
+      ...(datacuidador as PickedCuidadadorData),
+      descricao: Desc,
+    });
+
+  function handleProfissao(Profissao: string) {
+    Setprofissao(Profissao);
+
+    setDataCuidador({
+      ...(datacuidador as PickedCuidadadorData),
       profissao: Profissao,
     });
   }
 
-  const goSecondstep = (): void => {
+  const goSecondstep = () => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
     if (
       inputLengthCheck(datacuidador?.nome) >= 1 &&
       inputLengthCheck(datacuidador?.sobrenome) >= 1 &&
@@ -117,6 +99,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
       alert("preecha todos dados obrigatórios");
     }
   };
+
   return (
     <SafeAreaView style={homeloginscss.container}>
       <ScrollView
@@ -128,7 +111,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           value={datacuidador?.nome}
           nometxt="nome *"
           placeholder="digite seu nome"
-          onchangevalue={handlenome}
+          onchangevalue={handleNome}
           issenha={false}
           tamanho={{ height: 40 }}
           emailwarn=""
@@ -140,7 +123,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           nometxt="sobrenome *"
           value={datacuidador?.sobrenome}
           placeholder="digite seu sobrenome"
-          onchangevalue={handlesobrenome}
+          onchangevalue={handleSobrenome}
           issenha={false}
           tamanho={{ height: 40 }}
           emailwarn=""
@@ -153,7 +136,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           value={datacuidador?.email}
           nometxt="email * "
           placeholder={"digite seu email"}
-          onchangevalue={handleemail}
+          onchangevalue={handleEmail}
           issenha={false}
           tamanho={{ height: 40 }}
           emailwarn={"nada"}
@@ -165,7 +148,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           value={datacuidador?.senha}
           nometxt="senha *"
           placeholder="digite sua senha"
-          onchangevalue={handlesenha}
+          onchangevalue={handleSenha}
           issenha={true}
           tamanho={{ height: 40 }}
           emailwarn=""
@@ -178,7 +161,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           value={datacuidador?.descricao}
           nometxt="descrição"
           placeholder="breve descricão"
-          onchangevalue={handledescricao}
+          onchangevalue={handleDescricao}
           issenha={false}
           tamanho={{ height: 140 }}
           emailwarn=""
@@ -190,7 +173,7 @@ const Cadastrocuidador = ({ navigation }: PropsCadastroCuid1) => {
           placeholder="selecione a profissão"
           textabove="profissão *"
           initialvalue={profissao}
-          onchange={handleprofissao}
+          onchange={handleProfissao}
           arrayvalues={[
             "Cuidador Pcd’s",
             "Cuidador idosos",

@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+
 import {
   StyleSheet,
   Text,
@@ -9,28 +10,34 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
+
 import { AuthenticRootParamList } from "../../types/authenticRoot";
+
 import { Btn } from "../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import React, { useEffect } from "react";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+
+type PropsAuthenticCuid = NativeStackScreenProps<
   AuthenticRootParamList,
   "Autenticacaocuid"
 >;
-type Props = {
-  navigation: AuthenticScreenNavigationProp;
-};
 
-const Autenticacaocuid: React.FC<Props> = ({ navigation }) => {
+const Autenticacaocuid = ({ navigation }: PropsAuthenticCuid) => {
   const irpaginacliente = (): void => {
     navigation.navigate("Autenticacaocli");
   };
+
   const irCadastrocuidador = (): void => {
     console.log("cadastro cuidador");
     navigation.navigate("Cadastrocuidador");
   };
+
   const irentrarcuidador = (): void => {
     navigation.navigate("entrarcuidador");
   };

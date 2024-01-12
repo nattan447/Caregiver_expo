@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+
 import React, { useState } from "react";
+
 type dataQueryProps = {
   name: string;
   picture: number;
@@ -14,15 +16,19 @@ type dataQueryProps = {
   time: number;
   id: string;
 };
+
 type PropsNotification = {
   queryData: dataQueryProps[];
 };
+
 const NotificationComp = (props: PropsNotification) => {
   const [notifications, setNotifications] = useState(props.queryData);
+
   function removeNotification(Id: string) {
     const notificationRemoved = notifications.filter(
       (notification) => notification.id != Id
     );
+
     setNotifications(notificationRemoved);
   }
 
@@ -62,6 +68,7 @@ const NotificationComp = (props: PropsNotification) => {
   return (
     <>
       <FlatList
+        style={{ width: "100%" }}
         data={notifications}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => renderData(item)}

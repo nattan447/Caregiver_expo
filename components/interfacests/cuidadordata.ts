@@ -13,5 +13,6 @@ interface Cuidadadordatainterfc {
   rua: string | undefined;
   cep: string | undefined;
   pricePerHour: string | undefined;
+  certificado: string | undefined;
 }
 export { Cuidadadordatainterfc };

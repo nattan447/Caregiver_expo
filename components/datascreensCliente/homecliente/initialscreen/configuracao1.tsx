@@ -29,9 +29,6 @@ const ConfiguracaoCli = ({
 }: PropsConfigCli | PropsAuthenticScreen) => {
   const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
   const clienteDataTyped: Clientedatainterfc = clienteData;
-  //não consigo resolver o problema de tipagem dessa variável
-
-  //especificação das rotas de navegação
   const isAuthenticScreenNavigation = (
     navigation: AuthenticScreenNavigationProp | InitialScreenNavigationProp
   ): navigation is AuthenticScreenNavigationProp => {

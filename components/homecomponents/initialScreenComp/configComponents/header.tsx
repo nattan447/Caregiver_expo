@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,19 +7,28 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import * as ImagePicker from "expo-image-picker";
+
 import { Clientedatacontext } from "../../../datascreensCliente/homecliente/datacontext/clitentedata";
+
 import { ConfiguracaoStyle } from "../../../datascreensCliente/homecliente/initialscreen/styles/configuracaostyle";
+
 import { useState, useContext, useEffect } from "react";
+
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
+
 type propsHeader = {
   profileImageUrl: number;
   userName: string;
   profession: string;
 };
+
 const HeaderConfig = (props: propsHeader) => {
   const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
+
   const [dataTyped, setDataTyped] = useState<Clientedatainterfc>(clienteData);
+
   const changeImage = async () => {
     let Image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -42,6 +50,7 @@ const HeaderConfig = (props: propsHeader) => {
       });
     }
   };
+
   useEffect(() => {
     setClienteData(dataTyped);
   }, [dataTyped]);

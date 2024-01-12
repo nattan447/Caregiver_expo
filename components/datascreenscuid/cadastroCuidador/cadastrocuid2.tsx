@@ -1,59 +1,63 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   SafeAreaView,
-  Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
+  Image,
 } from "react-native";
+
 import { styles } from "../../../desginscomponents/inputs";
-import { useState, useEffect, useRef, useMemo } from "react";
+
+import { useState, useEffect, useRef } from "react";
+
 import * as ImagePicker from "expo-image-picker";
+
 import { TextInputMask } from "react-native-masked-text";
+
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+
 import { Btn } from "../../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import React from "react";
+
 import cadastro from "../../../estilos/cadastro";
+
 import Inputs from "../../../desginscomponents/inputs";
-import { RouteProp } from "@react-navigation/native";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+
+import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
+
+type PropsCadastroCuid2 = NativeStackScreenProps<
   AuthenticRootParamList,
   "Cadastrocuidador2"
 >;
-type PropsNavCuidador2 = {
-  navigation: AuthenticScreenNavigationProp;
-  route: RouteProp<AuthenticRootParamList, "Cadastrocuidador2">;
-};
-const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
-  navigation,
-  route,
-}: PropsNavCuidador2) => {
-  interface CadastrocuidadorInter2 {
-    nome: string | undefined;
-    sobrenome: string | undefined;
-    email: string | undefined;
-    senha: string | undefined;
-    profissao: string | undefined;
-    descricao: string | undefined;
-    cpf: string | undefined;
-    profileimg: string | undefined;
-    datanasc: string | undefined;
-  }
-  const [datacuidador, setDatacuidador] = useState<CadastrocuidadorInter2>();
+
+type OmitedCuidadadorData = Omit<
+  Cuidadadordatainterfc,
+  "cidade" | "rua" | "cep" | "pricePerHour" | "estado"
+>;
+
+const Cadastrocuidador2 = ({ navigation, route }: PropsCadastroCuid2) => {
+  const [datacuidador, setDatacuidador] = useState<OmitedCuidadadorData>();
+
+  let cpfRef = useRef<string | undefined>(undefined);
+
+  const DateRef = useRef("");
+
+  const dateInputRefMask = useRef(null);
 
   useEffect(() => {
     const fetchParams = async () => {
       try {
         if (route.params) {
-          const DatacuidadorObj = route.params;
+          const DatacuidadorObj = await route.params;
           if (DatacuidadorObj != undefined) {
-            setDatacuidador(DatacuidadorObj as CadastrocuidadorInter2);
+            setDatacuidador(DatacuidadorObj as OmitedCuidadadorData);
           }
         }
       } catch (error) {
@@ -63,25 +67,15 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
     fetchParams();
   }, []);
 
-  let cpfRef = useRef<string | undefined>(undefined);
-  function handlecpf(Cpf: string) {
+  const handleCpf = (Cpf: string) => {
     cpfRef.current = Cpf;
     setDatacuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
+      ...(datacuidador as OmitedCuidadadorData),
       cpf: Cpf,
-      profileimg: datacuidador?.profileimg,
-      datanasc: datacuidador?.datanasc,
     });
-  }
+  };
 
-  const DateRef = useRef<string>("");
-  const dateInputRefMask = useRef(null);
-  function handledatenasc(
+  function handleDateNasc(
     Date: string,
     formatted: any,
     extracted?: string | undefined
@@ -89,14 +83,7 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
     DateRef.current = Date;
     dateInputRefMask.current = formatted;
     setDatacuidador({
-      nome: datacuidador?.nome,
-      sobrenome: datacuidador?.sobrenome,
-      email: datacuidador?.email,
-      senha: datacuidador?.senha,
-      descricao: datacuidador?.descricao,
-      profissao: datacuidador?.profissao,
-      cpf: datacuidador?.cpf,
-      profileimg: datacuidador?.profileimg,
+      ...(datacuidador as OmitedCuidadadorData),
       datanasc: Date,
     });
   }
@@ -111,23 +98,36 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
     console.log(Image);
     if (!Image.canceled) {
       setDatacuidador({
-        nome: datacuidador?.nome,
-        sobrenome: datacuidador?.sobrenome,
-        email: datacuidador?.email,
-        senha: datacuidador?.senha,
-        descricao: datacuidador?.descricao,
-        profissao: datacuidador?.profissao,
-        cpf: datacuidador?.cpf,
+        ...(datacuidador as OmitedCuidadadorData),
         profileimg: Image.assets[0].uri,
-        datanasc: datacuidador?.datanasc,
       });
     }
   };
 
-  const gothrirdstep = (): void => {
+  async function handleCertificado() {
+    let Image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(Image);
+
+    if (!Image.canceled) {
+      setDatacuidador({
+        ...(datacuidador as OmitedCuidadadorData),
+        certificado: Image.assets[0].uri,
+      });
+    }
+  }
+
+  const gothrirdstep = () => {
     const regexEmptyInput = /^\S+$/;
+
     const arrayData = datacuidador ? Object.values(datacuidador) : "";
-    if (arrayData?.length >= 8) {
+
+    if (arrayData?.length >= 7) {
       console.log(datacuidador);
       if (DateRef.current && cpfRef.current) {
         if (
@@ -157,7 +157,7 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
             placeholder="digite seu cpf"
             value={datacuidador?.cpf}
             multiline={false}
-            onchangevalue={handlecpf}
+            onchangevalue={handleCpf}
             issenha={false}
             tamanho={{ height: 40 }}
             emailwarn=""
@@ -166,36 +166,41 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
           />
           <TouchableOpacity onPress={pickImage}>
             <Text style={styles.txt}>Foto de perfil</Text>
-            <View style={cadastro.inputimg}></View>
+            <View style={cadastro.inputimg}>
+              <Image
+                style={styleCadastro.imgCertificado}
+                source={require("../../../assets/user2.png")}
+              ></Image>
+            </View>
           </TouchableOpacity>
-          <View
-            style={{
-              width: "70%",
-            }}
-          >
-            <Text style={[styles.txt, { top: 10, marginTop: 40 }]}>
+          <View style={styleCadastro.viewTxt}>
+            <Text style={[styles.txt, styleCadastro.txtDate]}>
               data de nascimento
             </Text>
           </View>
           <TextInputMask
             placeholder="dia/mês/ano"
-            style={[
-              styles.input,
-              {
-                height: 40,
-                borderBottomWidth: 2,
-                borderColor: "#dddddd",
-                marginTop: 10,
-              },
-            ]}
+            style={[styles.input, styleCadastro.dateInput]}
             maxLength={10}
             value={datacuidador?.datanasc}
             type={"datetime"}
             options={{
               format: "DD/MM/YYYY",
             }}
-            onChangeText={handledatenasc}
+            onChangeText={handleDateNasc}
           />
+          <TouchableOpacity
+            onPress={handleCertificado}
+            style={styleCadastro.viewCertificado}
+          >
+            <Text style={styles.txt}>Certificado</Text>
+            <View style={cadastro.inputimg}>
+              <Image
+                style={styleCadastro.imgCertificado}
+                source={require("../../../assets/certificado.png")}
+              ></Image>
+            </View>
+          </TouchableOpacity>
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"
@@ -212,3 +217,26 @@ const Cadastrocuidador2: React.FC<PropsNavCuidador2> = ({
 };
 
 export default Cadastrocuidador2;
+
+const styleCadastro = StyleSheet.create({
+  dateInput: {
+    height: 40,
+    borderBottomWidth: 2,
+    borderColor: "#dddddd",
+    marginTop: 10,
+  },
+  txtDate: {
+    top: 10,
+    marginTop: 40,
+  },
+  viewTxt: {
+    width: "70%",
+  },
+  viewCertificado: {
+    marginTop: "10%",
+  },
+  imgCertificado: {
+    height: 90,
+    width: 90,
+  },
+});

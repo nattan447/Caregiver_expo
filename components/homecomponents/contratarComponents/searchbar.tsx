@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -6,11 +5,14 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+
 import { useState, useEffect, useContext } from "react";
+
 interface propsSearchBar {
   value: string;
   onchange: (itm: string) => void;
 }
+
 const SearchbarHome = (props: propsSearchBar) => {
   return (
     <TextInput

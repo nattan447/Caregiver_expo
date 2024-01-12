@@ -1,13 +1,23 @@
 import { StatusBar } from "expo-status-bar";
+
 import { NavigationContainer } from "@react-navigation/native";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import { contratarRootParams } from "../../types/contratarRootParams";
+
 import { ContratarClie } from "../../components/datascreensCliente/homecliente/contratacaoclie/contratar";
+
 import { InfocontratoCli } from "../../components/datascreensCliente/homecliente/contratacaoclie/infocontrato";
+
 import { PagamentoinfoCli } from "../../components/datascreensCliente/homecliente/contratacaoclie/pagamentoinfo";
+
 import { PerfilContratado } from "../../components/datascreensCliente/homecliente/contratacaoclie/perfil";
+
 import { Clientedatainterfc } from "../../components/interfacests/clienteInterface";
+
 const Stack = createNativeStackNavigator<contratarRootParams>();
+
 function ContratarRouteCli() {
   return (
     <NavigationContainer independent={true}>
@@ -17,6 +27,7 @@ function ContratarRouteCli() {
           component={ContratarClie}
           name="Contratar"
         ></Stack.Screen>
+
         <Stack.Screen
           options={styleHeader}
           component={PerfilContratado}
@@ -38,7 +49,9 @@ function ContratarRouteCli() {
     </NavigationContainer>
   );
 }
+
 export { ContratarRouteCli };
+
 const styleHeader = {
   headerShown: true,
   headerStyle: {

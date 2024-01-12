@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+
 import {
   StyleSheet,
   Text,
@@ -8,28 +9,31 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import { useState } from "react";
 
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
+
 import { AuthenticRootParamList } from "../../types/authenticRoot";
 
 import { Btn } from "../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import React from "react";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
+
+type PropsAuthenticCli = NativeStackScreenProps<
   AuthenticRootParamList,
   "Autenticacaocli"
 >;
-type Props = {
-  navigation: AuthenticScreenNavigationProp;
-};
 
-const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
+const Autenticacaocli = ({ navigation }: PropsAuthenticCli) => {
   const irpaginacuidador = (): void => {
     navigation.navigate("Autenticacaocuid");
   };
+
   const irentrarcliente = (): void => {
     navigation.navigate("entrarcliente");
   };
@@ -37,6 +41,7 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
   const cadastrarCliente = (): void => {
     navigation.navigate("cadastrocliente");
   };
+
   return (
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>
@@ -80,4 +85,5 @@ const Autenticacaocli: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
 export default Autenticacaocli;

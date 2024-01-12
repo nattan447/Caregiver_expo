@@ -1,5 +1,7 @@
 import { Text, View, TextInput, KeyboardType } from "react-native";
+
 import { EditProfileStyle } from "../../../datascreensCliente/homecliente/initialscreen/styles/editProfileStyle";
+
 type propsInputEdit = {
   txt: string;
   placeholder: string;
@@ -9,6 +11,7 @@ type propsInputEdit = {
   maxLength: number;
   type: KeyboardType;
 };
+
 const InputConfig = (props: propsInputEdit) => {
   return (
     <View style={EditProfileStyle.inputView}>

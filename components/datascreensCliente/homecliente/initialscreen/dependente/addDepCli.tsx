@@ -9,45 +9,35 @@ import {
 import Inputs, { Combobox } from "../../../../../desginscomponents/inputs";
 import { DepDataInterface } from "../../../../interfacests/depDataInterface";
 import { Btn } from "../../../../../desginscomponents/authenticheadrs";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DepDataContextCli } from "../../datacontext/depDataContext";
 import cadastro from "../../../../../estilos/cadastro";
 import * as ImagePicker from "expo-image-picker";
-import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
+import { inputLengthCheck } from "../../../../fuctions/inputCheck";
 const AddDependentCli = () => {
   const { depDataContext, setDepDataContext }: any =
     useContext(DepDataContextCli);
-  const [depData, setDepData] = useState<DepDataInterface>(depDataContext);
-  const [quadro, setQuadro] = useState<string>("");
-  function handleName(Name: string) {
-    setDepData({
-      nome: Name,
-      idade: depData?.idade,
-      quadro: depData?.quadro,
-      profileImg: depData?.profileImg,
-      descricao: depData?.descricao,
-    });
-  }
-  function handleIdade(Idade: string) {
-    setDepData({
-      nome: depData?.nome,
-      idade: Idade,
-      quadro: depData?.quadro,
-      profileImg: depData?.profileImg,
-      descricao: depData?.descricao,
-    });
+  const [depData, setDepData] = useState<DepDataInterface>();
+  const [quadro, setQuadro] = useState("");
+
+
+  const handleName=(Name:string)=>setDepData({...depData as DepDataInterface,nome:Name})
+
+  const handleIdade=(Age:string)=>setDepData({...depData as DepDataInterface,idade:Age})
+
+
+  const handleQuadro=(Quadro:string)=>
+  {
+    setDepData({...depData as DepDataInterface,quadro:Quadro})
+    setQuadro(Quadro);
   }
 
-  function handleQuadro(Quadro: string) {
-    setQuadro(Quadro);
-    setDepData({
-      nome: depData?.nome,
-      idade: depData?.idade,
-      quadro: Quadro,
-      profileImg: depData?.profileImg,
-      descricao: depData?.descricao,
-    });
-  }
+  const handleDescricao=(Desc:string)=>setDepData({...depData as DepDataInterface,descricao:Desc})
+
+
+
+
+
 
   const pickImage = async () => {
     let Image = await ImagePicker.launchImageLibraryAsync({
@@ -57,30 +47,31 @@ const AddDependentCli = () => {
       quality: 1,
     });
     console.log(Image);
-    if (!Image.canceled) {
-      setDepData({
-        nome: depData?.nome,
-        idade: depData?.idade,
-        quadro: depData?.quadro,
-        profileImg: Image.assets[0].uri,
-        descricao: depData?.descricao,
-      });
+    if (!Image.canceled) 
+    {
+      setDepData({...depData as DepDataInterface,profileImg:Image.assets[0].uri})
     }
   };
-  function handleDescricao(Descricao: string) {
-    setDepData({
-      nome: depData?.nome,
-      idade: depData?.idade,
-      quadro: depData?.quadro,
-      profileImg: depData?.profileImg,
-      descricao: Descricao,
-    });
-  }
-  function adicionar() {
-    setDepDataContext(depData);
-    alert("adicionado com sucesso");
+ 
+  const adicionar = () => {
+    if (
+      inputLengthCheck(depData?.nome) > 1 &&
+      inputLengthCheck(depData?.idade) > 1 &&
+      inputLengthCheck(depData?.descricao) > 1 &&
+      depData?.quadro
+    ) {
+      setDepDataContext(depData);
+      alert("dependente adicionado");
+      console.log("todos dados estão obrigatórios estão preenchidos");
+    } else {
+      alert(" preencha todos dados obrigatórios");
+      console.error("falta preencher todos dados obrigatórios");
+    }
+  };
+
+  useEffect(() => {
     console.log(depDataContext);
-  }
+  }, [depDataContext]);
 
   return (
     <SafeAreaView style={depStyle.container}>

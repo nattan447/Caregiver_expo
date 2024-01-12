@@ -6,27 +6,45 @@ import {
   Easing,
   ActivityIndicator,
 } from "react-native";
+
 import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
+
 import { useState, useEffect, useRef } from "react";
+
 import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
+
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+
 import { Btn } from "../../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../../estilos/homeloginscss";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import React from "react";
+
 import cadastro from "../../../estilos/cadastro";
+
 import Inputs from "../../../desginscomponents/inputs";
+
 import { Combobox } from "../../../desginscomponents/inputs";
+
 import { inputLengthCheck } from "../../fuctions/inputCheck";
+
 type PropsCadastroCuid3 = NativeStackScreenProps<
   AuthenticRootParamList,
   "Cadastrocuidador3"
 >;
+
 const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
   const [cuidadordata, SetCuidadordata] = useState<Cuidadadordatainterfc>();
+
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
+
   const [isloadingEstados, setIsloadingEstados] = useState(true);
+
   const [EstadoValue, SetEstadoValue] = useState<string>("");
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -45,7 +63,9 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
         setIsloadingEstados(false);
       }
     };
+
     fetchdata();
+
     if (route.params) {
       console.log("possui dados nos parametros");
       const { datacuidador }: { datacuidador?: Cuidadadordatainterfc } =
@@ -58,105 +78,48 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
     }
   }, []);
 
-  function handelEstado(Estado: string) {
+  const handelEstado = (Estado: string) => {
     if (!isloadingEstados) {
       if (Estado != null) {
         SetEstadoValue(Estado);
       }
+
       SetCuidadordata({
-        nome: cuidadordata?.nome,
-        sobrenome: cuidadordata?.sobrenome,
-        email: cuidadordata?.email,
-        senha: cuidadordata?.senha,
-        profissao: cuidadordata?.profissao,
-        descricao: cuidadordata?.descricao,
-        profileimg: cuidadordata?.profileimg,
-        cpf: cuidadordata?.cpf,
-        datanasc: cuidadordata?.datanasc,
+        ...(cuidadordata as Cuidadadordatainterfc),
         estado: Estado,
-        cidade: cuidadordata?.cidade,
-        rua: cuidadordata?.rua,
-        cep: cuidadordata?.cep,
-        pricePerHour: cuidadordata?.pricePerHour,
       });
     }
-  }
+  };
 
-  function handlecidade(Cidade: string) {
+  const handleCidade = (Cidade: string) => {
     SetCuidadordata({
-      nome: cuidadordata?.nome,
-      sobrenome: cuidadordata?.sobrenome,
-      email: cuidadordata?.email,
-      senha: cuidadordata?.senha,
-      profissao: cuidadordata?.profissao,
-      descricao: cuidadordata?.descricao,
-      profileimg: cuidadordata?.profileimg,
-      cpf: cuidadordata?.cpf,
-      datanasc: cuidadordata?.datanasc,
-      estado: cuidadordata?.estado,
+      ...(cuidadordata as Cuidadadordatainterfc),
       cidade: Cidade,
-      rua: cuidadordata?.rua,
-      cep: cuidadordata?.cep,
-      pricePerHour: cuidadordata?.pricePerHour,
     });
-  }
+  };
 
-  function handlerua(Rua: string) {
+  function handleRua(Rua: string) {
     SetCuidadordata({
-      nome: cuidadordata?.nome,
-      sobrenome: cuidadordata?.sobrenome,
-      email: cuidadordata?.email,
-      senha: cuidadordata?.senha,
-      profissao: cuidadordata?.profissao,
-      descricao: cuidadordata?.descricao,
-      profileimg: cuidadordata?.profileimg,
-      cpf: cuidadordata?.cpf,
-      datanasc: cuidadordata?.datanasc,
-      estado: cuidadordata?.estado,
-      cidade: cuidadordata?.cidade,
+      ...(cuidadordata as Cuidadadordatainterfc),
       rua: Rua,
-      cep: cuidadordata?.cep,
-      pricePerHour: cuidadordata?.pricePerHour,
     });
   }
 
-  function handlecep(Cep: string) {
+  function handleCep(Cep: string) {
     SetCuidadordata({
-      nome: cuidadordata?.nome,
-      sobrenome: cuidadordata?.sobrenome,
-      email: cuidadordata?.email,
-      senha: cuidadordata?.senha,
-      profissao: cuidadordata?.profissao,
-      descricao: cuidadordata?.descricao,
-      profileimg: cuidadordata?.profileimg,
-      cpf: cuidadordata?.cpf,
-      datanasc: cuidadordata?.datanasc,
-      estado: cuidadordata?.estado,
-      cidade: cuidadordata?.cidade,
-      rua: cuidadordata?.rua,
+      ...(cuidadordata as Cuidadadordatainterfc),
       cep: Cep,
-      pricePerHour: cuidadordata?.pricePerHour,
     });
   }
+
   function handlePricePHour(Price: string) {
     SetCuidadordata({
-      nome: cuidadordata?.nome,
-      sobrenome: cuidadordata?.sobrenome,
-      email: cuidadordata?.email,
-      senha: cuidadordata?.senha,
-      profissao: cuidadordata?.profissao,
-      descricao: cuidadordata?.descricao,
-      profileimg: cuidadordata?.profileimg,
-      cpf: cuidadordata?.cpf,
-      datanasc: cuidadordata?.datanasc,
-      estado: cuidadordata?.estado,
-      cidade: cuidadordata?.cidade,
-      rua: cuidadordata?.rua,
-      cep: cuidadordata?.cep,
+      ...(cuidadordata as Cuidadadordatainterfc),
       pricePerHour: Price,
     });
   }
-  const goHomeScreen = (): void => {
+
+  const goHomeScreen = () => {
     console.log("dados do cuidador:" + { ...cuidadordata });
     if (inputLengthCheck(cuidadordata?.pricePerHour) >= 1) {
       if (cuidadordata?.cep) {
@@ -202,7 +165,7 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
               nometxt="cidade "
               placeholder="digite sua cidade"
               value={cuidadordata?.cidade}
-              onchangevalue={handlecidade}
+              onchangevalue={handleCidade}
               issenha={false}
               tamanho={{ height: 40 }}
               emailwarn=""
@@ -214,7 +177,7 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
               nometxt="rua "
               placeholder="digite sua rua"
               value={cuidadordata?.rua}
-              onchangevalue={handlerua}
+              onchangevalue={handleRua}
               issenha={false}
               tamanho={{ height: 40 }}
               emailwarn=""
@@ -238,7 +201,7 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
               nometxt="cep "
               placeholder="digite seu cep"
               value={cuidadordata?.cep}
-              onchangevalue={handlecep}
+              onchangevalue={handleCep}
               issenha={false}
               tamanho={{ height: 40 }}
               emailwarn=""

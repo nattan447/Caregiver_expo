@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+
 import {
   StyleSheet,
   Text,
@@ -9,56 +10,60 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+
 import { useState } from "react";
+
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
 
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+
 import { Btn } from "../../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../../estilos/homeloginscss";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import Inputs from "../../../desginscomponents/inputs";
-import React from "react";
-type AuthenticScreenNavigationProp = NativeStackNavigationProp<
-  AuthenticRootParamList,
-  "Autenticacaocli"
->;
-type PropsEntrarCuidador = {
-  navigation: AuthenticScreenNavigationProp;
-};
+
 import { Cuidadadordatainterfc } from "../../interfacests/cuidadordata";
-const Entrarcuidador: React.FC<PropsEntrarCuidador> = ({ navigation }) => {
+
+import React from "react";
+
+type PropsEntrarCuid = NativeStackScreenProps<
+  AuthenticRootParamList,
+  "entrarcuidador"
+>;
+
+export type PickedData = Pick<Cuidadadordatainterfc, "nome" | "email">;
+
+const Entrarcuidador = ({ navigation }: PropsEntrarCuid) => {
   const irpaginacuidador = (): void => {
     navigation.navigate("Autenticacaocuid");
   };
+
   const [email, Setemail] = useState<string>("");
+
   const [senha, Setsenha] = useState<string>("");
 
   const handleEmail = (Email: string): void => {
     Setemail(Email);
   };
+
   const handleSenha = (Senha: string): void => {
     Setsenha(Senha);
   };
+
   const entrar = (): void => {
-    const cuidadordata: Cuidadadordatainterfc = {
+    const cuidadordata: PickedData = {
       nome: "Administrador",
-      sobrenome: "",
       email: email,
-      senha: senha,
-      estado: "",
-      cidade: "",
-      cep: "",
-      profissao: "",
-      profileimg: "",
-      cpf: "",
-      descricao: "",
-      rua: "",
-      datanasc: "",
     };
+
     if (email === "admin" && senha === "123") {
       navigation.navigate("Homenavigator", cuidadordata);
     } else alert("login ou sennhas incorretos");
   };
+
   return (
     <SafeAreaView style={homeloginscss.container}>
       <StatusBar hidden={true}></StatusBar>

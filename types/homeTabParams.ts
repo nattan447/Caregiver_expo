@@ -1,5 +1,5 @@
 export type HomeTabParms = {
-  Home: undefined;
+  homeCliente: undefined;
   Favoritos: undefined;
   Contratar: undefined;
   rootProcess: undefined;

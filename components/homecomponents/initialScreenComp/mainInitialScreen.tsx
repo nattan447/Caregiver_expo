@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -7,13 +6,16 @@ import {
   TextInput,
   Image,
 } from "react-native";
+
 import homesty from "../../homecuid/estiloscuid/homesty";
+
 type propsMainInitialScreen = {
   profileImgId: number;
   userName: string;
   depPress: () => void;
   notificationPress: () => void;
 };
+
 const MainInitialScreen = (props: propsMainInitialScreen) => {
   return (
     <View style={homesty.main}>
