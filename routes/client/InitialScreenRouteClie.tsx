@@ -30,6 +30,12 @@ import { DepDataContextCli } from "../../components/datascreensCliente/homeclien
 
 import { ServiceDetails } from "../../components/datascreensCliente/homecliente/processoScrens/details/serviceDetails";
 
+import { PerfilContratado } from "../../components/datascreensCliente/homecliente/contratacaoclie/perfil";
+
+import { InfoContratoCli } from "../../components/datascreensCliente/homecliente/contratacaoclie/infocontrato";
+
+import { PagamentoinfoCli } from "../../components/datascreensCliente/homecliente/contratacaoclie/pagamentoinfo";
+
 const Stack = createNativeStackNavigator<InitialScreenParamList>();
 
 type PropsHomeFromAuthenticScreen = NativeStackScreenProps<
@@ -99,6 +105,24 @@ const InitialScreenRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
           <Stack.Screen
             name="serviceDetails"
             component={ServiceDetails}
+            options={{ ...headerStyle1, headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="perfilContratado"
+            component={PerfilContratado}
+            options={{ ...headerStyle1, headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="infoContrato"
+            component={InfoContratoCli}
+            options={{ ...headerStyle1, headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="pagamentoInfo"
+            component={PagamentoinfoCli}
             options={{ ...headerStyle1, headerShown: true }}
           />
         </Stack.Navigator>

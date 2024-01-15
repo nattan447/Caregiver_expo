@@ -15,5 +15,9 @@ type InitialScreenParamList = {
   finished: undefined;
   pendent: undefined;
   inProcess: undefined;
+  Contratar: undefined;
+  perfilContratado: undefined;
+  infoContrato: undefined;
+  pagamentoInfo: undefined;
 };
 export { InitialScreenParamList };

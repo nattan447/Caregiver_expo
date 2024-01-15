@@ -10,7 +10,7 @@ const Cards: ServiceDetailsInter[] = [
     valor: 20,
   },
   {
-    prestador: "felipe",
+    prestador: "naldo",
     img: require("../../../../assets/modelFace.jpg"),
     status: "aguardando comfirmação",
     typeService: "pet care",

@@ -14,18 +14,18 @@ import { useState } from "react";
 
 import homeloginscss from "../../../../estilos/homeloginscss";
 
-import { contratarRootParams } from "../../../../types/contratarRootParams";
+import { InitialScreenParamList } from "../../../../types/initialScreenType";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type PropsInfoContrato = NativeStackScreenProps<
-  contratarRootParams,
-  "infocontrato"
+  InitialScreenParamList,
+  "infoContrato"
 >;
 
-const InfocontratoCli = ({ navigation }: PropsInfoContrato) => {
-  const gopagamento = (): void => {
-    navigation.navigate("pagamentoinfo");
+const InfoContratoCli = ({ navigation }: PropsInfoContrato) => {
+  const gopagamento = () => {
+    navigation.navigate("pagamentoInfo");
   };
 
   return (
@@ -36,4 +36,4 @@ const InfocontratoCli = ({ navigation }: PropsInfoContrato) => {
   );
 };
 
-export { InfocontratoCli };
+export { InfoContratoCli };

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,14 +7,22 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import React from "react";
+
 import { useState } from "react";
+
 import homeloginscss from "../../../../estilos/homeloginscss";
+
 import { contratarRootParams } from "../../../../types/contratarRootParams";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+import { InitialScreenParamList } from "../../../../types/initialScreenType";
+
 type PropsPagamentoCli = NativeStackScreenProps<
-  contratarRootParams,
-  "pagamentoinfo"
+  InitialScreenParamList,
+  "pagamentoInfo"
 >;
 
 const PagamentoinfoCli = ({ navigation }: PropsPagamentoCli) => {
