@@ -25,10 +25,9 @@ type dataQueryProps = {
 
 type PropsCuidadorCard = {
   queryData: dataQueryProps[];
-  onpresProposta: () => void;
 };
 
-const CuidadorCard = (props: PropsCuidadorCard) => {
+const CuidCardAndamento = (props: PropsCuidadorCard) => {
   const [card, setCards] = useState(props.queryData);
 
   function cancelService(Id: string) {
@@ -39,29 +38,35 @@ const CuidadorCard = (props: PropsCuidadorCard) => {
 
   function renderComponent(data: dataQueryProps) {
     return (
-      <View style={pendentStyle.container}>
-        <View style={pendentStyle.cardServico}>
+      <View style={AndamentoStyle.container}>
+        <View style={AndamentoStyle.cardServico}>
           <HeaderCard
             typeService={data.typeService}
             status={data.status}
             prestador={data.prestador}
             img={data.img}
           />
-          <TouchableOpacity
-            style={pendentStyle.txt}
-            onPress={props.onpresProposta}
-          >
-            <Text style={pendentStyle.txtProposta}>ver proposta</Text>
-          </TouchableOpacity>
-          <Btn
-            cor="#F1EBEB"
-            txtbtn="CANCELAR"
-            txtcor="#E64A19"
-            pres={() => cancelService(data.id)}
-            fontsize={10}
-            altura={34}
-            largura={100}
-          />
+
+          <View style={AndamentoStyle.btnViews}>
+            <Btn
+              cor="#F1EBEB"
+              txtbtn="CANCELAR"
+              txtcor="#E64A19"
+              pres={() => cancelService(data.id)}
+              fontsize={10}
+              altura={34}
+              largura={100}
+            />
+            <Btn
+              cor="#C77B43"
+              txtbtn="CONCLUIR"
+              txtcor="#FFFFFF"
+              pres={() => cancelService(data.id)}
+              fontsize={10}
+              altura={34}
+              largura={100}
+            />
+          </View>
         </View>
       </View>
     );
@@ -77,9 +82,9 @@ const CuidadorCard = (props: PropsCuidadorCard) => {
   );
 };
 
-export { CuidadorCard };
+export { CuidCardAndamento };
 
-const pendentStyle = StyleSheet.create({
+const AndamentoStyle = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
@@ -88,7 +93,7 @@ const pendentStyle = StyleSheet.create({
   },
   cardServico: {
     backgroundColor: "#F8F8F8",
-    height: "75%",
+    height: "90%",
     width: "80%",
     alignItems: "center",
     justifyContent: "space-around",
@@ -102,5 +107,8 @@ const pendentStyle = StyleSheet.create({
   txtProposta: {
     top: 10,
     color: "#607D8B",
+  },
+  btnViews: {
+    flexDirection: "row",
   },
 });

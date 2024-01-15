@@ -7,6 +7,7 @@ import { Btn } from "../../../../desginscomponents/authenticheadrs";
 import { CuidadorCard } from "../../../homecomponents/processComponents/pendentComps/cuidadorCard";
 
 import { Cards } from "../../../homecomponents/processComponents/data/cards";
+
 const Pendent = () => {
   return (
     <View style={pendentStyle.container}>

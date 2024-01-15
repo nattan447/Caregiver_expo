@@ -1,31 +1,37 @@
-const Cards = [
+import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+
+const Cards: ServiceDetailsInter[] = [
   {
-    prestador: "battab",
+    prestador: "nattan",
     img: require("../../../../assets/modelFace.jpg"),
     status: "aguardando comfirmação",
     typeService: "pet care",
     id: "1",
+    valor: 20,
   },
   {
-    prestador: "battab",
+    prestador: "felipe",
     img: require("../../../../assets/modelFace.jpg"),
     status: "aguardando comfirmação",
     typeService: "pet care",
     id: "2",
+    valor: 30,
   },
   {
-    prestador: "battab",
+    prestador: "fernando",
     img: require("../../../../assets/modelFace.jpg"),
     status: "aguardando comfirmação",
-    typeService: "pet care",
+    typeService: "pcd care",
     id: "3",
+    valor: 40,
   },
   {
-    prestador: "battab",
+    prestador: "joão",
     img: require("../../../../assets/modelFace.jpg"),
     status: "aguardando comfirmação",
-    typeService: "pet care",
+    typeService: "idoso care",
     id: "4",
+    valor: 50,
   },
 ];
 export { Cards };
