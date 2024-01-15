@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,25 +7,36 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import React, { useEffect } from "react";
+
 import { useState } from "react";
+
 import homeloginscss from "../../../../estilos/homeloginscss";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
-import { contratarRootParams } from "../../../../types/contratarRootParams";
+
+import { InitialScreenParamList } from "../../../../types/initialScreenType";
+
 type PropsPerfilContratado = NativeStackScreenProps<
-  contratarRootParams,
-  "perfil"
+  InitialScreenParamList,
+  "perfilContratado"
 >;
+
 const PerfilContratado = ({ navigation, route }: PropsPerfilContratado) => {
   useEffect(() => {
     if (route.params) {
       const cuidadordataState: Clientedatainterfc = route.params;
+      console.log(route.params);
     }
   }, []);
-  const solicitar = (): void => {
-    navigation.navigate("infocontrato");
+
+  const solicitar = () => {
+    navigation.navigate("infoContrato");
   };
+
   return (
     <View style={homeloginscss.container}>
       <Text>perfil</Text>

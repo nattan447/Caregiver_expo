@@ -9,7 +9,7 @@ import {
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { ContratarRouteCli } from "./contratarRouteCli";
+// import { ContratarRouteCli } from "./contratarRouteCli";
 
 import { FavoritosCli } from "../../components/datascreensCliente/homecliente/favoritos";
 
@@ -24,6 +24,8 @@ import { ProcessTopRouteCli } from "./proccessTopRouteCli";
 import Homecliente from "../../components/datascreensCliente/homecliente/initialscreen/homeclie";
 
 import { InitialScreenParamList } from "../../types/initialScreenType";
+
+import { ContratarClie } from "../../components/datascreensCliente/homecliente/contratacaoclie/contratar";
 
 type PropsTabHome = NativeStackScreenProps<InitialScreenParamList, "homeTab">;
 
@@ -60,7 +62,7 @@ const HomeTabRouteCli = ({ route }: PropsTabHome) => {
 
       <Tab.Screen
         name="Contratar"
-        component={ContratarRouteCli}
+        component={ContratarClie}
         options={({ route }) => ({
           tabBarIcon: ({ focused }) => (
             <FontAwesome5

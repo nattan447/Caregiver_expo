@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -7,60 +6,104 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  FlatList,
+  ScrollView,
 } from "react-native";
 
 import React from "react";
 
 import { useState, useEffect, useContext } from "react";
+
 import { Clientedatacontext } from "../datacontext/clitentedata";
+
 import homeloginscss from "../../../../estilos/homeloginscss";
+
 import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
+
 import { contratarRootParams } from "../../../../types/contratarRootParams";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import { SearchbarHome } from "../../../homecomponents/contratarComponents/searchbar";
-type PropsContratarCli = NativeStackScreenProps<
-  contratarRootParams,
+
+import { InitialScreenParamList } from "../../../../types/initialScreenType";
+
+import { Cards } from "../../../homecomponents/processComponents/data/cards";
+
+import { ConcluidoCard } from "../../../homecomponents/processComponents/concluidoComponents/concluidoCard";
+
+import { Combobox } from "../../../../desginscomponents/inputs";
+
+type PropsContratar = NativeStackScreenProps<
+  InitialScreenParamList,
   "Contratar"
 >;
-interface Search {
-  nome: string;
-  idade: number;
-}
-const ContratarClie = ({ navigation }: PropsContratarCli) => {
-  const Irperfil = (): void => {
-    navigation.navigate("perfil", cuidadordataState);
-  };
-  const Items = [
-    { nome: "nattan", idade: 18 },
-    { nome: "felipe", idade: 15 },
-    { nome: "fernando", idade: 10 },
-    { nome: "gabriel", idade: 28 },
-  ];
-  const [item, setItem] = useState<string>("");
-  const [nome, setNome] = useState<Search>();
-  const handleItem = (itm: string): void => {
-    setItem(itm);
-  };
-  const searchItem = () => {
-    const mysearch = Items.filter((data) => data.nome == item.toLowerCase());
-    setNome(mysearch[0]);
-  };
-  const cuidadordataState: Clientedatainterfc | undefined =
-    useContext(Clientedatacontext);
 
-  useEffect(() => {
-    console.log(cuidadordataState);
-  }, []);
+const ContratarClie = ({ navigation }: PropsContratar) => {
+  const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
+
+  const [cards, setCards] = useState(Cards);
+
+  const Irperfil = (): void => {
+    navigation.navigate("perfilContratado");
+  };
+
+  const [name, setName] = useState<string>("");
+
+  const handleItem = (itm: string): void => {
+    setName(itm);
+
+    const mySearch = cards.filter((card) => card.prestador === itm);
+
+    if (!mySearch[0]) {
+      console.log("usuario não encontrado");
+
+      setCards(Cards);
+    } else {
+      setCards(mySearch);
+    }
+  };
 
   return (
-    <View style={homeloginscss.container}>
-      {/* <Text>Contratar</Text> */}
-      <SearchbarHome value={item} onchange={handleItem} />
-      <Button title="pesquisar" onPress={searchItem}></Button>
-      <Text>nome:{nome?.nome}</Text>
-      <Text>idade:{nome?.idade}</Text>
-      {/* <Button onPress={Irperfil} title="contrate"></Button> */}
-    </View>
+    <SafeAreaView style={contratarStyle.container}>
+      <ScrollView style={{ width: "100%" }}>
+        <Text style={contratarStyle.contratarTxt}>Contratar</Text>
+
+        <SearchbarHome value={name} onchange={handleItem} />
+
+        {cards.map((card) => {
+          return (
+            <View key={card.id}>
+              <ConcluidoCard
+                typeService={card.typeService}
+                img={require("../../../../assets/modelFace.jpg")}
+                prestador={card.prestador}
+                status={card.status}
+                id={card.id}
+                onpressDetails={() =>
+                  navigation.navigate("serviceDetails", card)
+                }
+                onpressFavoritar={() => alert("favoritou")}
+              />
+            </View>
+          );
+        })}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 export { ContratarClie };
+
+const contratarStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  contratarTxt: {
+    color: "#C77B43",
+    marginTop: "10%",
+    fontSize: 24,
+    alignSelf: "center",
+  },
+});
