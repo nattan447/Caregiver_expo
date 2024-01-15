@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
+
 import React, { useRef } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -8,7 +10,9 @@ import {
   TextStyle,
   KeyboardTypeOptions,
 } from "react-native";
+
 import { Picker } from "@react-native-picker/picker";
+
 import { ItemValue } from "@react-native-picker/picker/typings/Picker";
 
 interface inputpropsInterface {
@@ -35,6 +39,7 @@ interface comboxpropsInterface {
 //componente da Combobox
 export const Combobox: React.FC<comboxpropsInterface> = (props) => {
   const keyCounter = useRef<number>(0);
+
   const Pickeritem = props.arrayvalues.map((value) => {
     keyCounter.current++;
     return <Picker.Item label={value} value={value} key={keyCounter.current} />;

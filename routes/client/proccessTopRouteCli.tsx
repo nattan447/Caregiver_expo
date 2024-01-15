@@ -16,17 +16,51 @@ import { InitialScreenRouteCli } from "./InitialScreenRouteClie";
 
 import { InitialScreenParamList } from "../../types/initialScreenType";
 
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 const Tab = createMaterialTopTabNavigator<InitialScreenParamList>();
 
 const ProcessTopRouteCli = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="pendent" component={Pendent}></Tab.Screen>
+    <Tab.Navigator screenOptions={tabBarStyle}>
+      <Tab.Screen
+        name="pendent"
+        options={{
+          title: "pendentes",
+        }}
+        component={Pendent}
+      ></Tab.Screen>
 
-      <Tab.Screen name="inProcess" component={InProcess}></Tab.Screen>
+      <Tab.Screen
+        name="inProcess"
+        options={{
+          title: "andamento",
+        }}
+        component={InProcess}
+      ></Tab.Screen>
 
-      <Tab.Screen name="finished" component={Finished}></Tab.Screen>
+      <Tab.Screen
+        name="finished"
+        options={{ title: "concluidos" }}
+        component={Finished}
+      ></Tab.Screen>
     </Tab.Navigator>
   );
 };
+
 export { ProcessTopRouteCli };
+
+const tabBarStyle = {
+  tabBarStyle: {
+    margin: 10,
+    borderRadius: 10,
+  },
+  tabBarIndicatorStyle: {
+    backgroundColor: "#E64A19",
+  },
+  tabBarLabelStyle: {
+    fontSize: 10,
+  },
+  tabBarInactiveTintColor: "gray",
+  tabBarActiveTintColor: "#D8A683",
+};
