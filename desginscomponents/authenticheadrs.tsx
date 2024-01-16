@@ -64,14 +64,7 @@ export const Authenticheadrs: React.FC<Propriedadesheader> = (props) => {
 //componente de btn
 export const Btn: React.FC<Propriedadesbtn> = (props) => {
   return (
-    <View
-      style={{
-        marginHorizontal: 33,
-        alignSelf: "center",
-        marginTop: "14%",
-        marginBottom: "10%",
-      }}
-    >
+    <View style={BtnSyle.container}>
       <View
         style={{
           position: "absolute",
@@ -84,9 +77,7 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
           borderRadius: 6,
           borderStartColor: "black",
         }}
-      >
-        <Text></Text>
-      </View>
+      ></View>
       <TouchableOpacity
         style={{
           height: props.altura,
@@ -115,6 +106,15 @@ export const Btn: React.FC<Propriedadesbtn> = (props) => {
     </View>
   );
 };
+
+const BtnSyle = StyleSheet.create({
+  container: {
+    marginHorizontal: 33,
+    alignSelf: "center",
+    marginTop: "10%",
+    marginBottom: "10%",
+  },
+});
 
 const styles = StyleSheet.create({
   header: {

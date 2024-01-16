@@ -3,6 +3,7 @@ import { Cuidadadordatainterfc } from "../components/interfacests/cuidadordata";
 import { Clientedatainterfc } from "../components/interfacests/clienteInterface";
 
 import { ServiceDetailsInter } from "../components/interfacests/sercideDetailsInterface";
+
 type InitialScreenParamList = {
   homeCliente: undefined;
   homeTab: undefined;
@@ -16,8 +17,8 @@ type InitialScreenParamList = {
   pendent: undefined;
   inProcess: undefined;
   Contratar: undefined;
-  perfilContratado: undefined;
-  infoContrato: undefined;
-  pagamentoInfo: undefined;
+  perfilContratado: ServiceDetailsInter;
+  infoContrato: ServiceDetailsInter;
+  pagamentoInfo: ServiceDetailsInter;
 };
 export { InitialScreenParamList };

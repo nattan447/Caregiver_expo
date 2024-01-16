@@ -30,7 +30,7 @@ interface inputpropsInterface {
 
 interface comboxpropsInterface {
   arrayvalues: string[];
-  initialvalue: string;
+  initialvalue: string | undefined;
   onchange: (Itemvalue: string, itemIndex: number) => void;
   textabove: string;
   placeholder: string;

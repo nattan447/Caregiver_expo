@@ -4,7 +4,7 @@ type BigInputProps = {
   nometxt: string;
   placeholder: string;
   onchangeValue: (content: string) => void;
-  value: string;
+  value: string | undefined;
 };
 const BigInput = (props: BigInputProps) => {
   return (
@@ -27,12 +27,11 @@ export { BigInput };
 
 const BigInputStyle = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    width: "60%",
+    width: 280,
     alignSelf: "center",
     marginTop: "14%",
+    height: 220,
   },
 
   input: {

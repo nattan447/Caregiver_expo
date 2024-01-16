@@ -30,9 +30,9 @@ import { InitialScreenParamList } from "../../../../types/initialScreenType";
 
 import { Cards } from "../../../homecomponents/processComponents/data/cards";
 
-import { ConcluidoCard } from "../../../homecomponents/processComponents/concluidoComponents/concluidoCard";
+import { CardContrado } from "../../../homecomponents/contratarComponents/cardContratado";
 
-import { Combobox } from "../../../../desginscomponents/inputs";
+import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
 
 type PropsContratar = NativeStackScreenProps<
   InitialScreenParamList,
@@ -43,10 +43,6 @@ const ContratarClie = ({ navigation }: PropsContratar) => {
   const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
 
   const [cards, setCards] = useState(Cards);
-
-  const Irperfil = (): void => {
-    navigation.navigate("perfilContratado");
-  };
 
   const [name, setName] = useState<string>("");
 
@@ -71,19 +67,19 @@ const ContratarClie = ({ navigation }: PropsContratar) => {
 
         <SearchbarHome value={name} onchange={handleItem} />
 
-        {cards.map((card) => {
+        {cards.map((card: ServiceDetailsInter) => {
           return (
-            <View key={card.id}>
-              <ConcluidoCard
+            <View style={contratarStyle.cardView} key={card.id}>
+              <CardContrado
                 typeService={card.typeService}
                 img={require("../../../../assets/modelFace.jpg")}
                 prestador={card.prestador}
                 status={card.status}
                 id={card.id}
-                onpressDetails={() =>
-                  navigation.navigate("serviceDetails", card)
+                starsCounter={card.starsCounter}
+                onpressVerPerfil={() =>
+                  navigation.navigate("perfilContratado", card)
                 }
-                onpressFavoritar={() => alert("favoritou")}
               />
             </View>
           );
@@ -105,5 +101,8 @@ const contratarStyle = StyleSheet.create({
     marginTop: "10%",
     fontSize: 24,
     alignSelf: "center",
+  },
+  cardView: {
+    marginTop: "10%",
   },
 });

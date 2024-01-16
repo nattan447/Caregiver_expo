@@ -8,6 +8,7 @@ const Cards: ServiceDetailsInter[] = [
     typeService: "pet care",
     id: "1",
     valor: 20,
+    starsCounter: 3,
   },
   {
     prestador: "naldo",
@@ -16,6 +17,7 @@ const Cards: ServiceDetailsInter[] = [
     typeService: "pet care",
     id: "2",
     valor: 30,
+    starsCounter: 5,
   },
   {
     prestador: "fernando",
@@ -24,6 +26,7 @@ const Cards: ServiceDetailsInter[] = [
     typeService: "pcd care",
     id: "3",
     valor: 40,
+    starsCounter: 1,
   },
   {
     prestador: "joão",
@@ -32,6 +35,7 @@ const Cards: ServiceDetailsInter[] = [
     typeService: "idoso care",
     id: "4",
     valor: 50,
+    starsCounter: 4,
   },
 ];
 export { Cards };
