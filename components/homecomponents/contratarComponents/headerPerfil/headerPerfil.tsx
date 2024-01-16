@@ -21,17 +21,12 @@ const HeaderPerfil = (props: PropsHeaderPerfil) => {
 export { HeaderPerfil };
 
 const perfilStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#F8F8F8",
-  },
   headerView: {
     flexDirection: "row",
     // backgroundColor: "red",
     width: "100%",
     justifyContent: "space-around",
-    height: "20%",
+    height: "14%",
     marginTop: "8%",
     paddingTop: 10,
   },
