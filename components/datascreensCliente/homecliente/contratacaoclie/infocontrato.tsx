@@ -10,7 +10,7 @@ import {
   TextInput,
 } from "react-native";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 
@@ -37,14 +37,28 @@ import { ContratoInfoInter } from "../../../interfacests/contratoInter";
 import { inputLengthCheck } from "../../../fuctions/inputCheck";
 
 import { monthNames } from "./mesesData/meses";
+import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+import { PerfilContratado } from "./perfil";
 
 type PropsInfoContrato = NativeStackScreenProps<
   InitialScreenParamList,
   "infoContrato"
 >;
 
-const InfoContratoCli = ({ navigation }: PropsInfoContrato) => {
+const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
   const [infoContrato, setInfoContrato] = useState<ContratoInfoInter>();
+
+  const [cuidadorPerfil, setCuidadorPerfil] = useState<ServiceDetailsInter>();
+
+  useEffect(() => {
+    if (route.params) {
+      console.log("possui dados nos parametros");
+      setCuidadorPerfil(route.params);
+      console.log(route.params);
+    } else {
+      console.error("não possui dados nos parametros");
+    }
+  }, []);
 
   const actualDate = new Date();
 
@@ -101,9 +115,9 @@ const InfoContratoCli = ({ navigation }: PropsInfoContrato) => {
     <SafeAreaView style={infoContratoStyle.container}>
       <ScrollView style={{ width: "100%" }}>
         <HeaderPerfil
-          img={require("../../../../assets/modelFace.jpg")}
-          nome="Nattan Ferreira"
-          cargo="Veterinário"
+          img={cuidadorPerfil?.img}
+          nome={cuidadorPerfil?.prestador as string}
+          cargo={cuidadorPerfil?.typeService as string}
         />
 
         <View style={infoContratoStyle.main}>

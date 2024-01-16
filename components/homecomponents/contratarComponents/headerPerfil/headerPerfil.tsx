@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image, Text } from "react-native";
 
 type PropsHeaderPerfil = {
-  img: number;
+  img: number | undefined;
   nome: string;
   cargo: string;
 };
@@ -9,7 +9,11 @@ type PropsHeaderPerfil = {
 const HeaderPerfil = (props: PropsHeaderPerfil) => {
   return (
     <View style={perfilStyle.headerView}>
-      <Image source={props.img} style={perfilStyle.img}></Image>
+      {props.img ? (
+        <Image source={props.img} style={perfilStyle.img}></Image>
+      ) : (
+        <Text>foto não encontrada</Text>
+      )}
       <View style={perfilStyle.innerHeaderView}>
         <Text style={perfilStyle.nome}>{props.nome} </Text>
         <Text style={perfilStyle.cargo}>{props.cargo}</Text>
@@ -48,7 +52,7 @@ const perfilStyle = StyleSheet.create({
     fontSize: 14,
     color: "black",
     fontWeight: "bold",
-    alignSelf: "center",
+
     top: 10,
   },
 });

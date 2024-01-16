@@ -32,6 +32,8 @@ import { Cards } from "../../../homecomponents/processComponents/data/cards";
 
 import { CardContrado } from "../../../homecomponents/contratarComponents/cardContratado";
 
+import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+
 type PropsContratar = NativeStackScreenProps<
   InitialScreenParamList,
   "Contratar"
@@ -65,7 +67,7 @@ const ContratarClie = ({ navigation }: PropsContratar) => {
 
         <SearchbarHome value={name} onchange={handleItem} />
 
-        {cards.map((card) => {
+        {cards.map((card: ServiceDetailsInter) => {
           return (
             <View style={contratarStyle.cardView} key={card.id}>
               <CardContrado

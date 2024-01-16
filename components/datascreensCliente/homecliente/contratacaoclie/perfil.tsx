@@ -28,6 +28,7 @@ import { Pendent } from "../processoScrens/pendent";
 import { Btn } from "../../../../desginscomponents/authenticheadrs";
 
 import { HeaderPerfil } from "../../../homecomponents/contratarComponents/headerPerfil/headerPerfil";
+import { Cuidadadordatainterfc } from "../../../interfacests/cuidadordata";
 
 type PropsPerfilContratado = NativeStackScreenProps<
   InitialScreenParamList,
@@ -41,14 +42,11 @@ const PerfilContratado = ({ navigation, route }: PropsPerfilContratado) => {
     if (route.params) {
       console.log("possui dados nos parametros");
       setCuidadorPerfil(route.params);
+      console.log(route.params);
     } else {
       console.error("não possui dados nos parametros");
     }
   }, []);
-
-  const solicitar = () => {
-    navigation.navigate("infoContrato");
-  };
 
   return (
     <SafeAreaView style={perfilStyle.container}>
@@ -56,9 +54,9 @@ const PerfilContratado = ({ navigation, route }: PropsPerfilContratado) => {
         <Text style={perfilStyle.headerTxt}>Perfil do cuidador</Text>
 
         <HeaderPerfil
-          img={require("../../../../assets/modelFace.jpg")}
-          nome="Nattan Ferreira"
-          cargo="Veterinário"
+          img={cuidadorPerfil?.img as number}
+          nome={cuidadorPerfil?.prestador as string}
+          cargo={cuidadorPerfil?.typeService as string}
         />
 
         <View style={perfilStyle.main}>
@@ -81,7 +79,10 @@ const PerfilContratado = ({ navigation, route }: PropsPerfilContratado) => {
               cor="#F1EBEB"
               txtbtn="solicitar"
               txtcor="#C77B43"
-              pres={() => navigation.navigate("infoContrato")}
+              pres={() => {
+                if (cuidadorPerfil)
+                  navigation.navigate("infoContrato", cuidadorPerfil);
+              }}
               fontsize={16}
               altura={40}
               largura={131}
