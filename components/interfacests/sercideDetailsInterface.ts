@@ -6,6 +6,7 @@ interface ServiceDetailsInter {
   id: string;
   valor?: number;
   conclusao?: string;
+  starsCounter: number;
 }
 [];
 
