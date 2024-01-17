@@ -10,7 +10,7 @@ export { EnderecoInter };
 
 interface ContratoInfoInter {
   data: string;
-  horario: string | undefined;
+  horario: Date | undefined | string;
   msgSolicitacao?: string;
   dependente?: string;
   endereco: EnderecoInter;

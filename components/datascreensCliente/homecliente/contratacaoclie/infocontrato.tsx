@@ -122,7 +122,7 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
 
     setInfoContrato({
       ...(infoContrato as ContratoInfoInter),
-      horario: currentDate?.toDateString(),
+      horario: currentDate,
     });
   };
 
@@ -157,12 +157,16 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
       infoContrato?.horario &&
       infoContrato?.endereco
     ) {
+      fetchApiCep();
+
       console.log(infoContrato.horario.toLocaleString());
 
-      fetchApiCep();
       if (parseInt(infoContrato?.data as string) <= days) {
         infoContrato?.endereco.localidade
-          ? navigation.navigate("pagamentoInfo", infoContrato)
+          ? navigation.navigate("pagamentoInfo", {
+              ...infoContrato,
+              horario: infoContrato.horario.toLocaleString(),
+            })
           : alert("cep invalido");
       } else {
         alert("digite um dia válido");
@@ -219,10 +223,12 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
               style={infoContratoStyle.hourInput}
             >
               <Text>
-                {date
-                  .toLocaleString()
-                  .split("")
-                  .filter((char, index) => index > 10)}
+                {infoContrato && infoContrato.horario
+                  ? infoContrato?.horario
+                      .toLocaleString()
+                      .split("")
+                      .filter((char, index) => index > 10)
+                  : undefined}
               </Text>
             </TouchableOpacity>
           </View>
