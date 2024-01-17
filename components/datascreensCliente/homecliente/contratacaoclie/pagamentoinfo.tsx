@@ -10,7 +10,7 @@ import {
 
 import React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import homeloginscss from "../../../../estilos/homeloginscss";
 
@@ -25,11 +25,33 @@ type PropsPagamentoCli = NativeStackScreenProps<
   "pagamentoInfo"
 >;
 
-const PagamentoinfoCli = ({ navigation }: PropsPagamentoCli) => {
+const PagamentoinfoCli = ({ navigation, route }: PropsPagamentoCli) => {
+  useEffect(() => {
+    if (route.params) {
+      console.log("possui dados nos parametros");
+
+      console.log(route.params.horario?.toLocaleString());
+    } else {
+      console.error("não possui dados nos parametros");
+    }
+  }, []);
+
   return (
-    <View style={homeloginscss.container}>
-      <Text>pagamento</Text>
+    <View style={pagamentoSyle.container}>
+      <Text style={pagamentoSyle.headerTxt}>Informações de Pagamento</Text>
     </View>
   );
 };
 export { PagamentoinfoCli };
+
+const pagamentoSyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  headerTxt: {
+    color: "#C77B43",
+    fontSize: 24,
+    marginTop: "4%",
+  },
+});

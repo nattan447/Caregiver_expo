@@ -4,6 +4,8 @@ import { Clientedatainterfc } from "../components/interfacests/clienteInterface"
 
 import { ServiceDetailsInter } from "../components/interfacests/sercideDetailsInterface";
 
+import { ContratoInfoInter } from "../components/interfacests/contratoInter";
+
 type InitialScreenParamList = {
   homeCliente: undefined;
   homeTab: undefined;
@@ -19,6 +21,6 @@ type InitialScreenParamList = {
   Contratar: undefined;
   perfilContratado: ServiceDetailsInter;
   infoContrato: ServiceDetailsInter;
-  pagamentoInfo: ServiceDetailsInter;
+  pagamentoInfo: ContratoInfoInter;
 };
 export { InitialScreenParamList };
