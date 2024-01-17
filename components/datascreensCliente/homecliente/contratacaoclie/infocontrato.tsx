@@ -37,7 +37,9 @@ import { ContratoInfoInter } from "../../../interfacests/contratoInter";
 import { inputLengthCheck } from "../../../fuctions/inputCheck";
 
 import { monthNames } from "./mesesData/meses";
+
 import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+
 import { PerfilContratado } from "./perfil";
 
 type PropsInfoContrato = NativeStackScreenProps<
@@ -90,7 +92,6 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
       inputLengthCheck(infoContrato?.data) > 1 &&
       inputLengthCheck(infoContrato?.horario) > 1
     ) {
-      const arrayChar = infoContrato?.horario.split("");
       if (infoContrato?.data) {
         if (parseInt(infoContrato?.data) <= days) {
           console.log("passou nos  testes dos dias");

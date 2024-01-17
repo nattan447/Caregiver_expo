@@ -7,23 +7,37 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import { InputConfig } from "../../../../homecomponents/initialScreenComp/configComponents/inputConfig";
+
 import Inputs from "../../../../../desginscomponents/inputs";
+
 import { DepDataContextCli } from "../../datacontext/depDataContext";
+
 import { Combobox } from "../../../../../desginscomponents/inputs";
+
 import { useState, useContext } from "react";
+
 import { BigInput } from "../../../../../desginscomponents/bigInput";
+
 import { HeaderConfig } from "../../../../homecomponents/initialScreenComp/configComponents/header";
+
 import { Btn } from "../../../../../desginscomponents/authenticheadrs";
+
 import { DepDataInterface } from "../../../../interfacests/depDataInterface";
+
 import { inputLengthCheck } from "../../../../fuctions/inputCheck";
+
 import * as ImagePicker from "expo-image-picker";
 
 const ConfigDepCli = () => {
   const { depDataContext, setDepDataContext }: any =
     useContext(DepDataContextCli);
+
   const [newData, setNewData] = useState<DepDataInterface>(depDataContext);
+
   const [quadro, setQuadro] = useState<string>("");
+
   async function handleImage() {
     let Image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -33,7 +47,7 @@ const ConfigDepCli = () => {
     });
     console.log(Image);
     if (!Image.canceled) {
-      setNewData({...newData,profileImg: Image.assets[0].uri,});
+      setNewData({ ...newData, profileImg: Image.assets[0].uri });
     }
   }
 
@@ -41,14 +55,13 @@ const ConfigDepCli = () => {
 
   const handleIdade = (Age: string) => setNewData({ ...newData, idade: Age });
 
-  const handleDescricao = (Des: string) => setNewData({ ...newData, descricao: Des });
-  
-  const handleQuadro =(Quadro: string) =>
-   {
-    setNewData({ ...newData, quadro:  Quadro })
+  const handleDescricao = (Des: string) =>
+    setNewData({ ...newData, descricao: Des });
+
+  const handleQuadro = (Quadro: string) => {
+    setNewData({ ...newData, quadro: Quadro });
     setQuadro(Quadro);
   };
-
 
   function salvar() {
     if (
@@ -82,7 +95,7 @@ const ConfigDepCli = () => {
           txt="nome completo"
           isPassWord={false}
           onchangeValue={handleName}
-          value={newData.nome}
+          value={newData?.nome}
           placeholder="digite  o nome"
           maxLength={40}
           type="default"
@@ -91,13 +104,13 @@ const ConfigDepCli = () => {
           txt="idade"
           isPassWord={false}
           onchangeValue={handleIdade}
-          value={newData.idade}
+          value={newData?.idade}
           placeholder="digite  a idade"
           maxLength={40}
           type="numeric"
         />
         <BigInput
-          value={newData.descricao as string}
+          value={newData?.descricao as string}
           onchangeValue={handleDescricao}
           nometxt="descrição *"
           placeholder=""
@@ -105,7 +118,7 @@ const ConfigDepCli = () => {
         <Combobox
           placeholder="selecione o quadro"
           textabove="Quadro"
-          initialvalue={newData.quadro as string}
+          initialvalue={newData?.quadro as string}
           onchange={handleQuadro}
           arrayvalues={["Pcd", "Idosos", "Pet", "Infantil"]}
         />
