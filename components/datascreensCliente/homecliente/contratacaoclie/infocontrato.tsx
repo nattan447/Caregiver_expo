@@ -199,6 +199,13 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
             onChangeText={handleDate}
           />
 
+          <BigInput
+            value={infoContrato?.msgSolicitacao}
+            onchangeValue={handleMsgSolicitacao}
+            nometxt="Mensagem de solicitação (*opcional)"
+            placeholder=""
+          />
+
           {showTime ? (
             <DateTimePicker
               mode="time"
@@ -209,12 +216,6 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
             />
           ) : undefined}
 
-          <BigInput
-            value={infoContrato?.msgSolicitacao}
-            onchangeValue={handleMsgSolicitacao}
-            nometxt="Mensagem de solicitação (*opcional)"
-            placeholder=""
-          />
           <View style={infoContratoStyle.maskedView}>
             <Text> horário em horas *</Text>
 
@@ -302,7 +303,7 @@ const infoContratoStyle = StyleSheet.create({
     paddingBottom: 20,
   },
   maskedView: {
-    marginTop: 30,
+    marginTop: 60,
     alignItems: "center",
   },
   hourInput: {

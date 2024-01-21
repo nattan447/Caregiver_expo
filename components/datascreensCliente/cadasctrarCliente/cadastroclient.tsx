@@ -38,6 +38,8 @@ import * as ImagePicker from "expo-image-picker";
 
 import { inputLengthCheck } from "../../fuctions/inputCheck";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 type PropsCadastroCliente = NativeStackScreenProps<
   AuthenticRootParamList,
   "cadastrocliente"
@@ -76,6 +78,15 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
     };
     fetchdata();
   }, []);
+
+  const saveDataClient = async () => {
+    const dataSet = await AsyncStorage.setItem(
+      "clientData",
+      JSON.stringify(clienteData)
+    )
+      .then(() => console.log("gurardou os dado"))
+      .catch((error) => console.log("deu erro", error));
+  };
 
   const handleName = (Name: string) =>
     setClienteData({ ...(clienteData as Clientedatainterfc), nome: Name });
@@ -140,9 +151,10 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
           alert("digite uma senha com mais de 4 carácteres");
         } else {
           if (inputLengthCheck(clienteData?.cpf) == 11) {
-            clienteData && isCheckedTerms
-              ? navigation.navigate("roothomecliente", clienteData)
-              : alert("concorde com os termos de uso antes");
+            if (clienteData && isCheckedTerms) {
+              navigation.navigate("roothomecliente", clienteData);
+              saveDataClient();
+            } else alert("concorde com os termos de uso antes");
           } else alert("campo de cpf com caracteres insuficientes ");
         }
       } else alert("digite o email de forma correta");

@@ -106,3 +106,5 @@ const contratarStyle = StyleSheet.create({
     marginTop: "10%",
   },
 });
+
+export { contratarStyle };
