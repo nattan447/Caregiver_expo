@@ -15,6 +15,7 @@ type InitialScreenParamList = {
   notificationCli: undefined;
   configPerfilDep: undefined;
   serviceDetails: ServiceDetailsInter;
+  propostaService: ServiceDetailsInter;
   finished: undefined;
   pendent: undefined;
   inProcess: undefined;

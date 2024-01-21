@@ -224,7 +224,7 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
                 ></CheckBox>
               </View>
 
-              <Text>concordo com os termos de uso da Caregiver</Text>
+              <Text>concordo com os termos de uso</Text>
             </View>
             <Btn
               cor="#F1EBEB"
@@ -247,7 +247,7 @@ export default Cadastrocuidador3;
 const cadastroCuidStyle = StyleSheet.create({
   CheckBoxViw: {
     width: "100%",
-    height: "2%",
+    height: "4%",
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-around",

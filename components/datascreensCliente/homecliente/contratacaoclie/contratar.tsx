@@ -49,7 +49,9 @@ const ContratarClie = ({ navigation }: PropsContratar) => {
   const handleItem = (itm: string): void => {
     setName(itm);
 
-    const mySearch = cards.filter((card) => card.prestador === itm);
+    const mySearch = cards.filter(
+      (card) => card.prestador.toLocaleLowerCase() === itm.toLocaleLowerCase()
+    );
 
     if (!mySearch[0]) {
       console.log("usuario não encontrado");

@@ -5,39 +5,46 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
+
 import Inputs, { Combobox } from "../../../../../desginscomponents/inputs";
+
 import { DepDataInterface } from "../../../../interfacests/depDataInterface";
+
 import { Btn } from "../../../../../desginscomponents/authenticheadrs";
+
 import React, { useState, useContext, useEffect } from "react";
+
 import { DepDataContextCli } from "../../datacontext/depDataContext";
+
 import cadastro from "../../../../../estilos/cadastro";
+
 import * as ImagePicker from "expo-image-picker";
+
 import { inputLengthCheck } from "../../../../fuctions/inputCheck";
+
 const AddDependentCli = () => {
   const { depDataContext, setDepDataContext }: any =
     useContext(DepDataContextCli);
+
   const [depData, setDepData] = useState<DepDataInterface>();
+
   const [quadro, setQuadro] = useState("");
 
+  const handleName = (Name: string) =>
+    setDepData({ ...(depData as DepDataInterface), nome: Name });
 
-  const handleName=(Name:string)=>setDepData({...depData as DepDataInterface,nome:Name})
+  const handleIdade = (Age: string) =>
+    setDepData({ ...(depData as DepDataInterface), idade: Age });
 
-  const handleIdade=(Age:string)=>setDepData({...depData as DepDataInterface,idade:Age})
-
-
-  const handleQuadro=(Quadro:string)=>
-  {
-    setDepData({...depData as DepDataInterface,quadro:Quadro})
+  const handleQuadro = (Quadro: string) => {
+    setDepData({ ...(depData as DepDataInterface), quadro: Quadro });
     setQuadro(Quadro);
-  }
+  };
 
-  const handleDescricao=(Desc:string)=>setDepData({...depData as DepDataInterface,descricao:Desc})
-
-
-
-
-
+  const handleDescricao = (Desc: string) =>
+    setDepData({ ...(depData as DepDataInterface), descricao: Desc });
 
   const pickImage = async () => {
     let Image = await ImagePicker.launchImageLibraryAsync({
@@ -47,12 +54,14 @@ const AddDependentCli = () => {
       quality: 1,
     });
     console.log(Image);
-    if (!Image.canceled) 
-    {
-      setDepData({...depData as DepDataInterface,profileImg:Image.assets[0].uri})
+    if (!Image.canceled) {
+      setDepData({
+        ...(depData as DepDataInterface),
+        profileImg: Image.assets[0].uri,
+      });
     }
   };
- 
+
   const adicionar = () => {
     if (
       inputLengthCheck(depData?.nome) > 1 &&
@@ -107,7 +116,14 @@ const AddDependentCli = () => {
             style={depStyle.imagePickerStyle}
           >
             <Text style={depStyle.defaultTxt}>Foto de perfil</Text>
-            <View style={depStyle.imagePickerView}></View>
+            <View style={depStyle.imagePickerView}>
+              {depData?.profileImg ? (
+                <Image
+                  source={{ uri: depData.profileImg }}
+                  style={depStyle.profileImg}
+                ></Image>
+              ) : undefined}
+            </View>
           </TouchableOpacity>
           <Inputs
             multiline={true}
@@ -168,15 +184,20 @@ const depStyle = StyleSheet.create({
     borderRadius: 5,
     width: 240,
     color: "#D8A683",
-    paddingLeft: 8,
-    zIndex: 1,
-    position: "relative",
     height: 190,
+    justifyContent: "center",
+    alignContent: "center",
   },
   defaultTxt: {
     marginBottom: 8,
     color: "#D8A683",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  profileImg: {
+    height: 150,
+    width: 180,
+    borderRadius: 10,
+    alignSelf: "center",
   },
 });

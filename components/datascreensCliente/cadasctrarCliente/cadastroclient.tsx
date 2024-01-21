@@ -6,6 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
+  Image,
 } from "react-native";
 
 import { CheckBox } from "react-native-btr";
@@ -240,7 +241,14 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
               style={{ alignSelf: "center" }}
             >
               <Text style={styles.txt}>Foto de perfil</Text>
-              <View style={cadastro.inputimg}></View>
+              <View style={cadastro.inputimg}>
+                {clienteData?.profileimg ? (
+                  <Image
+                    source={{ uri: clienteData.profileimg }}
+                    style={cadastroStyle.profileImg}
+                  />
+                ) : undefined}
+              </View>
             </TouchableOpacity>
 
             <Combobox
@@ -271,7 +279,7 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
                 ></CheckBox>
               </View>
 
-              <Text>concordo com os termos de uso da Caregiver</Text>
+              <Text>concordo com os termos de uso </Text>
             </View>
 
             <Btn
@@ -299,5 +307,10 @@ const cadastroStyle = StyleSheet.create({
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  profileImg: {
+    height: 150,
+    width: 180,
+    borderRadius: 10,
   },
 });
