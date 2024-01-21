@@ -36,6 +36,8 @@ import { InfoContratoCli } from "../../components/datascreensCliente/homecliente
 
 import { PagamentoinfoCli } from "../../components/datascreensCliente/homecliente/contratacaoclie/pagamentoinfo";
 
+import { Proposta } from "../../components/datascreensCliente/homecliente/processoScrens/propostaServico/proposta";
+
 const Stack = createNativeStackNavigator<InitialScreenParamList>();
 
 type PropsHomeFromAuthenticScreen = NativeStackScreenProps<
@@ -105,6 +107,11 @@ const InitialScreenRouteCli = ({ route }: PropsHomeFromAuthenticScreen) => {
           <Stack.Screen
             name="serviceDetails"
             component={ServiceDetails}
+            options={{ ...headerStyle1, headerShown: true }}
+          />
+          <Stack.Screen
+            name="propostaService"
+            component={Proposta}
             options={{ ...headerStyle1, headerShown: true }}
           />
 

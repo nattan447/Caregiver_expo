@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { View, SafeAreaView, ScrollView } from "react-native";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Authenticheadrs } from "../../../desginscomponents/authenticheadrs";
 
@@ -18,7 +18,10 @@ import { Clientedatainterfc } from "../../interfacests/clienteInterface";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import React from "react";
+import { VideoExportPreset } from "expo-image-picker";
 
 type PropsEntrarCliente = NativeStackScreenProps<
   AuthenticRootParamList,
@@ -28,9 +31,7 @@ type PropsEntrarCliente = NativeStackScreenProps<
 export type PickedCli = Pick<Clientedatainterfc, "nome" | "email" | "senha">;
 
 const Entrarcliente = ({ navigation }: PropsEntrarCliente) => {
-  const voltarcliente = (): void => {
-    navigation.navigate("Autenticacaocli");
-  };
+  const [allUsers, setAllUsers] = useState<PickedCli[]>();
 
   const [email, Setemail] = useState<string>("");
 
@@ -39,6 +40,41 @@ const Entrarcliente = ({ navigation }: PropsEntrarCliente) => {
   const handleEmail = (Email: string): void => Setemail(Email);
 
   const handleSenha = (Senha: string): void => Setsenha(Senha);
+
+  const voltarcliente = (): void => {
+    navigation.navigate("Autenticacaocli");
+  };
+
+  const getUser = async () => {
+    const get = await AsyncStorage.getItem("clientData")
+      .then((data) => console.log("tem dados no cell", data))
+      .catch((error) => console.log("erro ao achar usuario", error));
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    // const url = "http://10.0.0.105:3000/user/getAllUsers";
+    // const fetchApi = async () => {
+    //   try {
+    //     const fetchData = await fetch(url, {
+    //       method: "GET",
+    //       headers: {
+    //         Origin: "http://localhost:3000",
+    //       },
+    //     });
+    //     const { data } = await fetchData.json();
+    //     console.log("conectado com a api");
+    //     console.log(data);
+    //     setAllUsers(data);
+    //   } catch (error) {
+    //     console.log("error ao se conectar com a api do back", error);
+    //   }
+    // };
+    // fetchApi();
+  }, []);
 
   const entrar = () => {
     const clienteData: PickedCli = {

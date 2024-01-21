@@ -7,73 +7,49 @@ import {
   FlatList,
 } from "react-native";
 
-import homeloginscss from "../../../../estilos/homeloginscss";
-
 import { Btn } from "../../../../desginscomponents/authenticheadrs";
 
 import { useState } from "react";
 
 import { HeaderCard } from "../headerCard/headerCard";
 
-type dataQueryProps = {
+type PropsCuidadorCard = {
   img: number;
   typeService: string;
   status: string;
   prestador: string;
   id: string;
-};
-
-type PropsCuidadorCard = {
-  queryData: dataQueryProps[];
+  calcelService: () => void;
   onpresProposta: () => void;
 };
 
 const CuidadorCard = (props: PropsCuidadorCard) => {
-  const [card, setCards] = useState(props.queryData);
-
-  function cancelService(Id: string) {
-    const notificationRemoved = card.filter((card) => card.id != Id);
-
-    setCards(notificationRemoved);
-  }
-
-  function renderComponent(data: dataQueryProps) {
-    return (
-      <View style={pendentStyle.container}>
-        <View style={pendentStyle.cardServico}>
-          <HeaderCard
-            typeService={data.typeService}
-            status={data.status}
-            prestador={data.prestador}
-            img={data.img}
-          />
-          <TouchableOpacity
-            style={pendentStyle.txt}
-            onPress={props.onpresProposta}
-          >
-            <Text style={pendentStyle.txtProposta}>ver proposta</Text>
-          </TouchableOpacity>
-          <Btn
-            cor="#F1EBEB"
-            txtbtn="CANCELAR"
-            txtcor="#E64A19"
-            pres={() => cancelService(data.id)}
-            fontsize={10}
-            altura={34}
-            largura={100}
-          />
-        </View>
-      </View>
-    );
-  }
-
   return (
-    <FlatList
-      style={{ width: "100%" }}
-      data={card}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => renderComponent(item)}
-    ></FlatList>
+    <View style={pendentStyle.container}>
+      <View style={pendentStyle.cardServico}>
+        <HeaderCard
+          typeService={props.typeService}
+          status={props.status}
+          prestador={props.prestador}
+          img={props.img}
+        />
+        <TouchableOpacity
+          style={pendentStyle.txt}
+          onPress={props.onpresProposta}
+        >
+          <Text style={pendentStyle.txtProposta}>ver proposta</Text>
+        </TouchableOpacity>
+        <Btn
+          cor="#F1EBEB"
+          txtbtn="CANCELAR"
+          txtcor="#E64A19"
+          pres={props.calcelService}
+          fontsize={10}
+          altura={34}
+          largura={100}
+        />
+      </View>
+    </View>
   );
 };
 

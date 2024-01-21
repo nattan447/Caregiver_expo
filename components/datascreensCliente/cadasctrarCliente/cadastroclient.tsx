@@ -5,34 +5,57 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  StyleSheet,
+  Image,
 } from "react-native";
+
+import { CheckBox } from "react-native-btr";
+
 import React from "react";
+
 import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
+
 import { styles } from "../../../desginscomponents/inputs";
+
 import { useState, useEffect, useRef } from "react";
+
 import { AuthenticRootParamList } from "../../../types/authenticRoot";
+
 import { Btn } from "../../../desginscomponents/authenticheadrs";
+
 import homeloginscss from "../../../estilos/homeloginscss";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import cadastro from "../../../estilos/cadastro";
+
 import Inputs from "../../../desginscomponents/inputs";
+
 import { Clientedatainterfc } from "../../interfacests/clienteInterface";
+
 import { Combobox } from "../../../desginscomponents/inputs";
+
 import * as ImagePicker from "expo-image-picker";
+
 import { inputLengthCheck } from "../../fuctions/inputCheck";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 type PropsCadastroCliente = NativeStackScreenProps<
   AuthenticRootParamList,
   "cadastrocliente"
 >;
 const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
   const [clienteData, setClienteData] = useState<Clientedatainterfc>();
- 
+
+  const [isCheckedTerms, setIscCheckTerms] = useState(false);
+
   const [isloadingEstados, setIsloadingEstados] = useState(true);
- 
+
   const [ArrayEstado, SetArrayEstado] = useState<string[]>([]);
- 
+
   const [EstadoValue, SetEstadoValue] = useState<string>("");
- 
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -57,30 +80,48 @@ const Cadastrocliente = ({ navigation }: PropsCadastroCliente) => {
     fetchdata();
   }, []);
 
-  const handleName=(Name:string)=>setClienteData({...clienteData as Clientedatainterfc,nome:Name})
+  const saveDataClient = async () => {
+    const dataSet = await AsyncStorage.setItem(
+      "clientData",
+      JSON.stringify(clienteData)
+    )
+      .then(() => console.log("gurardou os dado"))
+      .catch((error) => console.log("deu erro", error));
+  };
 
-  const handleSobrenome=(sbNome:string)=>setClienteData({...clienteData as Clientedatainterfc,sobrenome:sbNome})
+  const handleName = (Name: string) =>
+    setClienteData({ ...(clienteData as Clientedatainterfc), nome: Name });
 
-  const handleEmail=(Email:string)=>setClienteData({...clienteData as Clientedatainterfc,email:Email})
+  const handleSobrenome = (sbNome: string) =>
+    setClienteData({
+      ...(clienteData as Clientedatainterfc),
+      sobrenome: sbNome,
+    });
 
-  const handleSenha=(Senha:string)=>setClienteData({...clienteData as Clientedatainterfc,senha:Senha})
+  const handleEmail = (Email: string) =>
+    setClienteData({ ...(clienteData as Clientedatainterfc), email: Email });
 
-  const handleCpf=(Cpf:string)=>setClienteData({...clienteData as Clientedatainterfc,cpf:Cpf})
+  const handleSenha = (Senha: string) =>
+    setClienteData({ ...(clienteData as Clientedatainterfc), senha: Senha });
 
-  const handleCidade=(city:string)=>setClienteData({...clienteData as Clientedatainterfc,cidade:city})
+  const handleCpf = (Cpf: string) =>
+    setClienteData({ ...(clienteData as Clientedatainterfc), cpf: Cpf });
 
-  const handelEstado=(Estado:string)=>
-  {
-    if (!isloadingEstados) 
-        {
-      if (Estado != null) 
-          {
+  const handleCidade = (city: string) =>
+    setClienteData({ ...(clienteData as Clientedatainterfc), cidade: city });
+
+  const handelEstado = (Estado: string) => {
+    if (!isloadingEstados) {
+      if (Estado != null) {
         SetEstadoValue(Estado);
-          }
+      }
 
-setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
-        }
-  }
+      setClienteData({
+        ...(clienteData as Clientedatainterfc),
+        Estado: Estado,
+      });
+    }
+  };
 
   const pickImage = async () => {
     let Image = await ImagePicker.launchImageLibraryAsync({
@@ -90,13 +131,13 @@ setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
       quality: 1,
     });
     console.log(Image);
-    if (!Image.canceled) 
-    {
-      setClienteData({...clienteData as Clientedatainterfc,profileimg: Image.assets[0].uri});
+    if (!Image.canceled) {
+      setClienteData({
+        ...(clienteData as Clientedatainterfc),
+        profileimg: Image.assets[0].uri,
+      });
     }
   };
-
-
 
   const goHome = (): void => {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -110,19 +151,17 @@ setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
         if (inputLengthCheck(clienteData?.senha) < 5) {
           alert("digite uma senha com mais de 4 carácteres");
         } else {
-          console.log("a senh tem mais de 4 carácteres ");
           if (inputLengthCheck(clienteData?.cpf) == 11) {
-            if (clienteData) {
+            if (clienteData && isCheckedTerms) {
               navigation.navigate("roothomecliente", clienteData);
-              console.log("dados conforme os padrões, cadastro acessivel");
-            }
+              saveDataClient();
+            } else alert("concorde com os termos de uso antes");
           } else alert("campo de cpf com caracteres insuficientes ");
         }
       } else alert("digite o email de forma correta");
     } else {
       alert("preecha todos dados obrigatórios");
     }
-    console.log(clienteData);
   };
 
   return (
@@ -202,7 +241,14 @@ setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
               style={{ alignSelf: "center" }}
             >
               <Text style={styles.txt}>Foto de perfil</Text>
-              <View style={cadastro.inputimg}></View>
+              <View style={cadastro.inputimg}>
+                {clienteData?.profileimg ? (
+                  <Image
+                    source={{ uri: clienteData.profileimg }}
+                    style={cadastroStyle.profileImg}
+                  />
+                ) : undefined}
+              </View>
             </TouchableOpacity>
 
             <Combobox
@@ -225,6 +271,17 @@ setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
               length={40}
               multiline={false}
             />
+            <View style={cadastroStyle.CheckBoxViw}>
+              <View style={{ width: "5%", left: 40 }}>
+                <CheckBox
+                  checked={isCheckedTerms}
+                  onPress={() => setIscCheckTerms(!isCheckedTerms)}
+                ></CheckBox>
+              </View>
+
+              <Text>concordo com os termos de uso </Text>
+            </View>
+
             <Btn
               cor="#F1EBEB"
               txtbtn="cadastrar"
@@ -242,3 +299,18 @@ setClienteData({...clienteData as Clientedatainterfc,Estado:Estado})
 };
 
 export default Cadastrocliente;
+
+const cadastroStyle = StyleSheet.create({
+  CheckBoxViw: {
+    width: "100%",
+    height: "2%",
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  profileImg: {
+    height: 150,
+    width: 180,
+    borderRadius: 10,
+  },
+});

@@ -1,16 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Authenticheadrs } from "../../desginscomponents/authenticheadrs";
 
@@ -22,6 +14,8 @@ import homeloginscss from "../../estilos/homeloginscss";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import React from "react";
 
 type PropsAuthenticCli = NativeStackScreenProps<
@@ -30,17 +24,25 @@ type PropsAuthenticCli = NativeStackScreenProps<
 >;
 
 const Autenticacaocli = ({ navigation }: PropsAuthenticCli) => {
-  const irpaginacuidador = (): void => {
-    navigation.navigate("Autenticacaocuid");
+  const irpaginacuidador = () => navigation.navigate("Autenticacaocuid");
+
+  const irentrarcliente = () => navigation.navigate("entrarcliente");
+
+  const cadastrarCliente = () => navigation.navigate("cadastrocliente");
+
+  const getUser = async () => {
+    const get = await AsyncStorage.getItem("clientData")
+      .then((data) => {
+        data
+          ? navigation.navigate("roothomecliente", JSON.parse(data as string))
+          : undefined;
+      })
+      .catch((error) => console.log("deu erro", error));
   };
 
-  const irentrarcliente = (): void => {
-    navigation.navigate("entrarcliente");
-  };
-
-  const cadastrarCliente = (): void => {
-    navigation.navigate("cadastrocliente");
-  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <SafeAreaView style={homeloginscss.container}>

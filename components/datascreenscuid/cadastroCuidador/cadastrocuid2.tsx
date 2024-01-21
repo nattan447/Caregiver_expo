@@ -101,6 +101,7 @@ const Cadastrocuidador2 = ({ navigation, route }: PropsCadastroCuid2) => {
         ...(datacuidador as OmitedCuidadadorData),
         profileimg: Image.assets[0].uri,
       });
+      alert("imagem adicionada");
     }
   };
 
@@ -175,7 +176,7 @@ const Cadastrocuidador2 = ({ navigation, route }: PropsCadastroCuid2) => {
           </TouchableOpacity>
           <View style={styleCadastro.viewTxt}>
             <Text style={[styles.txt, styleCadastro.txtDate]}>
-              data de nascimento
+              data de nascimento *
             </Text>
           </View>
           <TextInputMask

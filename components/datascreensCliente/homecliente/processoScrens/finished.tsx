@@ -12,6 +12,8 @@ import { ConcluidoCard } from "../../../homecomponents/processComponents/conclui
 
 import { Cards } from "../../../homecomponents/processComponents/data/cards";
 
+import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+
 type PropsFinished = NativeStackScreenProps<InitialScreenParamList, "finished">;
 
 type dataQueryProps = {
@@ -31,7 +33,9 @@ const Finished = ({ navigation }: PropsFinished) => {
         prestador={data.prestador}
         status={data.status}
         id={data.id}
-        onpressDetails={() => navigation.navigate("serviceDetails", data)}
+        onpressDetails={() =>
+          navigation.navigate("serviceDetails", data as ServiceDetailsInter)
+        }
         onpressFavoritar={() => alert("favoriotu")}
       />
     );

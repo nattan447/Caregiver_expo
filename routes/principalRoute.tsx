@@ -27,6 +27,7 @@ import Cadastrocuidador3 from "../components/datascreenscuid/cadastroCuidador/ca
 import Entrarcuidador from "../components/datascreenscuid/entrada/entrarcuid";
 
 import Homenavigator from "../components/homecuid/homenavigator";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<AuthenticRootParamList>();
 const PrincipalRoute = () => {

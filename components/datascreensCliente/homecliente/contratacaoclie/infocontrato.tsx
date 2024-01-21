@@ -37,8 +37,20 @@ import { ContratoInfoInter } from "../../../interfacests/contratoInter";
 import { inputLengthCheck } from "../../../fuctions/inputCheck";
 
 import { monthNames } from "./mesesData/meses";
+
 import { ServiceDetailsInter } from "../../../interfacests/sercideDetailsInterface";
+
 import { PerfilContratado } from "./perfil";
+
+import { EnderecoInter } from "../../../interfacests/contratoInter";
+
+import RNDateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 
 type PropsInfoContrato = NativeStackScreenProps<
   InitialScreenParamList,
@@ -47,6 +59,10 @@ type PropsInfoContrato = NativeStackScreenProps<
 
 const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
   const [infoContrato, setInfoContrato] = useState<ContratoInfoInter>();
+
+  const [showTime, setShowTime] = useState(false);
+
+  const [date, setDate] = useState(new Date(1598051730000));
 
   const [cuidadorPerfil, setCuidadorPerfil] = useState<ServiceDetailsInter>();
 
@@ -60,17 +76,59 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
     }
   }, []);
 
+  const fetchApiCep = async () => {
+    const cep = infoContrato?.endereco.cep;
+
+    const url = `https://viacep.com.br/ws/${cep}/json/`;
+
+    const fetchData = await fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.erro) {
+          setInfoContrato({
+            ...(infoContrato as ContratoInfoInter),
+            endereco: {
+              ...(infoContrato?.endereco as EnderecoInter),
+              rua: json.logradouro,
+              bairro: json.bairro,
+              localidade: json.localidade,
+              uf: json.uf,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("erro no cep ", error);
+
+        alert("erro ao tentar encontrar o cep");
+      });
+  };
+
   const actualDate = new Date();
 
   const actualMonth = monthNames[actualDate.getMonth()].name;
 
   const days = monthNames[actualDate.getMonth()].day;
 
-  const handleHour = (Hour: string) =>
-    setInfoContrato({ ...(infoContrato as ContratoInfoInter), horario: Hour });
+  const handleHour = (
+    event: DateTimePickerEvent,
+    selectedDate: Date | undefined
+  ) => {
+    setShowTime(false);
 
-  const handleDate = (Date: string) =>
+    const currentDate = selectedDate;
+
+    setDate(currentDate as Date);
+
+    setInfoContrato({
+      ...(infoContrato as ContratoInfoInter),
+      horario: currentDate,
+    });
+  };
+
+  const handleDate = (Date: string) => {
     setInfoContrato({ ...(infoContrato as ContratoInfoInter), data: Date });
+  };
 
   const handleMsgSolicitacao = (msg: string) =>
     setInfoContrato({
@@ -84,30 +142,37 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
       dependente: dep,
     });
 
+  const handleCep = (Cep: string) =>
+    setInfoContrato({
+      ...(infoContrato as ContratoInfoInter),
+      endereco: {
+        ...(infoContrato?.endereco as EnderecoInter),
+        cep: Cep,
+      },
+    });
+
   function proximo() {
-    console.log(infoContrato);
     if (
       inputLengthCheck(infoContrato?.data) > 1 &&
-      inputLengthCheck(infoContrato?.horario) > 1
+      infoContrato?.horario &&
+      infoContrato?.endereco
     ) {
-      const arrayChar = infoContrato?.horario.split("");
-      if (infoContrato?.data) {
-        if (parseInt(infoContrato?.data) <= days) {
-          console.log("passou nos  testes dos dias");
-          if (inputLengthCheck(infoContrato.horario) >= 2) {
-            console.log("passou no teste das horas");
-          } else {
-            console.error("não prencheu o campo das horas de manerira certa");
-            alert("preencha o campo de horas da maneira correta");
-          }
-        } else {
-          console.error("não existe esse dia");
-          alert("digite um dia válido");
-        }
+      fetchApiCep();
+
+      console.log(infoContrato.horario.toLocaleString());
+
+      if (parseInt(infoContrato?.data as string) <= days) {
+        infoContrato?.endereco.localidade
+          ? navigation.navigate("pagamentoInfo", {
+              ...infoContrato,
+              horario: infoContrato.horario.toLocaleString(),
+            })
+          : alert("cep invalido");
+      } else {
+        alert("digite um dia válido");
       }
     } else {
       alert("preencha os dados obrigatórios");
-      console.error("não preencheu os dados obrigatórios");
     }
   }
 
@@ -121,7 +186,7 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
         />
 
         <View style={infoContratoStyle.main}>
-          <Text> Data</Text>
+          <Text>Dia</Text>
           <TextInputMask
             placeholder="dia"
             style={infoContratoStyle.dateInput}
@@ -140,18 +205,45 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
             nometxt="Mensagem de solicitação (*opcional)"
             placeholder=""
           />
-          <Text> horário em horas *</Text>
-          <TextInputMask
-            placeholder="hora : minuto"
-            style={infoContratoStyle.dateInput}
-            maxLength={5}
-            value={infoContrato?.horario}
-            type={"datetime"}
-            options={{
-              format: "HH:MM",
-            }}
-            onChangeText={handleHour}
-          />
+
+          {showTime ? (
+            <DateTimePicker
+              mode="time"
+              value={date}
+              is24Hour={true}
+              testID="dateTimePicker"
+              onChange={handleHour}
+            />
+          ) : undefined}
+
+          <View style={infoContratoStyle.maskedView}>
+            <Text> horário em horas *</Text>
+
+            <TouchableOpacity
+              onPress={() => setShowTime(true)}
+              style={infoContratoStyle.hourInput}
+            >
+              <Text>
+                {infoContrato && infoContrato.horario
+                  ? infoContrato?.horario
+                      .toLocaleString()
+                      .split("")
+                      .filter((char, index) => index > 10)
+                  : undefined}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={infoContratoStyle.maskedView}>
+            <Text>Cep *</Text>
+
+            <TextInputMask
+              placeholder="digite o cep"
+              style={infoContratoStyle.dateInput}
+              maxLength={8}
+              type={"only-numbers"}
+              onChangeText={handleCep}
+            />
+          </View>
 
           <View style={infoContratoStyle.dependenteView}>
             <Combobox
@@ -162,6 +254,7 @@ const InfoContratoCli = ({ navigation, route }: PropsInfoContrato) => {
               arrayvalues={["Dep 1", "Dep 2", "Dep 3", "Dep 4"]}
             />
           </View>
+
           <Btn
             cor="#F1EBEB"
             txtbtn="próximo"
@@ -184,6 +277,7 @@ const infoContratoStyle = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#F8F8F8",
+    paddingBottom: 10,
   },
   dateInput: {
     height: 40,
@@ -208,16 +302,23 @@ const infoContratoStyle = StyleSheet.create({
     width: "100%",
     paddingBottom: 20,
   },
-  // input: {
-  //   backgroundColor: "#F1EBEB",
-  //   borderRadius: 5,
-  //   width: 280,
-  //   color: "#D8A683",
-  //   paddingLeft: 20,
-  //   minWidth: 6,
-  //   borderWidth: 0.4,
-  //   borderColor: "black",
-  //   height: 35,
-  //   margin: 30,
-  // },
+  maskedView: {
+    marginTop: 60,
+    alignItems: "center",
+  },
+  hourInput: {
+    height: 40,
+    borderBottomWidth: 2,
+    borderColor: "#dddddd",
+    backgroundColor: "#F1EBEB",
+    borderRadius: 5,
+    width: 200,
+    color: "#D8A683",
+    paddingLeft: 20,
+    minWidth: 6,
+    borderWidth: 0.4,
+    marginTop: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

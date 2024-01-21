@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { DepDataInterface } from "../../../interfacests/depDataInterface";
 
 const DepDataContextCli = createContext<DepDataInterface>({

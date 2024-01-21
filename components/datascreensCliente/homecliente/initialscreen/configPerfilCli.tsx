@@ -7,31 +7,44 @@ import { Clientedatainterfc } from "../../../interfacests/clienteInterface";
 import { InputConfig } from "../../../homecomponents/initialScreenComp/configComponents/inputConfig";
 import { Btn } from "../../../../desginscomponents/authenticheadrs";
 import { inputLengthCheck } from "../../../fuctions/inputCheck";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ConfigPerfilCli = () => {
+  const { clienteData, setClienteData }: any = useContext(Clientedatacontext);
 
-  const { clienteData,setClienteData }: any = useContext(Clientedatacontext);;
-    
   const [newData, setNewData] = useState<Clientedatainterfc>(clienteData);
 
   useEffect(() => {
     console.log(clienteData);
   }, []);
 
-  const changeName = (Name: string) => setNewData({...newData,nome:Name});
+  const changeName = (Name: string) => setNewData({ ...newData, nome: Name });
 
-  const changeSobrenome = (Sobrenome: string) => setNewData({...newData,sobrenome: Sobrenome,});
+  const changeSobrenome = (Sobrenome: string) =>
+    setNewData({ ...newData, sobrenome: Sobrenome });
 
-  const changeEmail = (Email: string) => setNewData({ ...newData,email: Email,});
+  const changeEmail = (Email: string) =>
+    setNewData({ ...newData, email: Email });
 
-  const changeSenha = (Senha: string) => setNewData({...newData,senha: Senha,});
-  
-  const changeCpf = (Cpf: string) =>  setNewData({...newData,cpf: Cpf,});
-  
-  const changeEstado = (estate: string) => setNewData({...newData,Estado: estate,});
- 
-  const changeCidade = (Cidade: string) => setNewData({...newData,cidade: Cidade,});
+  const changeSenha = (Senha: string) =>
+    setNewData({ ...newData, senha: Senha });
 
+  const changeCpf = (Cpf: string) => setNewData({ ...newData, cpf: Cpf });
+
+  const changeEstado = (estate: string) =>
+    setNewData({ ...newData, Estado: estate });
+
+  const changeCidade = (Cidade: string) =>
+    setNewData({ ...newData, cidade: Cidade });
+
+  const saveDataClient = async () => {
+    const dataSet = await AsyncStorage.setItem(
+      "clientData",
+      JSON.stringify(newData)
+    )
+      .then(() => console.log("gurardou os dado"))
+      .catch((error) => console.log("deu erro", error));
+  };
 
   function saveChangesDatas() {
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -49,7 +62,13 @@ const ConfigPerfilCli = () => {
             switch (inputLengthCheck(newData?.cpf)) {
               case 11:
                 console.log("passou na fase do cpf");
+
                 console.log("usuario pode salvar os dados sem problemas");
+
+                setClienteData(newData);
+
+                saveDataClient();
+
                 alert("dados salvos com sucesso");
                 break;
               default:
@@ -68,8 +87,6 @@ const ConfigPerfilCli = () => {
     } else {
       alert("dados obrigatórios vazios");
     }
-    setClienteData(newData);
-    console.log(newData);
   }
 
   return (

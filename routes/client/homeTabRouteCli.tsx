@@ -11,7 +11,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 // import { ContratarRouteCli } from "./contratarRouteCli";
 
-import { FavoritosCli } from "../../components/datascreensCliente/homecliente/favoritos";
+import { FavoritosCli } from "../../components/datascreensCliente/homecliente/faviritos/favoritos";
 
 import { Clientedatainterfc } from "../../components/interfacests/clienteInterface";
 

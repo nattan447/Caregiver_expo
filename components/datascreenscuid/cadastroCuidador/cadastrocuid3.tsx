@@ -3,8 +3,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
-  Easing,
   ActivityIndicator,
+  StyleSheet,
+  Text,
 } from "react-native";
 
 import { ApiIbgeInterface } from "../../interfacests/apiIbgeInterface";
@@ -31,6 +32,8 @@ import { Combobox } from "../../../desginscomponents/inputs";
 
 import { inputLengthCheck } from "../../fuctions/inputCheck";
 
+import { CheckBox } from "react-native-btr";
+
 type PropsCadastroCuid3 = NativeStackScreenProps<
   AuthenticRootParamList,
   "Cadastrocuidador3"
@@ -44,6 +47,8 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
   const [isloadingEstados, setIsloadingEstados] = useState(true);
 
   const [EstadoValue, SetEstadoValue] = useState<string>("");
+
+  const [isCheckedTerms, setIscCheckTerms] = useState(false);
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -120,26 +125,27 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
   }
 
   const goHomeScreen = () => {
-    console.log("dados do cuidador:" + { ...cuidadordata });
     if (inputLengthCheck(cuidadordata?.pricePerHour) >= 1) {
       if (cuidadordata?.cep) {
         if (inputLengthCheck(cuidadordata.cep) === 8) {
-          console.log("cadastro completo");
-          navigation.navigate("Homenavigator", cuidadordata);
+          isCheckedTerms
+            ? navigation.navigate("Homenavigator", cuidadordata)
+            : alert("aceite os termos antes de continuar");
         } else {
           alert("caracteres de cep insuficientes");
           console.error("não caracter suficientes no cep");
         }
       } else {
         console.log("usuário não colocou o cep e está tudo bem!");
-        navigation.navigate(
-          "Homenavigator",
-          cuidadordata as Cuidadadordatainterfc
-        );
+        isCheckedTerms
+          ? navigation.navigate(
+              "Homenavigator",
+              cuidadordata as Cuidadadordatainterfc
+            )
+          : alert("aceite os termos antes de continuar");
       }
     } else {
       alert("preencha todos dados obrigatórios");
-      console.error("dados do cuidador são insuficientes");
     }
   };
 
@@ -186,7 +192,7 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
               multiline={false}
             />
             <Inputs
-              nometxt="preço/hora* "
+              nometxt="preço/hora/em rais* "
               placeholder="preço por hora de seu serviço"
               value={cuidadordata?.pricePerHour}
               onchangevalue={handlePricePHour}
@@ -210,6 +216,16 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
               multiline={false}
             />
 
+            <View style={cadastroCuidStyle.CheckBoxViw}>
+              <View style={{ width: "5%", left: 40 }}>
+                <CheckBox
+                  checked={isCheckedTerms}
+                  onPress={() => setIscCheckTerms(!isCheckedTerms)}
+                ></CheckBox>
+              </View>
+
+              <Text>concordo com os termos de uso</Text>
+            </View>
             <Btn
               cor="#F1EBEB"
               txtbtn="cadastrar"
@@ -227,3 +243,13 @@ const Cadastrocuidador3 = ({ navigation, route }: PropsCadastroCuid3) => {
 };
 
 export default Cadastrocuidador3;
+
+const cadastroCuidStyle = StyleSheet.create({
+  CheckBoxViw: {
+    width: "100%",
+    height: "4%",
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
